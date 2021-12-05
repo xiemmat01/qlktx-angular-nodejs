@@ -2,7 +2,11 @@ const DepartmentsModel = (sequelize, Sequelize) => {
     const Department = sequelize.define(
         "khoa",
         {
-            MaKhoa: { type: Sequelize.STRING(10), allowNull: false },
+            MaKhoa: {
+                type: Sequelize.STRING(10),
+                allowNull: false,
+                primaryKey: true,
+            },
             TenKhoa: { type: Sequelize.STRING(10), allowNull: false },
 
             Ngay_them_moi: {
@@ -16,7 +20,7 @@ const DepartmentsModel = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "khoa" }
+        { tableName: "khoa", modelName: "khoa" }
     );
 
     return Department;

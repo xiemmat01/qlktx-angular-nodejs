@@ -1,8 +1,7 @@
 import db from "../models/sequelize.js";
 
-const Students = db.Students;
+const Class = db.Class;
 const Op = db.Sequelize.Op;
-
 
 export const create = async (req, res) => {
     console.log(req.body);
@@ -12,20 +11,14 @@ export const create = async (req, res) => {
         });
         return;
     }
-    const sinhvien = {
-        HoTen: req.body.hoten,
-        NgaySinh: req.body.ngaysinh,
-        Mssv: req.body.mssv,
-        Cmnd: req.body.cmnd,
-        DienThoai: req.body.dienthoai,
-        DiaChi: req.body.diachi,
-        DanToc: req.body.dantoc,
-        Phai: req.body.phai,
-        Hinh: req.body.hinh,
+    const lop = {
+        MaLop: req.body.malop,
+        TenLop: req.body.tenlop,
+        MaKhoa: req.body.makhoa,
     };
-    await Students.findOrCreate({
-        where: { Mssv: sinhvien.Mssv },
-        defaults: sinhvien,
+    await Class.findOrCreate({
+        where: { Mssv: lop.MaLop },
+        defaults: lop,
     })
         .then(([data, create]) => {
             if (create) {
@@ -47,19 +40,12 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
     const id = req.params.id;
 
-    const sinhvien = {
-        HoTen: req.body.hoten,
-        NgaySinh: req.body.ngaysinh,
-        Mssv: req.body.mssv,
-        Cmnd: req.body.cmnd,
-        DienThoai: req.body.dienthoai,
-        DiaChi: req.body.diachi,
-        DanToc: req.body.dantoc,
-        Phai: req.body.phai,
-        Hinh: req.body.hinh,
+    const lop = {
+        TenLop: req.body.tenlop,
+        MaKhoa: req.body.makhoa,
     };
 
-    await Students.update(sinhvien, {
+    await Class.update(lop, {
         where: { id: id },
     })
         .then((num) => {
@@ -82,7 +68,7 @@ export const update = async (req, res) => {
 export const deleteById = async (req, res) => {
     const id = req.params.id;
     console.log(id);
-    await Students.destroy({
+    await Class.destroy({
         where: { id: id },
     })
         .then((num) => {
@@ -112,7 +98,7 @@ export const findAll = async (req, res) => {
         hoten: hoten ? { HoTen: { [Op.like]: `%${hoten}%` } } : null,
     };
 
-    await Students.findAll({
+    await Class.findAll({
         where:
             condition.hoten || condition.mssv
                 ? { [Op.or]: [condition.hoten, condition.mssv] }

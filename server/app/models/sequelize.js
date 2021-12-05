@@ -1,6 +1,8 @@
 // khởi tạo sequelize
 import Sequelize from "sequelize";
 import dbConfig from "../config/db.config.js";
+import ClassModel from "./Class.model.js";
+import DepartmentsModel from "./Departments.model.js";
 import RoomsModel from "./Rooms.model.js";
 import SinhvienModel from "./Students.model.js";
 
@@ -30,6 +32,8 @@ const sequelize = new Sequelize(
 const db = {
     sequelize: sequelize,
     Sequelize: Sequelize,
+    Departments: DepartmentsModel(sequelize, Sequelize),
+    Class: ClassModel(sequelize, Sequelize),
     Students: SinhvienModel(sequelize, Sequelize),
     Rooms: RoomsModel(sequelize, Sequelize),
 };

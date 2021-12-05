@@ -12,7 +12,12 @@ export const create = (req, res) => {
         return;
     }
 
-    const room = {};
+    const room = {
+        MaSP: req.body.masp,
+        KhuNha: req.body.khunha,
+        SoNguoi: req.body.songuoi,
+        TinhTrang: req.body.tinhtrang,
+    };
 
     Rooms.create(room)
         .then((data) => {

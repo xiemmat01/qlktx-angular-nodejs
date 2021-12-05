@@ -7,11 +7,11 @@ import {
     update,
 } from "../controllers/Students.controller.js";
 
-const routerSinhvien = express.Router();
+const routerStudent = express.Router();
 
-routerSinhvien.post("/", create);
-routerSinhvien.get("/", findAll);
-routerSinhvien.put("/:id", update);
-routerSinhvien.delete("/:id", deleteById);
+routerStudent.post("/", create);
+routerStudent.get("/", findAll);
+routerStudent.put("/:id", update);
+routerStudent.delete("/:id", deleteById);
 
-export default routerSinhvien;
+export default routerStudent;

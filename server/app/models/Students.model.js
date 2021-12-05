@@ -4,8 +4,12 @@ const SinhvienModel = (sequelize, Sequelize) => {
         {
             HoTen: { type: Sequelize.STRING(155), allowNull: false },
             NgaySinh: { type: Sequelize.STRING(10), allowNull: false },
-            MSSV: { type: Sequelize.STRING(10), allowNull: false },
-            CMND: { type: Sequelize.INTEGER(10), allowNull: false },
+            Mssv: {
+                type: Sequelize.STRING(10),
+                allowNull: false,
+                primaryKey: true,
+            },
+            Cmnd: { type: Sequelize.INTEGER(10), allowNull: false },
             DienThoai: { type: Sequelize.STRING(10), allowNull: false },
             DiaChi: { type: Sequelize.STRING, allowNull: true },
             DanToc: {
@@ -15,6 +19,7 @@ const SinhvienModel = (sequelize, Sequelize) => {
             },
             Phai: { type: Sequelize.BOOLEAN, allowNull: false },
             Hinh: { type: Sequelize.STRING, allowNull: true },
+            MaLop: { type: Sequelize.STRING(10), allowNull: false },
             Ngay_them_moi: {
                 type: Sequelize.DATE,
                 allowNull: false,
@@ -26,7 +31,7 @@ const SinhvienModel = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "sinhvien" }
+        { tableName: "sinhvien", modelName: "sinhvien" }
     );
 
     return Sinhvien;

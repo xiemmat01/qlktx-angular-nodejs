@@ -5,7 +5,7 @@ const RoomsModel = (sequelize, Sequelize) => {
             MaSP: { type: Sequelize.STRING(10), allowNull: false },
             KhuNha: { type: Sequelize.STRING(10), allowNull: false },
             SoNguoi: { type: Sequelize.INTEGER(10), allowNull: false },
-            TìnhTrang: {
+            TinhTrang: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,

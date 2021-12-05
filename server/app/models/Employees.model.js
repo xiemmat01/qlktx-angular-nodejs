@@ -2,9 +2,9 @@ const EmployeesModel = (sequelize, Sequelize) => {
     const Employee = sequelize.define(
         "nhanvien",
         {
-            MaSP: { type: Sequelize.STRING(10), allowNull: false },
-            KhuNha: { type: Sequelize.STRING(10), allowNull: false },
-            SoNguoi: { type: Sequelize.INTEGER(10), allowNull: false },
+            MaNV: { type: Sequelize.STRING(10), allowNull: false },
+            TenNV: { type: Sequelize.STRING(10), allowNull: false },
+            DienThoai: { type: Sequelize.INTEGER(10), allowNull: false },
             TìnhTrang: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,

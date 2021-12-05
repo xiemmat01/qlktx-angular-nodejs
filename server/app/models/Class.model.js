@@ -2,14 +2,13 @@ const ClassModel = (sequelize, Sequelize) => {
     const Class = sequelize.define(
         "lop",
         {
-            MaLop: { type: Sequelize.STRING(10), allowNull: false },
-            TenLop: { type: Sequelize.STRING(10), allowNull: false },
-            SoNguoi: { type: Sequelize.INTEGER(10), allowNull: false },
-            TìnhTrang: {
-                type: Sequelize.BOOLEAN,
+            MaLop: {
+                type: Sequelize.STRING(10),
                 allowNull: false,
-                defaultValue: 0,
+                primaryKey: true,
             },
+            TenLop: { type: Sequelize.STRING(10), allowNull: false },
+            MaKhoa: { type: Sequelize.STRING(10), allowNull: false },
 
             Ngay_them_moi: {
                 type: Sequelize.DATE,
@@ -22,7 +21,7 @@ const ClassModel = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "lop" }
+        { tableName: "lop", modelName: "lop" }
     );
 
     return Class;
