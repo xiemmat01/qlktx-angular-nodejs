@@ -1,4 +1,4 @@
-const EmployeesModel = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Employee = sequelize.define(
         "nhanvien",
         {
@@ -27,4 +27,4 @@ const EmployeesModel = (sequelize, Sequelize) => {
 
     return Employee;
 };
-export default EmployeesModel;
+// export default EmployeesModel;

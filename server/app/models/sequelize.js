@@ -1,10 +1,10 @@
 // khởi tạo sequelize
 import Sequelize from "sequelize";
 import dbConfig from "../config/db.config.js";
-import ClassModel from "./Class.model.js";
-import DepartmentsModel from "./Departments.model.js";
-import RoomsModel from "./Rooms.model.js";
-import SinhvienModel from "./Students.model.js";
+import Class from "./Class.model.js";
+import Departments from "./Departments.model.js";
+import Rooms from "./Rooms.model.js";
+import Students from "./Students.model.js";
 
 const sequelize = new Sequelize(
     dbConfig.database,
@@ -27,15 +27,21 @@ const sequelize = new Sequelize(
         },
     }
 );
-
 // chạy file models
-const db = {
-    sequelize: sequelize,
-    Sequelize: Sequelize,
-    Departments: DepartmentsModel(sequelize, Sequelize),
-    Class: ClassModel(sequelize, Sequelize),
-    Students: SinhvienModel(sequelize, Sequelize),
-    Rooms: RoomsModel(sequelize, Sequelize),
+const models = {
+    Departments: Departments(sequelize, Sequelize),
+    Class: Class(sequelize, Sequelize),
+    Students: Students(sequelize, Sequelize),
+    Rooms: Rooms(sequelize, Sequelize),
 };
 
-export default db;
+Object.keys(models).forEach((modelName) => {
+    if ("associate" in models[modelName]) {
+        models[modelName].associate(models);
+    }
+});
+
+models.sequelize = sequelize;
+models.Sequelize = Sequelize;
+
+export default models;

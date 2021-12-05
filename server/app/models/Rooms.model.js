@@ -1,4 +1,4 @@
-const RoomsModel = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Room = sequelize.define(
         "phong",
         {
@@ -24,7 +24,6 @@ const RoomsModel = (sequelize, Sequelize) => {
         },
         { tableName: "phong" }
     );
-
     return Room;
 };
-export default RoomsModel;
+// export default RoomsModel;

@@ -1,5 +1,5 @@
-const SinhvienModel = (sequelize, Sequelize) => {
-    const Sinhvien = sequelize.define(
+export default (sequelize, Sequelize) => {
+    const Student = sequelize.define(
         "sinhvien",
         {
             HoTen: { type: Sequelize.STRING(155), allowNull: false },
@@ -31,9 +31,13 @@ const SinhvienModel = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "sinhvien", modelName: "sinhvien" }
+        { tableName: "sinhvien", modelName: "Students" }
     );
-
-    return Sinhvien;
+    Student.associate = (models) => {
+        Student.belongsTo(models.Class, {
+            foreignKey: "MaLop",
+        });
+    };
+    return Student;
 };
-export default SinhvienModel;
+// export default SinhvienModel;

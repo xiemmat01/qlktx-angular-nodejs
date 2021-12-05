@@ -1,4 +1,4 @@
-const ClassModel = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
     const Class = sequelize.define(
         "lop",
         {
@@ -21,9 +21,9 @@ const ClassModel = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "lop", modelName: "lop" }
+        { tableName: "lop", modelName: "Class" }
     );
 
     return Class;
 };
-export default ClassModel;
+// export default ClassModel;
