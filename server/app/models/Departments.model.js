@@ -1,5 +1,5 @@
 export default (sequelize, Sequelize) => {
-    const Department = sequelize.define(
+    const Departments = sequelize.define(
         "khoa",
         {
             MaKhoa: {
@@ -22,9 +22,7 @@ export default (sequelize, Sequelize) => {
         },
         { tableName: "khoa", modelName: "Departments" }
     );
-    Department.associate = (models) => {
-        Department.hasMany(models.Class, { foreignKey: "MaKhoa" });
-    };
-    return Department;
+
+    return Departments;
 };
 // export default DepartmentsModel;

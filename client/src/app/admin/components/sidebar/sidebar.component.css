@@ -1,0 +1,26 @@
+.sidebar-nav [data-bs-toggle="collapse"]:after {
+  border: solid;
+  border-width: 0 0.075rem 0.075rem 0;
+  content: "";
+  display: inline-block;
+  padding: 2px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.2rem;
+  transform: rotate(45deg);
+  transition: all 0.2s ease-out;
+}
+.sidebar-nav [aria-expanded="true"]:after,
+.sidebar-nav [data-bs-toggle="collapse"]:not(.collapsed):after {
+  top: 1.4rem;
+  transform: rotate(-135deg);
+}
+.sidebar-nav ul.sidebar-dropdown .sidebar-item {
+  padding-left: 1.8rem;
+}
+.sidebar-nav ul.sidebar-dropdown .sidebar-item a.active,
+.sidebar-nav ul.sidebar-dropdown .sidebar-item:hover a {
+  background: none;
+  border-left-color: transparent;
+  color: #518be1;
+}

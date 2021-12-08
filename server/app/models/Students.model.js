@@ -1,6 +1,6 @@
 export default (sequelize, Sequelize) => {
     const Student = sequelize.define(
-        "sinhvien",
+        "SinhVien",
         {
             HoTen: { type: Sequelize.STRING(155), allowNull: false },
             NgaySinh: { type: Sequelize.STRING(10), allowNull: false },
@@ -31,7 +31,7 @@ export default (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "sinhvien", modelName: "Students" }
+        { tableName: "SinhVien", modelName: "Students" }
     );
     Student.associate = (models) => {
         Student.belongsTo(models.Class, {
@@ -40,4 +40,3 @@ export default (sequelize, Sequelize) => {
     };
     return Student;
 };
-// export default SinhvienModel;

@@ -1,16 +1,11 @@
 export default (sequelize, Sequelize) => {
     const Employee = sequelize.define(
-        "nhanvien",
+        "NhanVien",
         {
             MaNV: { type: Sequelize.STRING(10), allowNull: false },
             TenNV: { type: Sequelize.STRING(10), allowNull: false },
-            DienThoai: { type: Sequelize.INTEGER(10), allowNull: false },
-            TìnhTrang: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false,
-                defaultValue: 0,
-            },
-
+            DienThoai: { type: Sequelize.STRING(10), allowNull: false },
+            DiaChi: { type: Sequelize.STRING, allowNull: true },
             Ngay_them_moi: {
                 type: Sequelize.DATE,
                 allowNull: false,
@@ -27,4 +22,4 @@ export default (sequelize, Sequelize) => {
 
     return Employee;
 };
-// export default EmployeesModel;
+

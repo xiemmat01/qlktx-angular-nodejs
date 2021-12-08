@@ -1,11 +1,18 @@
 export default (sequelize, Sequelize) => {
-    const Room = sequelize.define(
-        "phong",
+    const Rooms = sequelize.define(
+        "Phong",
         {
-            MaSP: { type: Sequelize.STRING(10), allowNull: false },
-            KhuNha: { type: Sequelize.STRING(10), allowNull: false },
-            SoNguoi: { type: Sequelize.INTEGER(10), allowNull: false },
-            TinhTrang: {
+            MaP: { type: Sequelize.STRING(10), allowNull: false },
+            MaNV: { type: Sequelize.STRING(10), allowNull: false },
+            SLToiDa: {
+                type: Sequelize.INTEGER(6),
+                allowNull: false,
+                defaultValue: 10,
+            },
+            SLDangO: { type: Sequelize.INTEGER(6), allowNull: false },
+            GhiChuPhong: { type: Sequelize.STRING(150), allowNull: false },
+            LoaiPhong: { type: Sequelize.BOOLEAN, allowNull: false },
+            TinhTrangPhong: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
                 defaultValue: 0,
@@ -22,8 +29,8 @@ export default (sequelize, Sequelize) => {
                 defaultValue: Sequelize.NOW,
             },
         },
-        { tableName: "phong" }
+        { tableName: "phong", modelName: "Rooms" }
     );
-    return Room;
+    return Rooms;
 };
 // export default RoomsModel;

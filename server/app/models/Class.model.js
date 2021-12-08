@@ -23,7 +23,8 @@ export default (sequelize, Sequelize) => {
         },
         { tableName: "lop", modelName: "Class" }
     );
-
+    Class.associate = (models) => {
+        Class.belongsTo(models.Department, { foreignKey: "MaKhoa" });
+    };
     return Class;
 };
-// export default ClassModel;

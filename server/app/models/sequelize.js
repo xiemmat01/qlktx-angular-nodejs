@@ -3,6 +3,7 @@ import Sequelize from "sequelize";
 import dbConfig from "../config/db.config.js";
 import Class from "./Class.model.js";
 import Departments from "./Departments.model.js";
+import Relatives from "./Relatives.model.js";
 import Rooms from "./Rooms.model.js";
 import Students from "./Students.model.js";
 
@@ -29,7 +30,7 @@ const sequelize = new Sequelize(
 );
 // chạy file models
 const models = {
-    Departments: Departments(sequelize, Sequelize),
+    Department: Departments(sequelize, Sequelize),
     Class: Class(sequelize, Sequelize),
     Students: Students(sequelize, Sequelize),
     Rooms: Rooms(sequelize, Sequelize),
