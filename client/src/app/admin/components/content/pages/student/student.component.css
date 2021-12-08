@@ -1,0 +1,26 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.feather-24 {
+  width: 24px;
+  height: 24px;
+}
+.feather-red {
+  color: rgb(190, 11, 11);
+}
+.btn.custom {
+  width: 45px;
+}
+.btn-check:focus + .btn.custom,
+.btn.custom:focus {
+  outline: 0;
+  box-shadow: unset;
+}
