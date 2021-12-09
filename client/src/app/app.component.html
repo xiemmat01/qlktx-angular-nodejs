@@ -1,1 +1,17 @@
-<app-admin></app-admin>
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="index.html">
+                <span class="mx-2 align-middle">Ký Túc Xá NTTU</span>
+            </a>
+            <app-sidebar></app-sidebar>
+        </div>
+    </nav>
+    <div class="main">
+        <app-header></app-header>
+        <main class="content">
+            <app-admin [settitle]="currentRoute"></app-admin>
+        </main>
+        <app-footer></app-footer>
+    </div>
+</div>

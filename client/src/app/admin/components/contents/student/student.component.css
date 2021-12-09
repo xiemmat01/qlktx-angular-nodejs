@@ -9,15 +9,11 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.feather-24 {
-  width: 24px;
-  height: 24px;
-}
-.feather-red {
-  color: rgb(190, 11, 11);
-}
 .btn.custom {
-  width: 45px;
+  width: unset;
+}
+.btn.custom ~ .btn.custom {
+  margin-left: 5px;
 }
 .btn-check:focus + .btn.custom,
 .btn.custom:focus {

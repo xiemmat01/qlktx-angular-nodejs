@@ -1,0 +1,89 @@
+<form class="row">
+    <div class="col-md-6 mb-3">
+        <label for="exampleInputEmail1" class="form-label">Họ tên:</label>
+        <input type="text" class="form-control" id="" placeholder="Nhập họ tên...">
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="" class="form-label">Ngày sinh:</label>
+                <input type="date" class="form-control" id="">
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="form-label">Giới tính:</label>
+                <select name="" id="" class="form-select">
+                    <option>--Chọn--</option>
+                    <option value="0">Nữ</option>
+                    <option value="1">Nam</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="" class="form-label">Mã số sinh viên:</label>
+        <input type="text" class="form-control" id="" placeholder="Nhập mã số sinh viên...">
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="" class="form-label">Số điện thoại:</label>
+                <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
+                    onkeypress="if(this.value.length == 10) return false;">
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="form-label">CMND/CCCD:</label>
+                <input type="number" class="form-control" id="" placeholder="Nhập CMND hoặc CCCD..."
+                    onkeypress="if(this.value.length == 10) return false;">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="" class="form-label">Địa chỉ:</label>
+        <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ...">
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="" class="form-label">Dân tộc:</label>
+        <input type="text" class="form-control" id="" value="Kinh">
+    </div>
+    <div class="col-md-12 mb-3">
+        <button type="submit" class="btn btn-primary">Thêm mới</button>
+    </div>
+</form>
+<div class="my-4"></div>
+<table class="table table-bordered table-striped display nowrap" style="width:100%" id="student">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+            <td>$320,800</td>
+            <td>$320,800</td>
+            <td>$320,800</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+            <td>$320,800</td>
+            <td>$320,800</td>
+            <td>$320,800</td>
+            <td>
+                <button class="btn btn-primary custom">
+                    Sửa
+                </button>
+                <button class="btn btn-danger custom">
+                    Xóa
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

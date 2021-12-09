@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { SidebarComponent } from './admin/components/sidebar/sidebar.component';
 import { HeaderComponent } from './admin/components/header/header.component';
-import { ContentComponent } from './admin/components/content/content.component';
-import { StudentComponent } from './admin/components/content/pages/student/student.component';
+import { FooterComponent } from './admin/components/footer/footer.component';
+import { StudentComponent } from './admin/components/contents/student/student.component';
+import { RoomComponent } from './admin/components/contents/room/room.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +18,17 @@ import { StudentComponent } from './admin/components/content/pages/student/stude
     AdminComponent,
     SidebarComponent,
     HeaderComponent,
-    ContentComponent,
     StudentComponent,
+    FooterComponent,
+    RoomComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    DataTablesModule,
+    HttpClientModule,
+  ],
+  providers: [Title],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

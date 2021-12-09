@@ -1,13 +1,26 @@
 <ul class="sidebar-nav">
-    <li class="sidebar-item active">
-        <a class="sidebar-link collapsed" href="#" data-bs-target="#collapse-system" data-bs-toggle="collapse"
-            aria-expanded="false">
-            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Hệ thống</span>
+    <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="sidebar-link" routerLink="/phong">
+            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Quản lý phòng</span>
         </a>
-        <ul id="collapse-system" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+    </li>
+    <li class="sidebar-item" routerLinkActive="active">
+        <a class="sidebar-link" routerLink="/sinh-vien">
+            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Quản lý sinh viên</span>
+        </a>
+    </li>
+</ul>
+
+
+
+<!-- <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <a class="sidebar-link collapsed" routerLink="/" data-bs-target="#collapse-system" data-bs-toggle="collapse"
+        aria-expanded="false">
+        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Hệ thống</span>
+    </a>
+    <ul id="collapse-system" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item"><a class="sidebar-link active" href="#">Analytics</a></li>
             <li class="sidebar-item"><a class="sidebar-link" href="#">E-Commerce</a></li>
             <li class="sidebar-item"><a class="sidebar-link" href="#">Crypto</a></li>
         </ul>
-    </li>
-</ul>
+</li> -->
