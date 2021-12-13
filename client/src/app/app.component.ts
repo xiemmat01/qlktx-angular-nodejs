@@ -11,17 +11,21 @@ export class AppComponent {
   currentRoute: string = '';
 
   constructor(private router: Router) {
-    console.log(router.url);
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event) => {
-        console.log(event.id);
         switch (event.url) {
-          case '/':
-            this.currentRoute = 'ABC';
+          case '/phong':
+            this.currentRoute = 'Quản lý phòng';
+            break;
+          case '/nhan-vien':
+            this.currentRoute = 'Quản lý nhân viên';
             break;
           case '/sinh-vien':
             this.currentRoute = 'Quản lý sinh viên';
+            break;
+          case '/tien-dien-nuoc':
+            this.currentRoute = 'Quản lý tiền điện - nước';
             break;
 
           default:

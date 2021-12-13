@@ -1,12 +1,45 @@
 <ul class="sidebar-nav">
     <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="sidebar-link" routerLink="/phong">
-            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Quản lý phòng</span>
+        <a class="sidebar-link collapsed" data-bs-target="#collapse-student" data-bs-toggle="collapse"
+            aria-expanded="false">
+            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Quản lý sinh viên</span>
+        </a>
+        <ul id="collapse-student" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item"><a class="sidebar-link" routerLinkActive="active" routerLink="/khoa">Danh sách
+                    khoa</a></li>
+            <li class="sidebar-item"><a class="sidebar-link" routerLinkActive="active" routerLink="/lop">Danh sách
+                    lớp</a>
+            </li>
+            <li class="sidebar-item"><a class="sidebar-link" routerLinkActive="active" routerLink="/sinh-vien">Danh sách
+                    sinh
+                    viên</a>
+            </li>
+        </ul>
+    </li>
+    <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="sidebar-link " routerLink="/phong">
+            <i class="align-middle bi bi-layout-wtf"></i> <span class="align-middle">Quản lý phòng</span>
         </a>
     </li>
-    <li class="sidebar-item" routerLinkActive="active">
-        <a class="sidebar-link" routerLink="/sinh-vien">
-            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Quản lý sinh viên</span>
+    <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="sidebar-link" routerLink="/nhan-vien">
+            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Quản lý nhân viên</span>
+        </a>
+    </li>
+    <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="sidebar-link" routerLink="/tien-dien-nuoc">
+            <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Quản lý tiền điện
+                nước</span>
+        </a>
+    </li>
+    <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="sidebar-link" routerLink="/dang-ky-phong">
+            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Quản lý đăng ký phòng</span>
+        </a>
+    </li>
+    <li class="sidebar-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="sidebar-link" routerLink="/hop-dong">
+            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Quản lý hợp đồng</span>
         </a>
     </li>
 </ul>

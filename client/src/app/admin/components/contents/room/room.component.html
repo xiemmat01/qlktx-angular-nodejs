@@ -1,1 +1,107 @@
-
+<div class="room container-fluid">
+    <div class="row mb-3 mt-3">
+        <div class="col-3">
+            <div class="d-flex flex-row align-items-center h-100">
+                <span>Còn trống: 0</span>
+                <span class="mx-2">|</span>
+                <span>Đã cho thuê: 0</span>
+            </div>
+        </div>
+        <div class="col-6">
+            <form class="d-flex flex-row justify-content-center">
+                <select name="" id="" class="form-select">
+                    <option>--Loại phòng--</option>
+                    <option value="0">Nam</option>
+                    <option value="1">Nữ</option>
+                </select>
+                <span class="mx-1"></span>
+                <select name="" id="" class="form-select">
+                    <option>--Trạng thái phòng--</option>
+                    <option value="0">Đầy</option>
+                    <option value="1">Trống</option>
+                </select>
+                <a href="!#" class="btn btn-primary ms-2"><i class="bi bi-search"></i></a>
+            </form>
+        </div>
+        <div class="col-3">
+            <div class="d-flex flex-row-reverse">
+                <a href="!#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thêm phòng mới</a>
+            </div>
+        </div>
+    </div>
+    <div style="border-bottom: 1px solid rgb(167, 165, 165); width: 100%;"></div>
+    <div class="mb-3 mt-4">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="#tang1" class="nav-link active" data-bs-toggle="tab">Khu A</a>
+            </li>
+            <li class="nav-item">
+                <a href="#tang2" class="nav-link" data-bs-toggle="tab">Khu B</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content row mt-3">
+        <div class="col tab-pane fade show active" id="tang1">
+            <div class="card border custom" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="card-body">
+                    <div class="row1">
+                        <i class="bi bi-house-fill"><span>P001</span></i>
+                        <i class="bi bi-gender-male"></i>
+                    </div>
+                    <div class="row2">
+                        <!-- <small>Phòng trống</small> -->
+                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <div class="row3">
+                        <a href="#" class="link-dark custom" data-bs-toggle="tooltip" data-bs-placement="right"
+                            title="Chỉnh sửa phòng">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                        <span>(0/6)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped display nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                            <td>2011/04/25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

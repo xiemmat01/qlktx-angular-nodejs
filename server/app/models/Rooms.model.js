@@ -4,6 +4,7 @@ export default (sequelize, Sequelize) => {
         {
             MaP: { type: Sequelize.STRING(10), allowNull: false },
             MaNV: { type: Sequelize.STRING(10), allowNull: false },
+            MaKhu: { type: Sequelize.INTEGER(10), allowNull: false },
             SLToiDa: {
                 type: Sequelize.INTEGER(6),
                 allowNull: false,
@@ -31,6 +32,7 @@ export default (sequelize, Sequelize) => {
         },
         { tableName: "phong", modelName: "Rooms" }
     );
+    
     return Rooms;
 };
 // export default RoomsModel;

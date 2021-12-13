@@ -11,6 +11,9 @@ import { HeaderComponent } from './admin/components/header/header.component';
 import { FooterComponent } from './admin/components/footer/footer.component';
 import { StudentComponent } from './admin/components/contents/student/student.component';
 import { RoomComponent } from './admin/components/contents/room/room.component';
+import { EmployeeComponent } from './admin/components/contents/employee/employee.component';
+import { BillsComponent } from './admin/components/contents/bills/bills.component';
+import { ContractComponent } from './admin/components/contents/contract/contract.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { RoomComponent } from './admin/components/contents/room/room.component';
     StudentComponent,
     FooterComponent,
     RoomComponent,
+    EmployeeComponent,
+    BillsComponent,
+    ContractComponent,
   ],
   imports: [
     BrowserModule,

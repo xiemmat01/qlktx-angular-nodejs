@@ -20,8 +20,18 @@
         </div>
     </div>
     <div class="col-md-6 mb-3">
-        <label for="" class="form-label">Mã số sinh viên:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập mã số sinh viên...">
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="" class="form-label">Mã số sinh viên:</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập mã số sinh viên...">
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="form-label">Phòng:</label>
+                <select name="" id="" class="form-select">
+                    <option>--Chọn phòng--</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
@@ -42,13 +52,24 @@
         <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ...">
     </div>
     <div class="col-md-6 mb-3">
-        <label for="" class="form-label">Dân tộc:</label>
-        <input type="text" class="form-control" id="" value="Kinh">
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="" class="form-label">Dân tộc:</label>
+                <input type="text" class="form-control" id="" value="Kinh">
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="form-label">Lớp:</label>
+                <select name="" id="" class="form-select">
+                    <option>--Chọn lớp--</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="col-md-12 mb-3">
         <button type="submit" class="btn btn-primary">Thêm mới</button>
     </div>
 </form>
+<hr class="w-100">
 <div class="my-4"></div>
 <table class="table table-bordered table-striped display nowrap" style="width:100%" id="student">
     <thead>
@@ -77,11 +98,11 @@
             <td>$320,800</td>
             <td>$320,800</td>
             <td>
-                <button class="btn btn-primary custom">
-                    Sửa
+                <button class="btn btn-success custom">
+                    <i class="bi bi-pencil-square"></i>
                 </button>
                 <button class="btn btn-danger custom">
-                    Xóa
+                    <i class="bi bi-trash"></i>
                 </button>
             </td>
         </tr>

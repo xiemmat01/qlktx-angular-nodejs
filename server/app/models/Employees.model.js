@@ -5,6 +5,11 @@ export default (sequelize, Sequelize) => {
             MaNV: { type: Sequelize.STRING(10), allowNull: false },
             TenNV: { type: Sequelize.STRING(10), allowNull: false },
             DienThoai: { type: Sequelize.STRING(10), allowNull: false },
+            Email: {
+                type: Sequelize.STRING(110),
+                allowNull: false,
+                validate: { isEmail: true },
+            },
             DiaChi: { type: Sequelize.STRING, allowNull: true },
             Ngay_them_moi: {
                 type: Sequelize.DATE,
@@ -22,4 +27,3 @@ export default (sequelize, Sequelize) => {
 
     return Employee;
 };
-

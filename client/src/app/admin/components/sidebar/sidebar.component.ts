@@ -9,5 +9,8 @@ import { Title } from '@angular/platform-browser';
 export class SidebarComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    sessionStorage.setItem('manv', 'nv01');
+    console.log(sessionStorage.getItem('manv'));
+  }
 }

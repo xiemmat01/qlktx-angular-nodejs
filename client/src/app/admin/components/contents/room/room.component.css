@@ -1,0 +1,57 @@
+.room {
+  padding: 0 0.5rem;
+}
+.room .card.custom {
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+}
+.card.custom .card-body {
+  font-size: 18px;
+  padding: 0.5rem 1rem;
+}
+.card.custom .card-body i {
+  font-style: normal;
+}
+.card.custom .card-body i > span {
+  padding-left: 5px;
+}
+.row1,
+.row2,
+.row3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.row1 {
+  font-size: 15px;
+  color: rgb(60, 18, 175);
+}
+.row2 {
+  margin-top: 15px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.row2 i {
+  font-size: 30px;
+  color: cadetblue;
+}
+.row3 {
+  margin-top: 15px;
+}
+.row3 span {
+  font-size: 14px;
+}
+nav .breadcrumb-item + .breadcrumb-item::before {
+  float: left;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: var(--bs-breadcrumb-divider, "|");
+}
+.room form select {
+  width: 150px;
+}
+.card.custom:hover {
+  box-shadow: 0 8px 8px 0 rgba(103, 151, 255, 0.11),
+    0 12px 18px 0 rgba(103, 151, 255, 0.11);
+}
