@@ -27,7 +27,9 @@ export class AppComponent {
           case '/tien-dien-nuoc':
             this.currentRoute = 'Quản lý tiền điện - nước';
             break;
-
+          case '/hop-dong':
+            this.currentRoute = 'Quản lý hợp đồng';
+            break;
           default:
             break;
         }

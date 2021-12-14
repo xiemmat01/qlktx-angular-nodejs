@@ -72,3 +72,42 @@
         </tr>
     </tbody>
 </table>
+
+<!-- <form [formGroup]="sinhvienForm" class="row" (ngSubmit)="submit()">
+    <div class="col-md-6">
+        <label class="form-label">Mã số sinh viên:</label>
+        <input type="text" class="form-control" placeholder="nhập masv" formControlName="Masv">
+        <div class="alert alert-danger mt-2" *ngIf="f.Masv.touched && f.Masv.invalid">
+            <div *ngIf="f.Masv.errors?.required">Bạn chưa nhập Mã SV</div>
+            <div *ngIf="f.Masv.errors?.minlength || f.Masv.errors?.maxlength">Mã sinh viên tối đa 10 ký số</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Họ và tên:</label>
+        <input type="text" class="form-control" placeholder="nhập họ và tên" formControlName="Hoten">
+        <div class="alert alert-danger mt-2" *ngIf="f.Hoten.touched && f.Hoten.invalid">
+            <div *ngIf="f.Hoten.errors?.required">Bạn chưa nhập Họ tên</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Năm sinh:</label>
+        <input type="text" class="form-control" placeholder="nhập năm sinh"
+            onkeypress="if(this.value.length == 4) return false;" formControlName="Namsinh">
+        <div class="alert alert-danger mt-2" *ngIf="f.Namsinh.touched && f.Namsinh.invalid">
+            <div *ngIf="f.Namsinh.errors?.required">Bạn chưa nhập Năm sinh</div>
+            <div *ngIf="f.Namsinh.errors?.min || f.Namsinh.errors?.max">Năm sinh trong khoảng từ 1993 đến
+                2000</div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Nơi sinh:</label>
+        <input type="text" class="form-control" placeholder="nhập nơi sinh" formControlName="Noisinh">
+        <div class="alert alert-danger mt-2" *ngIf="f.Noisinh.touched && f.Noisinh.invalid">
+            <div *ngIf="f.Noisinh.errors?.required">Bạn chưa nhập Nơi sinh</div>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <button class="btn btn-success" type="submit" [disabled]="sinhvienForm.valid">Cập nhật
+            thông tin</button>
+    </div>
+</form> -->

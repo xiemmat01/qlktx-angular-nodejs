@@ -14,6 +14,7 @@ import { RoomComponent } from './admin/components/contents/room/room.component';
 import { EmployeeComponent } from './admin/components/contents/employee/employee.component';
 import { BillsComponent } from './admin/components/contents/bills/bills.component';
 import { ContractComponent } from './admin/components/contents/contract/contract.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ContractComponent } from './admin/components/contents/contract/contract
     AppRoutingModule,
     DataTablesModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [Title],
   bootstrap: [AppComponent],
