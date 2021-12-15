@@ -10,8 +10,10 @@ export default (sequelize, Sequelize) => {
             MaNV: { type: Sequelize.STRING(10), allowNull: false },
             MaP: { type: Sequelize.STRING(10), allowNull: false },
             TongTien: { type: Sequelize.DECIMAL(10, 2), allowNull: false },
-            ChiSoDien: { type: Sequelize.INTEGER, allowNull: false },
-            ChiSoNuoc: { type: Sequelize.INTEGER, allowNull: false },
+            ChiSoDienDau: { type: Sequelize.INTEGER, allowNull: false },
+            ChiSoDienCuoi: { type: Sequelize.INTEGER, allowNull: false },
+            ChiSoNuocDau: { type: Sequelize.INTEGER, allowNull: false },
+            ChiSoNuocCuoi: { type: Sequelize.INTEGER, allowNull: false },
             Ngay_tao_lap: {
                 type: Sequelize.DATE,
                 allowNull: false,

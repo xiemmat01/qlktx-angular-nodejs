@@ -1,17 +1,18 @@
-<form class="row">
+<form [formGroup]="studentForm" class="row" (ngSubmit)="onSubmit()">
     <div class="col-md-6 mb-3">
         <label for="exampleInputEmail1" class="form-label">Họ tên:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập họ tên...">
+        <input type="text" class="form-control" id="" placeholder="Nhập họ tên..." formControlName="hoten">
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
             <div class="col-sm-6">
                 <label for="" class="form-label">Ngày sinh:</label>
-                <input type="date" class="form-control" id="">
+                <input bsDatepicker type="text" class="form-control" formControlName="ngaysinh" placeholder="dd/mm/yyyy"
+                    [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}" >
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">Giới tính:</label>
-                <select name="" id="" class="form-select">
+                <select name="" id="" class="form-select" formControlName="gioitinh">
                     <option>--Chọn--</option>
                     <option value="0">Nữ</option>
                     <option value="1">Nam</option>
@@ -20,46 +21,36 @@
         </div>
     </div>
     <div class="col-md-6 mb-3">
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="" class="form-label">Mã số sinh viên:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã số sinh viên...">
-            </div>
-            <div class="col-sm-6">
-                <label for="" class="form-label">Phòng:</label>
-                <select name="" id="" class="form-select">
-                    <option>--Chọn phòng--</option>
-                </select>
-            </div>
-        </div>
+        <label for="" class="form-label">Mã số sinh viên:</label>
+        <input type="text" class="form-control" placeholder="Nhập mã số sinh viên..." formControlName="masv">
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
             <div class="col-sm-6">
                 <label for="" class="form-label">Số điện thoại:</label>
                 <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
-                    onkeypress="if(this.value.length == 10) return false;">
+                    onkeypress="if(this.value.length == 10) return false;" formControlName="sodienthoai">
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">CMND/CCCD:</label>
                 <input type="number" class="form-control" id="" placeholder="Nhập CMND hoặc CCCD..."
-                    onkeypress="if(this.value.length == 10) return false;">
+                    onkeypress="if(this.value.length == 10) return false;" formControlName="cmnd">
             </div>
         </div>
     </div>
     <div class="col-md-6 mb-3">
         <label for="" class="form-label">Địa chỉ:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ...">
+        <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..." formControlName="diachi">
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
             <div class="col-sm-6">
                 <label for="" class="form-label">Dân tộc:</label>
-                <input type="text" class="form-control" id="" value="Kinh">
+                <input type="text" class="form-control" id="" formControlName="dantoc">
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">Lớp:</label>
-                <select name="" id="" class="form-select">
+                <select name="" id="" class="form-select" formControlName="lop">
                     <option>--Chọn lớp--</option>
                 </select>
             </div>

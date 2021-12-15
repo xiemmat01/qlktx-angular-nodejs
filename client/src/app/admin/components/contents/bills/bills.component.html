@@ -3,30 +3,53 @@
     <i class="bi bi-plus-circle"></i> Lập hóa đơn điện nước
 </button>
 <form class="row collapse mt-3" id="billForm">
-    <div class="col-md-6 mb-3">
-        <label for="exampleInputEmail1" class="form-label">Họ tên:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập họ tên...">
-    </div>
-    <div class="col-md-6 mb-3">
-        <label for="" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="" placeholder="Nhập email...">
-    </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-12 mb-3">
         <div class="row">
-            <div class="col-sm-6">
-                <label for="" class="form-label">Số điện thoại:</label>
-                <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
+            <div class="col-4">
+                <label for="" class="form-label">Phòng:</label>&nbsp;
+                <select class="form-control">
+                    <option>--Chọn phòng--</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="" class="form-label">Giá tiền điện (ĐỒNG/KWH):</label>
+                <input type="number" class="form-control" value="10000"
                     onkeypress="if(this.value.length == 10) return false;">
             </div>
-            <div class="col-sm-6">
-                <label for="" class="form-label">Mã nhân viên:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên...">
+            <div class="col-4">
+                <label for="" class="form-label">Giá tiền nước (ĐỒNG/M<sup>3</sup>):</label>
+                <input type="number" class="form-control" value="2000"
+                    onkeypress="if(this.value.length == 10) return false;">
             </div>
         </div>
     </div>
-    <div class="col-md-6 mb-3">
-        <label for="" class="form-label">Địa chỉ:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ...">
+    <div class="col-md-12 mb-3">
+        <div class="row">
+            <div class="col-6">
+                <label for="" class="form-label">Chỉ số điện đầu:</label>
+                <input type="number" class="form-control" placeholder="Nhập số điện thoại..."
+                    onkeypress="if(this.value.length == 10) return false;">
+            </div>
+            <div class="col-6">
+                <label for="" class="form-label">Chỉ số nước đầu:</label>
+                <input type="number" class="form-control" placeholder="Nhập mã nhân viên..."
+                    onkeypress="if(this.value.length == 10) return false;">
+            </div>
+            <div class="col-6">
+                <label for="" class="form-label">Chỉ số điện cuối:</label>
+                <input type="number" class="form-control" placeholder="Nhập số điện thoại..."
+                    onkeypress="if(this.value.length == 10) return false;">
+            </div>
+            <div class="col-6">
+                <label for="" class="form-label">Chỉ số nước cuối:</label>
+                <input type="number" class="form-control" placeholder="Nhập mã nhân viên..."
+                    onkeypress="if(this.value.length == 10) return false;">
+            </div>
+        </div>
+        <div class="row mt-3" style="font-size: 18px;">
+            <div class="col"><b>Tổng tiền:</b>&nbsp;<span>{{100000 | currency:"VND"}}</span>
+            </div>
+        </div>
     </div>
     <div class="col-md-12 mb-3 d-flex justify-content-end">
         <a href="#" class="btn btn-success"><i class="bi bi-check2-circle"></i> Lưu thông tin</a>&nbsp;

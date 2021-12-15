@@ -1,8 +1,11 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
@@ -14,7 +17,10 @@ import { RoomComponent } from './admin/components/contents/room/room.component';
 import { EmployeeComponent } from './admin/components/contents/employee/employee.component';
 import { BillsComponent } from './admin/components/contents/bills/bills.component';
 import { ContractComponent } from './admin/components/contents/contract/contract.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+registerLocaleData(localeVi);
 
 @NgModule({
   declarations: [
@@ -35,8 +41,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     DataTablesModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NoopAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
   ],
-  providers: [Title],
+  providers: [Title, { provide: LOCALE_ID, useValue: 'vi-VN' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
