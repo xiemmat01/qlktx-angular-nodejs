@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-declare var $: any;
+import { DataTable } from 'src/app/admin/config/datatable';
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -12,20 +13,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('#employee').DataTable({
-      scrollX: true,
-      language: {
-        lengthMenu: 'Hiện thị _MENU_',
-        zeroRecords: 'Không tìm thấy dữ liệu',
-        info: 'Hiện thị trang _PAGE_ của _PAGES_',
-        infoEmpty: '',
-        infoFiltered: '',
-        search: 'Tìm kiếm:',
-        paginate: {
-          previous: '<<',
-          next: '>>',
-        },
-      },
-    });
+    DataTable('employee');
   }
 }

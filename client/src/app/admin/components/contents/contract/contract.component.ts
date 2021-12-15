@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { DataTable } from 'src/app/admin/config/datatable';
 
 @Component({
   selector: 'app-contract',
@@ -11,5 +12,7 @@ export class ContractComponent implements OnInit {
     this.titleService.setTitle('Quản lý hợp đồng');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    DataTable('contract');
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { DataTable } from 'src/app/admin/config/datatable';
 
 declare var $: any;
 
@@ -11,9 +12,7 @@ declare var $: any;
   styleUrls: ['./student.component.css'],
 })
 export class StudentComponent implements OnInit {
-  constructor(
-    private titleService: Title
-  ) {
+  constructor(private titleService: Title) {
     this.titleService.setTitle('Quản lý sinh viên');
   }
 
@@ -34,21 +33,7 @@ export class StudentComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    $('#student').DataTable({
-      scrollX: true,
-      language: {
-        lengthMenu: 'Hiện thị _MENU_',
-        zeroRecords: 'Không tìm thấy dữ liệu',
-        info: 'Hiện thị trang _PAGE_ của _PAGES_',
-        infoEmpty: '',
-        infoFiltered: '',
-        search: 'Tìm kiếm:',
-        paginate: {
-          previous: '<<',
-          next: '>>',
-        },
-      },
-    });
+    DataTable('student');
   }
 
   get f() {
