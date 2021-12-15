@@ -1,12 +1,7 @@
 export class Employee {
-  HoTen?: string;
-  NgaySinh?: string;
-  Mssv?: string;
-  Cmnd?: number;
+  MaNV?: string;
+  TenNV?: string;
   DienThoai?: string;
+  Email?: string;
   DiaChi?: string;
-  DanToc?: string;
-  Phai: number = 0;
-  Hinh?: string;
-  MaLop?: string;
 }

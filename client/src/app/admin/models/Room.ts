@@ -1,12 +1,10 @@
 export class Room {
-  HoTen?: string;
-  NgaySinh?: string;
-  Mssv?: string;
-  Cmnd?: number;
-  DienThoai?: string;
-  DiaChi?: string;
-  DanToc?: string;
-  Phai: number = 0;
-  Hinh?: string;
-  MaLop?: string;
+  MaP?: string;
+  MaNV?: string;
+  MaKhu?: string;
+  SLToiDa: number = 6;
+  SLDangO: number = 0;
+  GhiChuPhong?: string;
+  LoaiPhong?: number;
+  TinhTrangPhong: number = 0;
 }

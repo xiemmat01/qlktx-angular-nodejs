@@ -19,7 +19,7 @@ export default (sequelize, Sequelize) => {
             },
             Phai: { type: Sequelize.BOOLEAN, allowNull: false },
             Hinh: { type: Sequelize.STRING, allowNull: true },
-            MaLop: { type: Sequelize.STRING(10), allowNull: false },
+            MaLop: { type: Sequelize.STRING(10), allowNull: true },
             Ngay_them_moi: {
                 type: Sequelize.DATE,
                 allowNull: false,

@@ -6,7 +6,7 @@ export class Student {
   DienThoai?: string;
   DiaChi?: string;
   DanToc?: string;
-  Phai: number = 0;
+  Phai?: number;
   Hinh?: string;
   MaLop?: string;
 }

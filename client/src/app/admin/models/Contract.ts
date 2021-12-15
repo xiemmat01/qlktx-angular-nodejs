@@ -1,12 +1,9 @@
 export class Contract {
-  HoTen?: string;
-  NgaySinh?: string;
+  MaHopDong?: string;
+  MaNV?: string;
   Mssv?: string;
-  Cmnd?: number;
-  DienThoai?: string;
-  DiaChi?: string;
-  DanToc?: string;
-  Phai: number = 0;
-  Hinh?: string;
-  MaLop?: string;
+  MaP?: string;
+  NgayLap?: string;
+  NgayBatDau?: string;
+  NgayKetThuc?: string;
 }
