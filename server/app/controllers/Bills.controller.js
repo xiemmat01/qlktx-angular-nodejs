@@ -1,6 +1,6 @@
 import db from "../models/sequelize.js";
 
-const Rooms = db.Rooms;
+const Bill = db.ElectricityWaterBills;
 const Op = db.Sequelize.Op;
 
 export const create = async (req, res) => {
@@ -12,43 +12,55 @@ export const create = async (req, res) => {
 		return;
 	}
 
-	const room = {
-		MaP: req.body.map,
+	const bill = {
+		MaHD: req.body.mahd,
 		MaNV: req.body.manv,
-		MaKhu: req.body.makhu,
-		SLToiDa: req.body.sltoida,
-		SLDangO: req.body.sldango,
-		GhiChuPhong: req.body.ghichu,
-		LoaiPhong: req.body.loaiphong,
-		TinhTrangPhong: req.body.tinhtrang,
+		MaP: req.body.map,
+		TongTien: req.body.tongtien,
+		ChiSoDienDau: req.body.chisodiendau,
+		ChiSoDienCuoi: req.body.chisodiencuoi,
+		ChiSoNuocDau: req.body.chisonuocdau,
+		ChiSoNuocCuoi: req.body.chisonuoccuoi,
 	};
 
-	await Rooms.findOrCreate({ where: { MaP: room.MaP }, defaults: room })
+	await Bill.findOrCreate({
+		where: { MaHD: bill.MaHD },
+		defaults: bill,
+	})
 		.then(([data, create]) => {
 			if (create) {
 				res.send(data);
 			} else {
 				res.send({
-					message: "Mã Phòng đã tồn tại! Không thể thêm mới phòng.",
+					message: "Mã hóa đơn đã tồn tại! Không thể thêm mới hd.",
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: err.message || "Có lỗi, không thêm được phòng!",
+				message: err.message || "Có lỗi, không thêm được hd!",
 			});
 		});
 };
 
 export const update = (req, res) => {
 	const id = req.params.id;
-	const room = {};
-	Rooms.update(room, {
+	const bill = {
+		MaHD: req.body.mahd,
+		MaNV: req.body.manv,
+		MaP: req.body.map,
+		TongTien: req.body.tongtien,
+		ChiSoDienDau: req.body.chisodiendau,
+		ChiSoDienCuoi: req.body.chisodiencuoi,
+		ChiSoNuocDau: req.body.chisonuocdau,
+		ChiSoNuocCuoi: req.body.chisonuoccuoi,
+	};
+	Bill.update(bill, {
 		where: { id: id },
 	})
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Cập nhật phòng thành công" });
+				res.send({ message: "Cập nhật hóa đơn thành công" });
 			} else {
 				res.send({
 					message: `Không thể cập nhật với id=${id}. Có thể id này không tồn tại`,
@@ -66,41 +78,29 @@ export const update = (req, res) => {
 export const deleteById = (req, res) => {
 	const id = req.params.id;
 	console.log(id);
-	Rooms.destroy({
+	Bill.destroy({
 		where: { id: id },
 	})
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Xóa phòng thành công" });
+				res.send({ message: "Xóa  hợp đồng thành công" });
 			} else {
 				res.send({
-					message: `Không thể Xóa phòngn với id=${id}. Có thể id này không tồn tại`,
+					message: `Không thể Xóa  hợp đồng với id=${id}. Có thể id này không tồn tại`,
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
 				message:
-					err.message || "Có lổi, Không thể Xóa phòng với id=" + id,
+					err.message ||
+					"Có lổi, Không thể Xóa hợp đồng với id=" + id,
 			});
 		});
 };
 
 export const findAll = (req, res) => {
-	const hoten = req.body.hoten;
-	const mssv = req.body.mssv;
-
-	let condition = {
-		mssv: mssv ? { MSSV: { [Op.eq]: mssv } } : null,
-		hoten: hoten ? { HoTen: { [Op.like]: `%${hoten}%` } } : null,
-	};
-
-	Rooms.findAll({
-		where:
-			condition.hoten || condition.mssv
-				? { [Op.or]: [condition.hoten, condition.mssv] }
-				: null,
-	})
+	Bill.findAll()
 		.then((data) => {
 			res.send(data);
 		})

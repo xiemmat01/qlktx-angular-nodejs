@@ -2,7 +2,7 @@ const dbConfig = {
     host: "localhost",
     username: "root",
     password: "",
-    database: "qlktx",
+    database: "db_qlktx",
     dialect: "mysql",
     pool: {
         max: 5,

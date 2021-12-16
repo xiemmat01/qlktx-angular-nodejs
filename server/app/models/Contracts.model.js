@@ -1,0 +1,52 @@
+export default (sequelize, Sequelize) => {
+	const Contracts = sequelize.define(
+		"Hopdong",
+		{
+			MaHopDong: {
+				type: Sequelize.STRING(10),
+				allowNull: false,
+				primaryKey: true,
+			},
+			MaNV: {
+				type: Sequelize.STRING(10),
+				allowNull: false,
+			},
+			Mssv: {
+				type: Sequelize.STRING(10),
+				allowNull: false,
+			},
+			MaP: {
+				type: Sequelize.STRING(10),
+				allowNull: false,
+			},
+			Ngay_Lap: {
+				type: Sequelize.DATE,
+				allowNull: false,
+				defaultValue: Sequelize.NOW,
+			},
+
+			Ngay_Bat_Dau: {
+				type: Sequelize.DATE,
+				allowNull: false,
+				defaultValue: Sequelize.NOW,
+			},
+			Ngay_Ket_Thuc: {
+				type: Sequelize.DATE,
+				allowNull: false,
+			},
+		},
+		{ tableName: "Hopdong", modelName: "Contracts" },
+	);
+	Contract.associate = (models) => {
+		Contract.belongsTo(models.Employees, {
+			foreignKey: "MaNV",
+		});
+		Contract.belongsTo(models.Students, {
+			foreignKey: "Mssv",
+		});
+		Contract.belongsTo(models.Rooms, {
+			foreignKey: "MaP",
+		});
+	};
+	return Contracts;
+};

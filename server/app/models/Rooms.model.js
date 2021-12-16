@@ -2,7 +2,11 @@ export default (sequelize, Sequelize) => {
 	const Rooms = sequelize.define(
 		"Phong",
 		{
-			MaP: { type: Sequelize.STRING(10), allowNull: false },
+			MaP: {
+				type: Sequelize.STRING(10),
+				allowNull: false,
+				primaryKey: true,
+			},
 			MaNV: { type: Sequelize.STRING(10), allowNull: false },
 			MaKhu: { type: Sequelize.INTEGER(10), allowNull: false },
 			SLToiDa: {

@@ -1,10 +1,9 @@
 import express from "express";
-
 import {
-    create,
-    deleteById,
-    findAll,
-    update,
+	create,
+	deleteById,
+	findAll,
+	update,
 } from "../controllers/Students.controller.js";
 
 const routerStudent = express.Router();

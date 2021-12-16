@@ -1,6 +1,6 @@
 import db from "../models/sequelize.js";
 
-const Rooms = db.Rooms;
+const Employee = db.Employees;
 const Op = db.Sequelize.Op;
 
 export const create = async (req, res) => {
@@ -12,43 +12,44 @@ export const create = async (req, res) => {
 		return;
 	}
 
-	const room = {
-		MaP: req.body.map,
+	const employee = {
 		MaNV: req.body.manv,
-		MaKhu: req.body.makhu,
-		SLToiDa: req.body.sltoida,
-		SLDangO: req.body.sldango,
-		GhiChuPhong: req.body.ghichu,
-		LoaiPhong: req.body.loaiphong,
-		TinhTrangPhong: req.body.tinhtrang,
+		TenNV: req.body.tennv,
+		DienThoai: req.body.dienthoai,
+		Email: req.body.email,
+		DiaChi: req.body.diachi,
 	};
 
-	await Rooms.findOrCreate({ where: { MaP: room.MaP }, defaults: room })
+	await Employee.findOrCreate({
+		where: { MaNV: employee.MaNV },
+		defaults: employee,
+	})
 		.then(([data, create]) => {
 			if (create) {
 				res.send(data);
 			} else {
 				res.send({
-					message: "Mã Phòng đã tồn tại! Không thể thêm mới phòng.",
+					message:
+						"Mã nhân viên đã tồn tại! Không thể thêm mới nhân viên.",
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: err.message || "Có lỗi, không thêm được phòng!",
+				message: err.message || "Có lỗi, không thêm được nhân viên!",
 			});
 		});
 };
 
 export const update = (req, res) => {
 	const id = req.params.id;
-	const room = {};
-	Rooms.update(room, {
+	const employee = {};
+	Employee.update(employee, {
 		where: { id: id },
 	})
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Cập nhật phòng thành công" });
+				res.send({ message: "Cập nhật nhân viên thành công" });
 			} else {
 				res.send({
 					message: `Không thể cập nhật với id=${id}. Có thể id này không tồn tại`,
@@ -66,22 +67,23 @@ export const update = (req, res) => {
 export const deleteById = (req, res) => {
 	const id = req.params.id;
 	console.log(id);
-	Rooms.destroy({
+	Employee.destroy({
 		where: { id: id },
 	})
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Xóa phòng thành công" });
+				res.send({ message: "Xóa nhân viên thành công" });
 			} else {
 				res.send({
-					message: `Không thể Xóa phòngn với id=${id}. Có thể id này không tồn tại`,
+					message: `Không thể Xóa nhân viênn với id=${id}. Có thể id này không tồn tại`,
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
 				message:
-					err.message || "Có lổi, Không thể Xóa phòng với id=" + id,
+					err.message ||
+					"Có lổi, Không thể Xóa nhân viên với id=" + id,
 			});
 		});
 };
@@ -95,7 +97,7 @@ export const findAll = (req, res) => {
 		hoten: hoten ? { HoTen: { [Op.like]: `%${hoten}%` } } : null,
 	};
 
-	Rooms.findAll({
+	Employee.findAll({
 		where:
 			condition.hoten || condition.mssv
 				? { [Op.or]: [condition.hoten, condition.mssv] }
