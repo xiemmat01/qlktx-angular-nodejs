@@ -21,4 +21,10 @@ export class StudentService {
   create(data: any): Observable<Student> {
     return this.http.post(NODE_API_SERVER + 'sinh-vien', data);
   }
+  update(data: any): Observable<Student> {
+    return this.http.put(NODE_API_SERVER + 'sinh-vien', data);
+  }
+  delete(id: number): Observable<Student> {
+    return this.http.delete(`${NODE_API_SERVER}/sinh-vien/${id}`);
+  }
 }
