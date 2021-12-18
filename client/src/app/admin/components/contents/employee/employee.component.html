@@ -2,70 +2,65 @@
     aria-controls="collapseOne">
     <i class="bi bi-plus-circle"></i> Thêm mới nhân viên
 </button>
-<form class="row collapse mt-3" id="collapseOne">
+<form class="row collapse mt-3" id="collapseOne" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="col-md-6 mb-3">
         <label for="exampleInputEmail1" class="form-label">Họ tên:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập họ tên...">
+        <input type="text" class="form-control" id="" placeholder="Nhập họ tên..." formControlName="tennv">
     </div>
     <div class="col-md-6 mb-3">
         <label for="" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="" placeholder="Nhập email...">
+        <input type="email" class="form-control" id="" placeholder="Nhập email..." formControlName="email">
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
             <div class="col-sm-6">
                 <label for="" class="form-label">Số điện thoại:</label>
                 <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
-                    onkeypress="if(this.value.length == 10) return false;">
+                    onkeypress="if(this.value.length == 10) return false;" formControlName="dienthoai">
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">Mã nhân viên:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên...">
+                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên..." formControlName="manv">
             </div>
         </div>
     </div>
     <div class="col-md-6 mb-3">
         <label for="" class="form-label">Địa chỉ:</label>
-        <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ...">
+        <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..." formControlName="diachi">
     </div>
     <div class="col-md-12 mb-3 d-flex justify-content-end">
-        <a href="#" class="btn btn-success"><i class="bi bi-check2-circle"></i> Lưu thông tin</a>&nbsp;
-        <button class="btn btn-danger"><i class="bi bi-x-circle"></i> Hủy lưu</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> Lưu thông tin</button>&nbsp;
+        <button [disabled]="id==0?true:false" class="btn btn-success"><i class="bi bi-x-circle" (click)="update()"></i>
+            Cập nhật</button>
     </div>
 </form>
 <hr class="w-100">
 <div class="my-4"></div>
-<table class="table table-bordered table-striped display nowrap" style="width:100%" id="employee">
+<table class="table table-bordered table-striped display nowrap" style="width:100%">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
-            <td>$320,800</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
+            <th>Id</th>
+            <th>Mã Nhân Viên</th>
+            <th>Họ và Tên</th>
+            <th>Email</th>
+            <th>Địa Chỉ</th>
+            <th>Điện thoại</th>
             <td></td>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Tiger Nixon</td>
+        <tr *ngFor="let item of employee">
+            <td>{{item.id}}</td>
             <td>System Architect</td>
             <td>Edinburgh</td>
             <td>61</td>
             <td>2011/04/25</td>
             <td>$320,800</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
             <td>
-                <button class="btn btn-success custom">
+                <button class="btn btn-success custom" (click)="selectRowValue(item)">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                <button class="btn btn-danger custom">
+                <button class="btn btn-danger custom" (click)="delete(item.id)">
                     <i class="bi bi-trash"></i>
                 </button>
             </td>

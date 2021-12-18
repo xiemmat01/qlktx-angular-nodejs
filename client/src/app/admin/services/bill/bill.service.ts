@@ -11,6 +11,20 @@ export class BillService {
   constructor(private http: HttpClient) {}
 
   findAll(): Observable<Bill[]> {
-    return this.http.get<Bill[]>(NODE_API_SERVER + 'hoa-don');
+    return this.http.get<Bill[]>(NODE_API_SERVER + '/hoa-don');
+  }
+  findOne(hoten: any, mssv: any): Observable<Bill> {
+    return this.http.get(
+      `${NODE_API_SERVER}${'/hoa-don'}/${hoten ? hoten : mssv}`
+    );
+  }
+  create(data: any): Observable<Bill> {
+    return this.http.post(NODE_API_SERVER + '/hoa-don', data);
+  }
+  update(id: any, data: any): Observable<Bill> {
+    return this.http.put(`${NODE_API_SERVER}/hoa-don/${id}`, data);
+  }
+  delete(id?: number): Observable<Bill> {
+    return this.http.delete(`${NODE_API_SERVER}/hoa-don/${id}`);
   }
 }
