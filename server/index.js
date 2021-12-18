@@ -10,6 +10,7 @@ import routerHouse from "./app/routes/Houses.router.js";
 import routerBill from "./app/routes/Bills.router.js";
 import routerContract from "./app/routes/Contracts.router.js";
 import routerDepartment from "./app/routes/Departments.router.js";
+import routerEmployee from "./app/routes/Employees.router.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;

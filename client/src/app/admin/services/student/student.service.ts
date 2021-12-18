@@ -11,20 +11,20 @@ export class StudentService {
   constructor(private http: HttpClient) {}
 
   findAll(): Observable<Student[]> {
-    return this.http.get<Student[]>(NODE_API_SERVER + 'sinh-vien');
+    return this.http.get<Student[]>(NODE_API_SERVER + '/sinh-vien');
   }
   findOne(hoten: any, mssv: any): Observable<Student> {
     return this.http.get(
-      `${NODE_API_SERVER}${'sinh-vien'}/${hoten ? hoten : mssv}`
+      `${NODE_API_SERVER}${'/sinh-vien'}/${hoten ? hoten : mssv}`
     );
   }
   create(data: any): Observable<Student> {
-    return this.http.post(NODE_API_SERVER + 'sinh-vien', data);
+    return this.http.post(NODE_API_SERVER + '/sinh-vien', data);
   }
-  update(data: any): Observable<Student> {
-    return this.http.put(NODE_API_SERVER + 'sinh-vien', data);
+  update(id: any, data: any): Observable<Student> {
+    return this.http.put(`${NODE_API_SERVER}/sinh-vien/${id}`, data);
   }
-  delete(id: number): Observable<Student> {
+  delete(id?: number): Observable<Student> {
     return this.http.delete(`${NODE_API_SERVER}/sinh-vien/${id}`);
   }
 }

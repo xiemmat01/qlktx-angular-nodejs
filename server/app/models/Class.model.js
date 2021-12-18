@@ -2,6 +2,11 @@ export default (sequelize, Sequelize) => {
 	const Class = sequelize.define(
 		"Lop",
 		{
+			id: {
+				type: Sequelize.INTEGER,
+				autoIncrement: true,
+				primaryKey: true,
+			},
 			MaLop: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
@@ -24,7 +29,7 @@ export default (sequelize, Sequelize) => {
 		{ tableName: "Lop", modelName: "Class" },
 	);
 	Class.associate = (models) => {
-		Class.belongsTo(models.Department, { foreignKey: "MaKhoa" });
+		Class.belongsTo(models.Departments, { foreignKey: "MaKhoa" });
 	};
 	return Class;
 };

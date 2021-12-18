@@ -17,8 +17,16 @@ import { RoomComponent } from './admin/components/contents/room/room.component';
 import { EmployeeComponent } from './admin/components/contents/employee/employee.component';
 import { BillsComponent } from './admin/components/contents/bills/bills.component';
 import { ContractComponent } from './admin/components/contents/contract/contract.component';
-import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  NoopAnimationsModule,
+  BrowserAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { viLocale } from 'ngx-bootstrap/locale';
+
+defineLocale('vi', viLocale);
 
 registerLocaleData(localeVi);
 

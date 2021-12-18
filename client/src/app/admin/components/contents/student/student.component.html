@@ -7,12 +7,12 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="" class="form-label">Ngày sinh:</label>
-                <input bsDatepicker type="text" class="form-control" formControlName="ngaysinh" placeholder="dd/mm/yyyy"
-                    [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}">
+                <input bsDatepicker type="text" class="form-control" formControlName="ngaysinh" placeholder="dd-mm-yyyy"
+                    [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">Giới tính:</label>
-                <select name="" id="" class="form-select" formControlName="gioitinh">
+                <select name="" id="" class="form-select" formControlName="phai">
                     <option>--Chọn--</option>
                     <option value="0">Nữ</option>
                     <option value="1">Nam</option>
@@ -29,7 +29,7 @@
             <div class="col-sm-6">
                 <label for="" class="form-label">Số điện thoại:</label>
                 <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
-                    onkeypress="if(this.value.length == 10) return false;" formControlName="sodienthoai">
+                    onkeypress="if(this.value.length == 10) return false;" formControlName="dienthoai">
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">CMND/CCCD:</label>
@@ -57,7 +57,9 @@
         </div>
     </div>
     <div class="col-md-12 mb-3">
-        <button type="submit" class="btn btn-primary">Thêm mới</button>
+        <button type="submit" class="btn btn-primary">Thêm mới</button> &nbsp;
+        <button [disabled]="id==0?true:false" class="btn btn-success" type="button" (click)="updateStudent()">Cập
+            nhật</button>
     </div>
 </form>
 <hr class="w-100">
@@ -82,11 +84,11 @@
             <td>{{item.id}}</td>
             <td>{{item.HoTen}}</td>
             <td>{{item.Mssv}}</td>
-            <td>{{item.NgaySinh}}</td>
+            <td>{{item.NgaySinh | date:'dd-MM-yyyy'}}</td>
             <td>{{item.Cmnd}}</td>
             <td>{{item.DanToc}}</td>
             <td>{{item.DiaChi}}</td>
-            <td>{{item.GioiTinh}}</td>
+            <td>{{item.Phai ? "Nam" : "Nữ"}}</td>
             <td>{{item.MaLop}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)">

@@ -2,6 +2,11 @@ export default (sequelize, Sequelize) => {
 	const Contracts = sequelize.define(
 		"Hopdong",
 		{
+			id: {
+				type: Sequelize.INTEGER,
+				autoIncrement: true,
+				primaryKey: true,
+			},
 			MaHopDong: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
@@ -37,14 +42,14 @@ export default (sequelize, Sequelize) => {
 		},
 		{ tableName: "Hopdong", modelName: "Contracts" },
 	);
-	Contract.associate = (models) => {
-		Contract.belongsTo(models.Employees, {
+	Contracts.associate = (models) => {
+		Contracts.belongsTo(models.Employees, {
 			foreignKey: "MaNV",
 		});
-		Contract.belongsTo(models.Students, {
+		Contracts.belongsTo(models.Students, {
 			foreignKey: "Mssv",
 		});
-		Contract.belongsTo(models.Rooms, {
+		Contracts.belongsTo(models.Rooms, {
 			foreignKey: "MaP",
 		});
 	};

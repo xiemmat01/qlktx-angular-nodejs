@@ -2,6 +2,11 @@ export default (sequelize, Sequelize) => {
 	const Rooms = sequelize.define(
 		"Phong",
 		{
+			id: {
+				type: Sequelize.INTEGER,
+				autoIncrement: true,
+				primaryKey: true,
+			},
 			MaP: {
 				type: Sequelize.STRING(10),
 				allowNull: false,

@@ -2,6 +2,11 @@ export default (sequelize, Sequelize) => {
 	const Employee = sequelize.define(
 		"nhanvien",
 		{
+			id: {
+				type: Sequelize.INTEGER,
+				autoIncrement: true,
+				primaryKey: true,
+			},
 			MaNV: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
