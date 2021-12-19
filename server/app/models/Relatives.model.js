@@ -2,11 +2,7 @@ export default (sequelize, Sequelize) => {
 	const Relatives = sequelize.define(
 		"ThanNhan",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
+		
 			MaTN: {
 				type: Sequelize.STRING(10),
 				allowNull: false,

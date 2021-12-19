@@ -2,11 +2,6 @@ export default (sequelize, Sequelize) => {
 	const Student = sequelize.define(
 		"SinhVien",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
 			HoTen: { type: Sequelize.STRING(155), allowNull: false },
 			NgaySinh: { type: Sequelize.DATE, allowNull: false },
 			Mssv: {

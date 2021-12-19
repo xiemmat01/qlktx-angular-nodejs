@@ -87,18 +87,20 @@ export const deleteById = (req, res) => {
 };
 
 export const findAll = (req, res) => {
-	const hoten = req.body.hoten;
-	const mssv = req.body.mssv;
+	const loaiphong = req.body.loaiphong;
+	const tinhtrang = req.body.tinhtrang;
 
 	let condition = {
-		mssv: mssv ? { MSSV: { [Op.eq]: mssv } } : null,
-		hoten: hoten ? { HoTen: { [Op.like]: `%${hoten}%` } } : null,
+		tinhtrang: tinhtrang
+			? { TinhTrangPhong: { [Op.eq]: tinhtrang } }
+			: null,
+		loaiphong: loaiphong ? { LoaiPhong: { [Op.eq]: loaiphong } } : null,
 	};
 
 	Rooms.findAll({
 		where:
-			condition.hoten || condition.mssv
-				? { [Op.or]: [condition.hoten, condition.mssv] }
+			condition.tinhtrang || condition.loaiphong
+				? { [Op.or]: [condition.tinhtrang, condition.loaiphong] }
 				: null,
 	})
 		.then((data) => {

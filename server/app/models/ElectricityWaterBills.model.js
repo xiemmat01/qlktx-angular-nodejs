@@ -2,11 +2,7 @@ export default (sequelize, Sequelize) => {
 	const ElectricityWaterBills = sequelize.define(
 		"HDDienNuoc",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
+			
 			MaHD: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
@@ -31,24 +27,9 @@ export default (sequelize, Sequelize) => {
 			},
 		},
 		{
-			validate: {
-				checkElectricityBill: () => {
-					if (this.ChiSoDienDau > this.ChiSoDienCuoi) {
-						throw ERROR(
-							"Chỉ số điện đầu phải nhỏ hơn chỉ số điện cuối.",
-						);
-					}
-				},
-				checkWaterBill: () => {
-					if (this.ChiSoNuocDau > this.ChiSoNuocCuoi) {
-						throw ERROR(
-							"Chỉ số nước đầu phải nhỏ hơn chỉ số nước cuối.",
-						);
-					}
-				},
-			},
+			tableName: "HDDienNuoc",
+			modelName: "ElectricityWaterBills",
 		},
-		{ tableName: "HDDienNuoc", modelName: "ElectricityWaterBills" },
 	);
 	ElectricityWaterBills.associate = (models) => {
 		ElectricityWaterBills.belongsTo(models.Employees, {

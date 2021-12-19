@@ -2,17 +2,13 @@ export default (sequelize, Sequelize) => {
 	const Departments = sequelize.define(
 		"Khoa",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
+			
 			MaKhoa: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
 				primaryKey: true,
 			},
-			TenKhoa: { type: Sequelize.STRING(10), allowNull: false },
+			TenKhoa: { type: Sequelize.STRING(100), allowNull: false },
 
 			Ngay_them_moi: {
 				type: Sequelize.DATE,

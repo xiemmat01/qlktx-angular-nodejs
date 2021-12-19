@@ -2,11 +2,7 @@ export default (sequelize, Sequelize) => {
 	const Contracts = sequelize.define(
 		"Hopdong",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
+		
 			MaHopDong: {
 				type: Sequelize.STRING(10),
 				allowNull: false,

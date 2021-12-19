@@ -2,11 +2,6 @@ export default (sequelize, Sequelize) => {
 	const Class = sequelize.define(
 		"Lop",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
 			MaLop: {
 				type: Sequelize.STRING(10),
 				allowNull: false,

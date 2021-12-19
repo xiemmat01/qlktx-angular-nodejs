@@ -2,18 +2,13 @@ export default (sequelize, Sequelize) => {
 	const Rooms = sequelize.define(
 		"Phong",
 		{
-			id: {
-				type: Sequelize.INTEGER,
-				autoIncrement: true,
-				primaryKey: true,
-			},
 			MaP: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
 				primaryKey: true,
 			},
 			MaNV: { type: Sequelize.STRING(10), allowNull: false },
-			MaKhu: { type: Sequelize.INTEGER(10), allowNull: false },
+			MaKhu: { type: Sequelize.STRING(10), allowNull: false },
 			SLToiDa: {
 				type: Sequelize.INTEGER(6),
 				allowNull: false,
