@@ -2,13 +2,12 @@ export default (sequelize, Sequelize) => {
 	const Employee = sequelize.define(
 		"nhanvien",
 		{
-			
 			MaNV: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
 				primaryKey: true,
 			},
-			TenNV: { type: Sequelize.STRING(10), allowNull: false },
+			TenNV: { type: Sequelize.STRING(100), allowNull: false },
 			DienThoai: { type: Sequelize.STRING(10), allowNull: false },
 			Email: {
 				type: Sequelize.STRING(110),

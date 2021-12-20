@@ -87,9 +87,21 @@ export const deleteById = (req, res) => {
 };
 
 export const findAll = (req, res) => {
+	Rooms.findAll()
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send(
+				err.message || "Có lỗi, không tìm thấy dữ liệu!",
+			);
+		});
+};
+
+export const filter = (req, res) => {
 	const loaiphong = req.body.loaiphong;
 	const tinhtrang = req.body.tinhtrang;
-
+	console.log(loaiphong);
 	let condition = {
 		tinhtrang: tinhtrang
 			? { TinhTrangPhong: { [Op.eq]: tinhtrang } }
@@ -100,7 +112,7 @@ export const findAll = (req, res) => {
 	Rooms.findAll({
 		where:
 			condition.tinhtrang || condition.loaiphong
-				? { [Op.or]: [condition.tinhtrang, condition.loaiphong] }
+				? { [Op.and]: [condition.tinhtrang, condition.loaiphong] }
 				: null,
 	})
 		.then((data) => {
@@ -111,4 +123,12 @@ export const findAll = (req, res) => {
 				err.message || "Có lỗi, không tìm thấy dữ liệu!",
 			);
 		});
+};
+
+export const findAndCount = (req, res) => {
+	Rooms.findAndCountAll({
+		where: { SLDangO: { [Op.eq]: 0 }, TinhTrangPhong: { [Op.eq]: 0 } },
+	}).then((data) => {
+		res.send(data);
+	});
 };

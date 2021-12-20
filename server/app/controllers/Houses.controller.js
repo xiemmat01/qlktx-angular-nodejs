@@ -1,6 +1,7 @@
 import db from "../models/sequelize.js";
 
 const House = db.Houses;
+const Room = db.Rooms;
 const Op = db.Sequelize.Op;
 
 export const create = async (req, res) => {
@@ -84,6 +85,21 @@ export const deleteById = (req, res) => {
 
 export const findAll = (req, res) => {
 	House.findAll()
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send(
+				err.message || "Có lỗi, không tìm thấy dữ liệu!",
+			);
+		});
+};
+export const findRoomByKhu = (req, res) => {
+	console.log(req.params.khu);
+	House.findAll({
+		include: Room,
+		where: { MaKhu: { [Op.eq]: req.params.khu } },
+	})
 		.then((data) => {
 			res.send(data);
 		})

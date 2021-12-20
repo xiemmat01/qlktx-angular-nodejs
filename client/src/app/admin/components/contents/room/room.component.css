@@ -34,7 +34,25 @@
 }
 .row2 i {
   font-size: 30px;
-  color: cadetblue;
+  color: rgb(179, 187, 187);
+}
+.row2.sl1 i:nth-child(1) {
+  color: rgb(6, 124, 160);
+}
+.row2.sl2 i:nth-child(-n + 2) {
+  color: rgb(6, 124, 160);
+}
+.row2.sl3 i:nth-child(-n + 3) {
+  color: rgb(6, 124, 160);
+}
+.row2.sl4 i:nth-child(-n + 4) {
+  color: rgb(6, 124, 160);
+}
+.row2.sl5 i:nth-child(-n + 5) {
+  color: rgb(6, 124, 160);
+}
+.row2.sl6 i:nth-child(-n + 6) {
+  color: rgb(6, 124, 160);
 }
 .row3 {
   margin-top: 15px;
@@ -54,4 +72,7 @@ nav .breadcrumb-item + .breadcrumb-item::before {
 .card.custom:hover {
   box-shadow: 0 8px 8px 0 rgba(103, 151, 255, 0.11),
     0 12px 18px 0 rgba(103, 151, 255, 0.11);
+}
+.custom > .active {
+  display: flex;
 }

@@ -24,7 +24,7 @@ export class StudentService {
   update(id: any, data: any): Observable<Student> {
     return this.http.put(`${NODE_API_SERVER}/sinh-vien/${id}`, data);
   }
-  delete(id?: number): Observable<Student> {
+  delete(id?: any): Observable<Student> {
     return this.http.delete(`${NODE_API_SERVER}/sinh-vien/${id}`);
   }
 }

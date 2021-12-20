@@ -2,67 +2,314 @@
     <div class="row mb-3 mt-3">
         <div class="col-3">
             <div class="d-flex flex-row align-items-center h-100">
-                <span>Còn trống: 0</span>
+                <span>Còn trống: {{countEmptyRoom}}</span>
                 <span class="mx-2">|</span>
-                <span>Đã cho thuê: 0</span>
+                <span>Đã cho thuê: {{countFullRoom}}</span>
             </div>
         </div>
         <div class="col-6">
-            <form class="d-flex flex-row justify-content-center">
-                <select name="" id="" class="form-select">
+            <form class="d-flex flex-row justify-content-center" [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+                <select class="form-select" formControlName="loaiphong">
                     <option>--Loại phòng--</option>
                     <option value="0">Nam</option>
                     <option value="1">Nữ</option>
                 </select>
                 <span class="mx-1"></span>
-                <select name="" id="" class="form-select">
+                <select class="form-select" formControlName="tinhtrang">
                     <option>--Trạng thái phòng--</option>
-                    <option value="0">Đầy</option>
-                    <option value="1">Trống</option>
+                    <option value="0">Trống</option>
+                    <option value="1">Đầy</option>
                 </select>
-                <a href="!#" class="btn btn-primary ms-2"><i class="bi bi-search"></i></a>
+                <button type="submit" class="btn btn-primary ms-2"><i class="bi bi-search"></i></button>
+                <button type="button" (click)="resetData()" class="btn btn-secondary ms-2"><i
+                        class="bi bi-arrow-clockwise"></i></button>
             </form>
         </div>
         <div class="col-3">
             <div class="d-flex flex-row-reverse">
-                <a href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thêm phòng mới</a>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddNew"><i
+                        class="bi bi-plus-circle"></i> Thêm phòng mới</button>
             </div>
         </div>
     </div>
     <div style="border-bottom: 1px solid rgb(167, 165, 165); width: 100%;"></div>
     <div class="mb-3 mt-4">
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a href="#tang1" class="nav-link active" data-bs-toggle="tab">Khu A</a>
+            <li class="nav-item" (click)="getAll()">
+                <a href="#tatca" class="nav-link" [ngClass]="isActive.tatca ? 'active' : ''" data-bs-toggle="tab">Tất
+                    Cả</a>
             </li>
-            <li class="nav-item">
-                <a href="#tang2" class="nav-link" data-bs-toggle="tab">Khu B</a>
+            <li class="nav-item" (click)="getKhuA('A')">
+                <a href="#khuA" class="nav-link" [ngClass]="isActive.khuA ? 'active' : ''" data-bs-toggle="tab">Khu
+                    A</a>
+            </li>
+            <li class="nav-item" (click)="getKhuB('B')">
+                <a href="#khuB" class="nav-link" [ngClass]="isActive.khuB ? 'active' : ''" data-bs-toggle="tab">Khu
+                    B</a>
+            </li>
+            <li class="nav-item float-start">
+                <a href="#loc" [ngClass]="isActive.loc ? 'nav-link active' : 'nav-link disabled'" data-bs-toggle="tab"
+                    [attr.aria-disabled]="isActive.loc ? false : true">Lọc</a>
             </li>
         </ul>
     </div>
-    <div class="tab-content row mt-3">
-        <div class="col tab-pane fade show active" id="tang1">
-            <div class="card border custom" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="card-body">
-                    <div class="row1">
-                        <i class="bi bi-house-fill"><span>P001</span></i>
-                        <i class="bi bi-gender-male"></i>
+    <div class="tab-content mt-3 custom">
+        <div id="tatca" class="row tab-pane fade show" [ngClass]="isActive.tatca ? 'active' : ''">
+            <div class="col-2" *ngFor="let item of room">
+                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                    <div class="card-body">
+                        <div class="row1">
+                            <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
+                            <i [ngClass]="item.LoaiPhong == 0 ? 'bi bi-gender-male' : 'bi bi-gender-female'"></i>
+                        </div>
+                        <div [ngClass]="item.SLDangO == 0 ? 'row2': 'row2 sl'+item.SLDangO ">
+                            <!-- <small>Phòng trống</small> -->
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="row3">
+                            <a class="link-dark custom" data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Chỉnh sửa phòng">
+                                <i class="bi bi-gear"></i>
+                            </a>
+                            <span>({{item.SLDangO}}/6)</span>
+                        </div>
                     </div>
-                    <div class="row2">
-                        <!-- <small>Phòng trống</small> -->
-                        <i class="bi bi-person-fill"></i>
-                        <i class="bi bi-person-fill"></i>
-                        <i class="bi bi-person-fill"></i>
-                        <i class="bi bi-person-fill"></i>
-                        <i class="bi bi-person-fill"></i>
-                        <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered table-striped display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row3">
-                        <a href="#" class="link-dark custom" data-bs-toggle="tooltip" data-bs-placement="right"
-                            title="Chỉnh sửa phòng">
-                            <i class="bi bi-gear"></i>
-                        </a>
-                        <span>(0/6)</span>
+                </div>
+            </div>
+        </div>
+        <div id="khuA" class="row tab-pane fade show" [ngClass]="isActive.khuA ? 'active' : ''">
+            <div class="col-2" *ngFor="let item of khunha">
+                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                    <div class="card-body">
+                        <div class="row1">
+                            <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
+                            <i [ngClass]="item.LoaiPhong == 0 ? 'bi bi-gender-male' : 'bi bi-gender-female'"></i>
+                        </div>
+                        <div [ngClass]="item.SLDangO == 0 ? 'row2': 'row2 sl'+item.SLDangO ">
+                            <!-- <small>Phòng trống</small> -->
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="row3">
+                            <a class="link-dark custom" data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Chỉnh sửa phòng">
+                                <i class="bi bi-gear"></i>
+                            </a>
+                            <span>({{item.SLDangO}}/6)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered table-striped display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="khuB" class="tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
+            <div class="col-2" *ngFor="let item of khunha">
+                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                    <div class="card-body">
+                        <div class="row1">
+                            <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
+                            <i [ngClass]="item.LoaiPhong == 0 ? 'bi bi-gender-male' : 'bi bi-gender-female'"></i>
+                        </div>
+                        <div [ngClass]="item.SLDangO == 0 ? 'row2': 'row2 sl'+item.SLDangO ">
+                            <!-- <small>Phòng trống</small> -->
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="row3">
+                            <a class="link-dark custom" data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Chỉnh sửa phòng">
+                                <i class="bi bi-gear"></i>
+                            </a>
+                            <span>({{item.SLDangO}}/6)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered table-striped display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loc" class="tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
+            <div class="col-2" *ngFor="let item of filterRoom">
+                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                    <div class="card-body">
+                        <div class="row1">
+                            <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
+                            <i [ngClass]="item.LoaiPhong == 0 ? 'bi bi-gender-male' : 'bi bi-gender-female'"></i>
+                        </div>
+                        <div [ngClass]="item.SLDangO == 0 ? 'row2': 'row2 sl'+item.SLDangO ">
+                            <!-- <small>Phòng trống</small> -->
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="row3">
+                            <a class="btn link-dark custom" data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Chỉnh sửa phòng">
+                                <i class="bi bi-gear"></i>
+                            </a>
+                            <span>({{item.SLDangO}}/6)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered table-striped display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,38 +317,70 @@
     </div>
 </div>
 <!-- modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddNew" tabindex="-1" aria-labelledby="themmoi" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered table-striped display nowrap" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+            <form [formGroup]="AddNewRoom" (ngSubmit)="AddNewSubmit()">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="themmoi">Thêm Mới Phòng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Mã Khu</label>
+                            <select formControlName="makhu" class="form-select">
+                                <option value="A">Khu A</option>
+                                <option value="B">Khu B</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Mã Phòng</label>
+                            <input type="text" class="form-control" formControlName="map">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Mã Nhân Viên</label>
+                            <input type="text" class="form-control" formControlName="manv">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Loại Phòng</label>
+                            <select formControlName="loaiphong" class="form-select">
+                                <option value="0">Nam</option>
+                                <option value="1">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Số Lượng Tối Đa</label>
+                            <input type="text" class="form-control" readonly formControlName="sltoida">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Số Lượng Đang Ở</label>
+                            <input type="text" class="form-control" formControlName="sldango">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Ghi Chú</label>
+                            <textarea type="text" class="form-control" formControlName="ghichu"></textarea>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="" class="form-label">Tình Trạng Phòng</label>
+                            <div class="d-flex">
+                                <input type="radio" name="tinhtrang" class="form-check" value="0"
+                                    formControlName="tinhtrang">&nbsp;
+                                <label class="form-label">Trống</label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" name="tinhtrang" class="form-check" value="1"
+                                    formControlName="tinhtrang">&nbsp;
+                                <label for="" class="form-label">Đầy</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

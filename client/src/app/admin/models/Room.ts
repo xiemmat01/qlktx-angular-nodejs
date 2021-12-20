@@ -6,5 +6,5 @@ export class Room {
   SLDangO?: number = 0;
   GhiChuPhong?: string;
   LoaiPhong?: number;
-  TinhTrangPhong?: boolean;
+  TinhTrangPhong?: number;
 }

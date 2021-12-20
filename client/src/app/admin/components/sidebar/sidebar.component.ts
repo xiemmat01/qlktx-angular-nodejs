@@ -10,7 +10,7 @@ export class SidebarComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    sessionStorage.setItem('manv', 'nv01');
+    sessionStorage.setItem('manv', 'NV001');
     console.log(sessionStorage.getItem('manv'));
   }
 }

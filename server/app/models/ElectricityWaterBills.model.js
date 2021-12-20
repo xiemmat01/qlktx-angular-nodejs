@@ -2,7 +2,6 @@ export default (sequelize, Sequelize) => {
 	const ElectricityWaterBills = sequelize.define(
 		"HDDienNuoc",
 		{
-			
 			MaHD: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
@@ -35,7 +34,7 @@ export default (sequelize, Sequelize) => {
 		ElectricityWaterBills.belongsTo(models.Employees, {
 			foreignKey: "MaNV",
 		});
-		ElectricityWaterBills.hasOne(models.Rooms, {
+		ElectricityWaterBills.belongsTo(models.Rooms, {
 			foreignKey: "MaP",
 		});
 	};

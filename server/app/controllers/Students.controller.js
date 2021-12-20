@@ -50,7 +50,6 @@ export const update = async (req, res) => {
 	const sinhvien = {
 		HoTen: req.body.hoten,
 		NgaySinh: req.body.ngaysinh,
-		Mssv: req.body.mssv,
 		Cmnd: req.body.cmnd,
 		DienThoai: req.body.dienthoai,
 		DiaChi: req.body.diachi,
@@ -60,21 +59,22 @@ export const update = async (req, res) => {
 	};
 
 	await Students.update(sinhvien, {
-		where: { id: id },
+		where: { Mssv: id },
 	})
 		.then((num) => {
 			if (num == 1) {
 				res.send({ message: "Cập nhật sinh viên thành công." });
 			} else {
 				res.send({
-					message: `Không thể cập nhật với id=${id}. Có thể id này không tồn tại.`,
+					message: `Thông tin sinh viên không có sự thây đổi.`,
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
 				message:
-					err.message || `Có lổi, Không thể cập nhật với id= ${id}.`,
+					err.message ||
+					`Có lổi, Không thể cập nhật với Mssv = ${id}.`,
 			});
 		});
 };
@@ -83,14 +83,14 @@ export const deleteById = async (req, res) => {
 	const id = req.params.id;
 	console.log(id);
 	await Students.destroy({
-		where: { id: id },
+		where: { Mssv: id },
 	})
 		.then((num) => {
 			if (num == 1) {
 				res.send({ message: "Xóa sinh viên thành công" });
 			} else {
 				res.send({
-					message: `Không thể Xóa sinh viên với id= ${id}. Có thể id này không tồn tại`,
+					message: `Không thể Xóa sinh viên với Mssv = ${id}. Có thể id này không tồn tại`,
 				});
 			}
 		})
@@ -98,7 +98,7 @@ export const deleteById = async (req, res) => {
 			res.status(500).send({
 				message:
 					err.message ||
-					`Có lổi, Không thể Xóa sinh vien với id= ${id}.`,
+					`Có lổi, Không thể Xóa sinh vien với Mssv = ${id}.`,
 			});
 		});
 };
@@ -106,7 +106,7 @@ export const deleteById = async (req, res) => {
 export const findAll = async (req, res) => {
 	const hoten = req.body.hoten;
 	const mssv = req.body.mssv;
-
+	console.log(mssv);
 	let condition = {
 		mssv: mssv ? { Mssv: { [Op.eq]: mssv } } : null,
 		hoten: hoten ? { HoTen: { [Op.like]: `%${hoten}%` } } : null,

@@ -10,6 +10,7 @@ const routerStudent = express.Router();
 
 routerStudent.post("/", create);
 routerStudent.get("/", findAll);
+routerStudent.put("/", findAll);
 routerStudent.put("/:id", update);
 routerStudent.delete("/:id", deleteById);
 

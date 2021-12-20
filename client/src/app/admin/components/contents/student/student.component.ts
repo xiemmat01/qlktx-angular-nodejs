@@ -12,7 +12,7 @@ import { StudentService } from 'src/app/admin/services/student/student.service';
 })
 export class StudentComponent implements OnInit {
   student: Student[] = [];
-  id?: number = 0;
+  mssv?: string = '';
   constructor(
     private titleService: Title,
     private studentService: StudentService,
@@ -45,7 +45,7 @@ export class StudentComponent implements OnInit {
 
   selectRowValue = (std: Student) => {
     console.log(std);
-    this.id = std.id;
+    this.mssv = std.Mssv;
     this.studentForm.setValue({
       hoten: std.HoTen,
       ngaysinh: new Date(std.NgaySinh ? std.NgaySinh : ''),
@@ -80,10 +80,10 @@ export class StudentComponent implements OnInit {
       }
     );
   };
-  deleteStudent = (id?: number) => {
-    this.studentService.delete(id).subscribe(
+  deleteStudent = (mssv?: string) => {
+    this.studentService.delete(mssv).subscribe(
       (rep) => {
-        alert(rep);
+        console.log(rep);
         this.getAllStudent();
       },
       (error) => {
@@ -92,9 +92,11 @@ export class StudentComponent implements OnInit {
     );
   };
   updateStudent = () => {
-    this.studentService.update(this.id, this.studentForm.value).subscribe(
-      (rep) => {
-        alert(rep);
+    this.studentService.update(this.mssv, this.studentForm.value).subscribe(
+      (req: any) => {
+        alert(req.message);
+        this.studentForm.reset();
+        this.mssv = '';
         this.getAllStudent();
       },
       (error) => {
