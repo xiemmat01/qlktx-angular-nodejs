@@ -21,6 +21,7 @@ export class RoomComponent implements OnInit {
   manv = sessionStorage.getItem('manv');
   countEmptyRoom: any;
   countFullRoom: any;
+  setMaP: any;
 
   ngOnInit(): void {
     this.getAll();
@@ -31,36 +32,72 @@ export class RoomComponent implements OnInit {
   });
 
   AddNewRoom = new FormGroup({
-    makhu: new FormControl('A', Validators.required),
-    map: new FormControl('', Validators.required),
+    makhu: new FormControl('--Chọn Khu--', Validators.required),
+    map: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(4),
+    ]),
     manv: new FormControl(this.manv, Validators.required),
     loaiphong: new FormControl('0', Validators.required),
-    sldango: new FormControl('0', Validators.required),
+    sldango: new FormControl('0', [Validators.required, Validators.max(6)]),
     sltoida: new FormControl('6', Validators.required),
     ghichu: new FormControl('', Validators.required),
     tinhtrang: new FormControl('0', Validators.required),
   });
-
+  // submit
+  onSubmit = () => {
+    this.filter();
+  };
+  // reset data
+  resetData = () => {
+    this.getAll();
+    this.roomForm.patchValue({
+      loaiphong: '--Loại phòng--',
+      tinhtrang: '--Trạng thái phòng--',
+    });
+  };
+  // khi chon select
+  OnChange = () => {
+    this.setMaP = this.room
+      .filter((item) => item.MaKhu === this.AddNewRoom.value.makhu)
+      .reverse();
+    console.log(this.setMaP);
+    if (this.AddNewRoom.value.makhu == 'A') {
+      this.AddNewRoom.patchValue({
+        map: this.setMaP.at(0).MaP,
+      });
+    } else {
+      this.AddNewRoom.patchValue({
+        map: this.setMaP.at(0).MaP,
+      });
+    }
+  };
+  // khi nhap sldango
+  SlDangO_InputChang = () => {
+    if (this.AddNewRoom.value.sldango == '6') {
+      this.AddNewRoom.patchValue({
+        tinhtrang: '1',
+      });
+    }
+  };
+  // them moi phong
   AddNewSubmit = () => {
     this.roomService.create(this.AddNewRoom.value).subscribe(
-      (res) => {
-        console.log(res);
-        this.getAll();
+      (res: any) => {
+        // console.log(res);
+        if (res.message) {
+          alert(res.message);
+        } else {
+          this.getAll();
+        }
       },
       (error) => {
         console.log(error);
       }
     );
   };
-
-  onSubmit = () => {
-    this.filter();
-  };
-
-  resetData = () => {
-    this.getAll();
-  };
-
+  // cac ham su ly data
   getKhuA(khu: any) {
     this.khunha = this.room.filter((item) => item.MaKhu === khu);
     this.isActive.tatca = !true;
@@ -76,9 +113,10 @@ export class RoomComponent implements OnInit {
     this.isActive.loc = !true;
   }
   getAll = () => {
+    this.filterRoom = [];
     this.roomService.getAll().subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this.room = data;
         this.isActive.tatca = true;
         this.isActive.khuA = !true;
@@ -90,6 +128,7 @@ export class RoomComponent implements OnInit {
         this.countFullRoom = this.room.filter(
           (item) => item.TinhTrangPhong == 1
         ).length;
+        console.log(this.countFullRoom);
       },
       (error) => {
         console.log(error);
@@ -99,10 +138,8 @@ export class RoomComponent implements OnInit {
   filter = () => {
     this.filterRoom = this.room.filter((item) => {
       if (
-        item.LoaiPhong == this.roomForm.value.loaiphong ||
-        (item.TinhTrangPhong == this.roomForm.value.tinhtrang &&
-          item.LoaiPhong == this.roomForm.value.loaiphong) ||
-        item.TinhTrangPhong == this.roomForm.value.tinhtrang
+        item.TinhTrangPhong == this.roomForm.value.tinhtrang &&
+        item.LoaiPhong == this.roomForm.value.loaiphong
       ) {
         return true;
       }
@@ -112,9 +149,8 @@ export class RoomComponent implements OnInit {
     this.isActive.khuA = !true;
     this.isActive.khuB = !true;
     this.isActive.loc = true;
-    // console.log(this.filterRoom);
+    console.log(this.filterRoom);
   };
-
   delete = (id?: number) => {
     this.roomService.delete(id).subscribe(
       (rep) => {
@@ -137,6 +173,18 @@ export class RoomComponent implements OnInit {
       }
     );
   };
-
-  getStudentInContract = () => {};
+  getMaP = () => {
+    this.roomService.getMaP().subscribe(
+      (data: any) => {
+        this.setMaP = data.reverse().at(0);
+        console.log(this.setMaP);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+  get f() {
+    return this.AddNewRoom.controls;
+  }
 }

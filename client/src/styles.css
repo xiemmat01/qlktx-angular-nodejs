@@ -35,5 +35,12 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Inter, "Source Sans Pro", sans-serif !important;
+}
+.table > :not(:first-child) {
+  border-top: 1px solid currentColor !important;
+}
+a {
+  color: #3b7ddd;
+  text-decoration: none !important;
 }

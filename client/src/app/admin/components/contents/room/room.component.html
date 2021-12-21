@@ -54,6 +54,10 @@
         </ul>
     </div>
     <div class="tab-content mt-3 custom">
+        <div *ngIf="room.length != 0; else elseBlock"></div>
+        <ng-template #elseBlock>
+            <h4 class="text-center" style="font-family: 'Baloo Tamma 2', cursive;"><b>Hiện chưa có phòng</b></h4>
+        </ng-template>
         <div id="tatca" class="row tab-pane fade show" [ngClass]="isActive.tatca ? 'active' : ''">
             <div class="col-2" *ngFor="let item of room">
                 <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
@@ -184,7 +188,7 @@
                 </div>
             </div>
         </div>
-        <div id="khuB" class="tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
+        <div id="khuB" class="row tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
             <div class="col-2" *ngFor="let item of khunha">
                 <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
                     <div class="card-body">
@@ -249,7 +253,7 @@
                 </div>
             </div>
         </div>
-        <div id="loc" class="tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
+        <div id="loc" class="row tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
             <div class="col-2" *ngFor="let item of filterRoom">
                 <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
                     <div class="card-body">
@@ -318,7 +322,7 @@
 </div>
 <!-- modal -->
 <div class="modal fade" id="AddNew" tabindex="-1" aria-labelledby="themmoi" aria-hidden="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <form [formGroup]="AddNewRoom" (ngSubmit)="AddNewSubmit()">
                 <div class="modal-header">
@@ -329,7 +333,8 @@
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label for="" class="form-label">Mã Khu</label>
-                            <select formControlName="makhu" class="form-select">
+                            <select formControlName="makhu" class="form-select" (change)="OnChange()">
+                                <option>--Chọn Khu--</option>
                                 <option value="A">Khu A</option>
                                 <option value="B">Khu B</option>
                             </select>
@@ -337,10 +342,15 @@
                         <div class="col-6 mb-3">
                             <label for="" class="form-label">Mã Phòng</label>
                             <input type="text" class="form-control" formControlName="map">
+                            <div class="alert alert-danger mt-2" *ngIf="f.map.touched && f.map.invalid">
+                                <div *ngIf="f.map.errors?.required">Bạn chưa nhập Mã Phòng</div>
+                                <div *ngIf="f.map.errors?.minlength || f.map.errors?.maxlength">Mã phòng tối đa 4
+                                    ký số</div>
+                            </div>
                         </div>
                         <div class="col-6 mb-3">
                             <label for="" class="form-label">Mã Nhân Viên</label>
-                            <input type="text" class="form-control" formControlName="manv">
+                            <input type="text" class="form-control" formControlName="manv" readonly>
                         </div>
                         <div class="col-6 mb-3">
                             <label for="" class="form-label">Loại Phòng</label>
@@ -355,7 +365,12 @@
                         </div>
                         <div class="col-6 mb-3">
                             <label for="" class="form-label">Số Lượng Đang Ở</label>
-                            <input type="text" class="form-control" formControlName="sldango">
+                            <input type="number" class="form-control" formControlName="sldango"
+                                (change)="SlDangO_InputChang()">
+                            <div class="alert alert-danger mt-2" *ngIf="f.sldango.touched && f.sldango.invalid">
+                                <div *ngIf="f.sldango.errors?.required">Bạn chưa số lượng</div>
+                                <div *ngIf="f.sldango.errors?.max">Số lượng người ở tối đa là 6</div>
+                            </div>
                         </div>
                         <div class="col-6 mb-3">
                             <label for="" class="form-label">Ghi Chú</label>
@@ -377,7 +392,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="submit" class="btn btn-success" [disabled]="f.map.errors?.required">Lưu</button>
                     <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </form>

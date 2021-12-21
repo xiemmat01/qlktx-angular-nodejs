@@ -28,9 +28,10 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/css/app.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "src/assets/css/app.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js"

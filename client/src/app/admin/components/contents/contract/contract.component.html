@@ -124,14 +124,14 @@
 
 <table class="table table-bordered table-striped display nowrap mt-4" style="width:100%" id="contract">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th>Mã hợp đồng</th>
             <th>Mã sinh viên</th>
             <th>Mã phòng</th>
             <th>Nhân viên lập</th>
             <th>Ngày lập</th>
             <th>Ngày bắt đầu</th>
-            <td>Ngày kết thúc</td>
+            <th>Ngày kết thúc</th>
             <td></td>
         </tr>
     </thead>
@@ -139,7 +139,8 @@
         <div *ngIf="contract.length!=0; else contractCheck" class="text-center"></div>
         <ng-template #contractCheck>
             <tr class="text-center">
-                <td colspan="8">Hiện không có hợp đồng</td>
+                <td colspan="8" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện không có hợp đồng
+                </td>
             </tr>
         </ng-template>
         <tr *ngFor="let item of contract">

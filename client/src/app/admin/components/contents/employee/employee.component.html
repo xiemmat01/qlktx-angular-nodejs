@@ -39,7 +39,6 @@
 <table class="table table-bordered table-striped display nowrap" style="width:100%">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Mã Nhân Viên</th>
             <th>Họ và Tên</th>
             <th>Email</th>
@@ -48,14 +47,20 @@
             <td></td>
         </tr>
     </thead>
-    <tbody *ngIf="employee">
+    <tbody>
+        <div *ngIf="employee.length!=0; else contractCheck" class="text-center"></div>
+        <ng-template #contractCheck>
+            <tr class="text-center">
+                <td colspan="6" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện chưa có nhân viên
+                </td>
+            </tr>
+        </ng-template>
         <tr *ngFor="let item of employee">
-            <td>{{item.id}}</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td>$320,800</td>
+            <td>{{item.MaNV}}</td>
+            <td>{{item.TenNV}}</td>
+            <td>{{item.Email}}</td>
+            <td>{{item.DiaChi}}</td>
+            <td>{{item.DienThoai}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)">
                     <i class="bi bi-pencil-square"></i>
