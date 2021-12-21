@@ -125,10 +125,8 @@ export const filter = (req, res) => {
 		});
 };
 
-export const findAndCount = (req, res) => {
-	Rooms.findAndCountAll({
-		where: { SLDangO: { [Op.eq]: 0 }, TinhTrangPhong: { [Op.eq]: 0 } },
-	}).then((data) => {
+export const findOne = async (req, res) => {
+	await Rooms.findAll({ attributes: ["MaP"] }).then((data) => {
 		res.send(data);
 	});
 };

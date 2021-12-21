@@ -13,8 +13,8 @@ export class RoomService {
   getAll(): Observable<Room[]> {
     return this.http.get<Room[]>(NODE_API_SERVER + '/phong');
   }
-  getCount() {
-    return this.http.get(NODE_API_SERVER + '/phong/sl');
+  getMaP() {
+    return this.http.get(NODE_API_SERVER + '/phong/map');
   }
   findByHouse(khu: any) {
     return this.http.get(`${NODE_API_SERVER}/khu-nha/${khu}`);

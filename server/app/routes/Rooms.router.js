@@ -4,15 +4,15 @@ import {
 	deleteById,
 	filter,
 	findAll,
-	findAndCount,
+	findOne,
 	update,
 } from "../controllers/Rooms.controller.js";
 
 const routerRoom = express.Router();
 
-routerRoom.post("/", create);
 routerRoom.get("/", findAll);
-routerRoom.get("/sl", findAndCount);
+routerRoom.get("/map", findOne);
+routerRoom.post("/", create);
 routerRoom.put("/", filter);
 routerRoom.put("/:id", update);
 routerRoom.delete("/:id", deleteById);

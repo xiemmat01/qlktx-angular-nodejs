@@ -13,8 +13,9 @@ export class RoomComponent implements OnInit {
   constructor(private titleService: Title, private roomService: RoomService) {
     this.titleService.setTitle('Quản lý phòng');
   }
+
   khunha: any = [];
-  filterRoom: any;
+  filterRoom: any = [];
   room: Room[] = [];
   isActive = { khuA: false, khuB: false, loc: false, tatca: false };
   manv = sessionStorage.getItem('manv');
@@ -136,4 +137,6 @@ export class RoomComponent implements OnInit {
       }
     );
   };
+
+  getStudentInContract = () => {};
 }

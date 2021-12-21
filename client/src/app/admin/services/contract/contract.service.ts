@@ -12,11 +12,11 @@ export class ContractService {
   findAll(): Observable<Contract[]> {
     return this.http.get<Contract[]>(NODE_API_SERVER + '/hop-dong');
   }
-  findOne(hoten: any, mssv: any): Observable<Contract> {
-    return this.http.get(
-      `${NODE_API_SERVER}${'/hop-dong'}/${hoten ? hoten : mssv}`
-    );
-  }
+  // findOne(hoten: any, mssv: any): Observable<Contract> {
+  //   return this.http.get(
+  //     `${NODE_API_SERVER}${'/hop-dong'}/${hoten ? hoten : mssv}`
+  //   );
+  // }
   create(data: any): Observable<Contract> {
     return this.http.post(NODE_API_SERVER + '/hop-dong', data);
   }

@@ -127,3 +127,9 @@ export const findAll = async (req, res) => {
 			);
 		});
 };
+
+export const findOne = async (req, res) => {
+	await Students.findAll({ attributes: ["Mssv"] }).then((data) => {
+		res.send(data);
+	});
+};

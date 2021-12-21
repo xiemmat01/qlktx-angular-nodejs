@@ -8,27 +8,40 @@
             </div>
             <div class="col-md-12">
                 <label for="exampleInputEmail1" class="form-label">Mssv:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã sinh viên..." formControlName="mssv">
+                <input type="text" class="form-control" list="datalistOptions" placeholder="Nhập mã sinh viên..."
+                    formControlName="mssv">
+                <datalist id="datalistOptions">
+                    <option *ngFor="let item of Masv" [value]="item.Mssv">{{item.Mssv}}</option>
+                </datalist>
             </div>
             <div class="col-md-12">
                 <label for="" class="form-label">Mã phòng:</label>
-                <select name="" id="" class="form-select" formControlName="map">
-                    <option>--Chọn--</option>
+                <select class="form-select" formControlName="map">
+                    <option *ngIf="room.length!=0; else elseBlock">--Chọn phòng--</option>
+                    <option *ngFor="let item of room" [value]="item.MaP">{{item.MaP}}</option>
+                    <ng-template #elseBlock>
+                        <option>--Hiện tại chưa có phòng--</option>
+                    </ng-template>
                 </select>
             </div>
             <div class="col-md-12">
                 <label for="" class="form-label">Nhân viên lập:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên..." formControlName="manv">
+                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên..." formControlName="manv"
+                    readonly>
             </div>
             <div class="col-md-12">
-                <label for="" class="form-label">Ngày lập:</label>
-                <input bsDatepicker type="text" class="form-control" formControlName="ngaylap" placeholder="dd-mm-yyyy"
-                    [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
-            </div>
-            <div class="col-md-12">
-                <label for="" class="form-label">Ngày bắt đầu:</label>
-                <input bsDatepicker type="text" class="form-control" formControlName="ngaybatdau"
-                    placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                <div class="row">
+                    <div class="col">
+                        <label for="" class="form-label">Ngày lập:</label>
+                        <input bsDatepicker type="text" class="form-control" formControlName="ngaylap"
+                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                    </div>
+                    <div class="col">
+                        <label for="" class="form-label">Ngày bắt đầu:</label>
+                        <input bsDatepicker type="text" class="form-control" formControlName="ngaybatdau"
+                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                    </div>
+                </div>
             </div>
             <div class="col-md-12">
                 <label for="" class="form-label">Ngày kết thúc:</label>
@@ -112,7 +125,6 @@
 <table class="table table-bordered table-striped display nowrap mt-4" style="width:100%" id="contract">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Mã hợp đồng</th>
             <th>Mã sinh viên</th>
             <th>Mã phòng</th>
@@ -123,15 +135,20 @@
             <td></td>
         </tr>
     </thead>
-    <tbody *ngIf="contract">
+    <tbody>
+        <div *ngIf="contract.length!=0; else contractCheck" class="text-center"></div>
+        <ng-template #contractCheck>
+            <tr class="text-center">
+                <td colspan="8">Hiện không có hợp đồng</td>
+            </tr>
+        </ng-template>
         <tr *ngFor="let item of contract">
-            <th>{{item.id}}</th>
-            <th>{{item.MaHopDong}}</th>
-            <th>{{item.Mssv}}</th>
-            <th>{{item.MaP}}</th>
-            <th>{{item.Mssv}}p</th>
-            <th>{{item.NgayLap}}</th>
-            <th>{{item.NgayBatDau}}</th>
+            <td>{{item.MaHopDong}}</td>
+            <td>{{item.Mssv}}</td>
+            <td>{{item.MaP}}</td>
+            <td>{{item.Mssv}}p</td>
+            <td>{{item.NgayLap}}</td>
+            <td>{{item.NgayBatDau}}</td>
             <td>{{item.NgayKetThuc}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)">

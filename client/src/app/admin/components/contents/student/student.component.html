@@ -72,13 +72,19 @@
             <th>Ngày sinh</th>
             <th>CMND</th>
             <th>Dân tộc</th>
-            <td>Địa chỉ</td>
-            <td>Giới tính</td>
-            <td>Lớp</td>
-            <td></td>
+            <th>Địa chỉ</th>
+            <th>Giới tính</th>
+            <th>Lớp</th>
+            <th></th>
         </tr>
     </thead>
-    <tbody *ngIf="student">
+    <tbody>
+        <div *ngIf="student.length!=0; else elseBlock" class="text-center"></div>
+        <ng-template #elseBlock>
+            <tr class="text-center">
+                <td colspan="9">Hiện không chưa có sinh viên</td>
+            </tr>
+        </ng-template>
         <tr *ngFor="let item of student">
             <td>{{item.Mssv}}</td>
             <td>{{item.HoTen}}</td>

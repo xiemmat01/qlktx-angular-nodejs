@@ -13,7 +13,10 @@ export class StudentService {
   findAll(): Observable<Student[]> {
     return this.http.get<Student[]>(NODE_API_SERVER + '/sinh-vien');
   }
-  findOne(hoten: any, mssv: any): Observable<Student> {
+  findMasv(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${NODE_API_SERVER}${'/sinh-vien'}/mssv`);
+  }
+  findFilter(hoten: any, mssv: any): Observable<Student> {
     return this.http.get(
       `${NODE_API_SERVER}${'/sinh-vien'}/${hoten ? hoten : mssv}`
     );

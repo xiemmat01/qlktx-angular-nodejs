@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Contract } from 'src/app/admin/models/Contract';
 import { ContractService } from 'src/app/admin/services/contract/contract.service';
+import { RoomService } from 'src/app/admin/services/room/room.service';
+import { StudentService } from 'src/app/admin/services/student/student.service';
 
 @Component({
   selector: 'app-contract',
@@ -12,9 +14,14 @@ import { ContractService } from 'src/app/admin/services/contract/contract.servic
 export class ContractComponent implements OnInit {
   contract: Contract[] = [];
   id?: number = 0;
+  room: any = [];
+  manv = sessionStorage.getItem('manv');
+  Masv: any = [];
   constructor(
     private titleService: Title,
-    private contractService: ContractService
+    private contractService: ContractService,
+    private studentService: StudentService,
+    private roomService: RoomService
   ) {
     this.titleService.setTitle('Quản lý hợp đồng');
   }
@@ -31,15 +38,17 @@ export class ContractComponent implements OnInit {
   });
   contractForm = new FormGroup({
     mahopdong: new FormControl('', [Validators.required]),
-    manv: new FormControl('', [Validators.required]),
+    manv: new FormControl(this.manv, [Validators.required]),
     mssv: new FormControl('', [Validators.required]),
-    map: new FormControl('', [Validators.required]),
+    map: new FormControl('--Chọn phòng--', [Validators.required]),
     ngaylap: new FormControl(new Date(), [Validators.required]),
     ngaybatdau: new FormControl(new Date(), [Validators.required]),
     ngayketthuc: new FormControl('', [Validators.required]),
   });
   ngOnInit(): void {
     this.getAll();
+    this.getMaP();
+    this.getMasv();
   }
   onSubmit = () => {
     this.create();
@@ -57,7 +66,28 @@ export class ContractComponent implements OnInit {
       ngayketthuc: contract.NgayKetThuc,
     });
   };
-
+  getMasv = () => {
+    this.studentService.findMasv().subscribe(
+      (data) => {
+        this.Masv = data;
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+  getMaP() {
+    this.roomService.getMaP().subscribe(
+      (data) => {
+        this.room = data;
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   getAll = () => {
     this.contractService.findAll().subscribe(
       (data) => {
@@ -69,15 +99,18 @@ export class ContractComponent implements OnInit {
     );
   };
   create = () => {
-    this.contractService.create(this.contractForm.value).subscribe(
-      (rep) => {
-        console.log(rep);
-        this.getAll();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.studentForm.invalid) {
+      console.log(true);
+    }
+    // this.contractService.create(this.contractForm.value).subscribe(
+    //   (rep) => {
+    //     console.log(rep);
+    //     this.getAll();
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   };
   delete = (id?: number) => {
     this.contractService.delete(id).subscribe(
