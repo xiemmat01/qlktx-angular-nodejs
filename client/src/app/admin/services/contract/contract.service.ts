@@ -23,7 +23,7 @@ export class ContractService {
   update(id: any, data: any): Observable<Contract> {
     return this.http.put(`${NODE_API_SERVER}/hop-dong/${id}`, data);
   }
-  delete(id?: number): Observable<Contract> {
+  delete(id?: string): Observable<Contract> {
     return this.http.delete(`${NODE_API_SERVER}/hop-dong/${id}`);
   }
 }

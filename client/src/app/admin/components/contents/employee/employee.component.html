@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">Mã nhân viên:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên..." formControlName="manv">
+                <input type="text" class="form-control" placeholder="Nhập mã nhân viên..." formControlName="manv">
             </div>
         </div>
     </div>
@@ -29,9 +29,8 @@
         <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..." formControlName="diachi">
     </div>
     <div class="col-md-12 mb-3 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> Lưu thông tin</button>&nbsp;
-        <button [disabled]="id==0?true:false" class="btn btn-success"><i class="bi bi-x-circle" (click)="update()"></i>
-            Cập nhật</button>
+        <button type="submit" class="btn btn-primary" [disabled]="f.manv.errors?.required"><i
+                class="bi bi-check2-circle"></i> Lưu thông tin</button>
     </div>
 </form>
 <hr class="w-100">
@@ -39,6 +38,7 @@
 <table class="table table-bordered table-striped display nowrap" style="width:100%">
     <thead>
         <tr>
+            <th>STT</th>
             <th>Mã Nhân Viên</th>
             <th>Họ và Tên</th>
             <th>Email</th>
@@ -55,20 +55,75 @@
                 </td>
             </tr>
         </ng-template>
-        <tr *ngFor="let item of employee">
+        <tr *ngFor="let item of employee; index as indexOfelement">
+            <td>{{indexOfelement+1}}</td>
             <td>{{item.MaNV}}</td>
             <td>{{item.TenNV}}</td>
             <td>{{item.Email}}</td>
             <td>{{item.DiaChi}}</td>
             <td>{{item.DienThoai}}</td>
             <td>
-                <button class="btn btn-success custom" (click)="selectRowValue(item)">
+                <button class="btn btn-success custom" (click)="selectRowValue(item)" data-bs-toggle="modal"
+                    data-bs-target="#UpdateNV">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                <button class="btn btn-danger custom" (click)="delete(item.id)">
+                <button class="btn btn-danger custom" (click)="delete(item.MaNV)">
                     <i class="bi bi-trash"></i>
                 </button>
             </td>
         </tr>
     </tbody>
 </table>
+<!-- // modal -->
+<div class="modal fade" id="UpdateNV" tabindex="-1" aria-labelledby="capnhatNV" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="UpdateNVForm">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="capnhatNV">Cập Nhật Nhân Viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Họ tên:</label>
+                            <input type="text" class="form-control" id="" placeholder="Nhập họ tên..."
+                                formControlName="tennv">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="" placeholder="Nhập email..."
+                                formControlName="email">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Số điện thoại:</label>
+                                    <input type="text" class="form-control" placeholder="Nhập số điện thoại..."
+                                        onkeypress="if(this.value.length == 10) return false;"
+                                        formControlName="dienthoai">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Mã nhân viên:</label>
+                                    <input type="text" class="form-control" placeholder="Nhập mã nhân viên..."
+                                        formControlName="manv" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="" class="form-label">Địa chỉ:</label>
+                            <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..."
+                                formControlName="diachi">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="update()">
+                        <i class="bi bi-x-circle"></i>
+                        Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

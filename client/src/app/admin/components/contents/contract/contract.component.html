@@ -1,62 +1,85 @@
 <div class="row">
-    <div class="col">
+    <div class="col border position-relative m-3 p-3">
+        <span class="position-absolute top-0 start-50 translate-middle badge bg-white">
+            <h5>Thông Tin Hợp Đồng</h5>
+            <span class="visually-hidden">unread messages</span>
+        </span>
         <form class="row" [formGroup]="contractForm" (ngSubmit)="onSubmit()">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <label for="exampleInputEmail1" class="form-label">Mã hợp đồng:</label>
                 <input type="text" class="form-control" id="" placeholder="Nhập mã sinh viên..."
-                    formControlName="mahopdong">
+                    formControlName="mahopdong" onkeyup="this.value=this.value.toUpperCase()">
             </div>
-            <div class="col-md-12">
-                <label for="exampleInputEmail1" class="form-label">Mssv:</label>
-                <input type="text" class="form-control" list="datalistOptions" placeholder="Nhập mã sinh viên..."
-                    formControlName="mssv">
-                <datalist id="datalistOptions">
-                    <option *ngFor="let item of Masv" [value]="item.Mssv">{{item.Mssv}}</option>
-                </datalist>
-            </div>
-            <div class="col-md-12">
-                <label for="" class="form-label">Mã phòng:</label>
-                <select class="form-select" formControlName="map">
-                    <option *ngIf="room.length!=0; else elseBlock">--Chọn phòng--</option>
-                    <option *ngFor="let item of room" [value]="item.MaP">{{item.MaP}}</option>
-                    <ng-template #elseBlock>
-                        <option>--Hiện tại chưa có phòng--</option>
-                    </ng-template>
-                </select>
-            </div>
-            <div class="col-md-12">
-                <label for="" class="form-label">Nhân viên lập:</label>
-                <input type="text" class="form-control" id="" placeholder="Nhập mã nhân viên..." formControlName="manv"
-                    readonly>
-            </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="row">
                     <div class="col">
-                        <label for="" class="form-label">Ngày lập:</label>
-                        <input bsDatepicker type="text" class="form-control" formControlName="ngaylap"
-                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                        <label for="exampleInputEmail1" class="form-label">Mssv:</label>
+                        <input type="text" class="form-control" list="datalistOptions"
+                            placeholder="Nhập mã sinh viên..." formControlName="mssv"
+                            onkeyup="this.value=this.value.toUpperCase()">
+                        <datalist id="datalistOptions">
+                            <option *ngFor="let item of Masv" [value]="item.Mssv">{{item.Mssv}}</option>
+                        </datalist>
                     </div>
                     <div class="col">
-                        <label for="" class="form-label">Ngày bắt đầu:</label>
-                        <input bsDatepicker type="text" class="form-control" formControlName="ngaybatdau"
-                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                        <label for="" class="form-label">Nhân viên lập:</label>
+                        <input type="text" class="form-control" [value]="tennv" readonly>
+                        <input type="hidden" class="form-control" id="" placeholder="Nhập mã nhân viên..."
+                            formControlName="manv" readonly>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <label for="" class="form-label">Ngày kết thúc:</label>
-                <input bsDatepicker type="text" class="form-control" formControlName="ngayketthuc"
-                    placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+            <div class="col-md-12 mb-3">
+                <div class="row">
+                    <div class="col">
+                        <label for="" class="form-label">Mã phòng:</label>
+                        <select class="form-select" formControlName="map">
+                            <option *ngIf="room.length!=0; else elseBlock">--Chọn phòng--</option>
+                            <option *ngFor="let item of room" [value]="item.MaP">{{item.MaP}}</option>
+                            <ng-template #elseBlock>
+                                <option>--Hiện tại chưa có phòng--</option>
+                            </ng-template>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="" class="form-label">Số tháng muốn ở:</label>
+                        <select class="form-select" formControlName="thoigian_o">
+                            <option value="6">6 Tháng</option>
+                            <option value="11">11 Tháng</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-
+            <div class="col-md-12 mb-3">
+                <div class="row">
+                    <div class="col">
+                        <label for="" class="form-label">Ngày bắt đầu ở:</label>
+                        <input bsDatepicker type="text" class="form-control" formControlName="ngaybatdau"
+                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                    </div>
+                    <div class="col">
+                        <label for="" class="form-label">Ngày kết thúc:</label>
+                        <input bsDatepicker type="text" class="form-control" formControlName="ngayketthuc"
+                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}"
+                            style="pointer-events: none;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="" class="form-label">Ngày lập:</label>
+                <input bsDatepicker type="text" class="form-control" formControlName="ngaylap" placeholder="dd-mm-yyyy"
+                    [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+            </div>
             <div class="col-sm-12 mt-3 d-flex flex-row">
-                <button type="submit" class="btn btn-primary">Thêm mới</button> &nbsp;
-                <button [disabled]="id==0?true:false" class="btn btn-success" type="button" (click)="update()">Cập
-                    nhật</button>
+                <button type="submit" class="btn btn-success">Lưu Thông Tin</button> &nbsp;
             </div>
         </form>
     </div>
-    <div class="col">
+    <div class="col border position-relative m-3 p-3">
+        <span class="position-absolute top-0 start-50 translate-middle badge bg-white">
+            <h5>Thông Tin Sinh Viên</h5>
+            <span class="visually-hidden">unread messages</span>
+        </span>
         <form class="row" [formGroup]="studentForm" class="row" (ngSubmit)="onSubmit()">
             <div class="col-md-12 mb-3">
                 <div class="row">
@@ -81,8 +104,8 @@
                         <label for="" class="form-label">Giới tính:</label>
                         <select class="form-select" formControlName="phai">
                             <option>--Chọn--</option>
-                            <option value="0">Nữ</option>
-                            <option value="1">Nam</option>
+                            <option value="0">Nam</option>
+                            <option value="1">Nữ</option>
                         </select>
                     </div>
                 </div>
@@ -118,6 +141,7 @@
                     </div>
                 </div>
             </div>
+            <small class="text-danger"><i>Lưu ý: Nếu chưa có sinh viên, vui lòng nhập thông tin sinh viên</i></small>
         </form>
     </div>
 </div>
@@ -147,15 +171,15 @@
             <td>{{item.MaHopDong}}</td>
             <td>{{item.Mssv}}</td>
             <td>{{item.MaP}}</td>
-            <td>{{item.Mssv}}p</td>
-            <td>{{item.NgayLap}}</td>
-            <td>{{item.NgayBatDau}}</td>
-            <td>{{item.NgayKetThuc}}</td>
+            <td>{{item.Mssv}}</td>
+            <td>{{item.Ngay_Lap | date:'dd-MM-yyyy'}}</td>
+            <td>{{item.Ngay_Bat_Dau | date:'dd-MM-yyyy'}}</td>
+            <td>{{item.Ngay_Ket_Thuc | date:'dd-MM-yyyy'}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                <button class="btn btn-danger custom" (click)="delete(item.id)">
+                <button class="btn btn-danger custom" (click)="delete(item.MaHopDong)">
                     <i class="bi bi-trash"></i>
                 </button>
             </td>

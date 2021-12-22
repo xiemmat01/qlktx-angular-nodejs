@@ -2,9 +2,9 @@
     <div class="row mb-3 mt-3">
         <div class="col-3">
             <div class="d-flex flex-row align-items-center h-100">
-                <span>Còn trống: {{countEmptyRoom}}</span>
+                <span>Còn trống: {{countEmptyRoom ? countEmptyRoom : 0 }}</span>
                 <span class="mx-2">|</span>
-                <span>Đã cho thuê: {{countFullRoom}}</span>
+                <span>Đã cho thuê: {{countFullRoom ? countFullRoom : 0}}</span>
             </div>
         </div>
         <div class="col-6">
@@ -332,7 +332,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Mã Khu</label>
+                            <label for="" class="form-label">Mã Khu:</label>
                             <select formControlName="makhu" class="form-select" (change)="OnChange()">
                                 <option>--Chọn Khu--</option>
                                 <option value="A">Khu A</option>
@@ -340,7 +340,7 @@
                             </select>
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Mã Phòng</label>
+                            <label for="" class="form-label">Mã Phòng:</label>
                             <input type="text" class="form-control" formControlName="map">
                             <div class="alert alert-danger mt-2" *ngIf="f.map.touched && f.map.invalid">
                                 <div *ngIf="f.map.errors?.required">Bạn chưa nhập Mã Phòng</div>
@@ -349,22 +349,23 @@
                             </div>
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Mã Nhân Viên</label>
-                            <input type="text" class="form-control" formControlName="manv" readonly>
+                            <label for="" class="form-label">Nhân Viên Thêm:</label>
+                            <input type="text" class="form-control" [value]="tennv" readonly>
+                            <input type="hidden" formControlName="manv" readonly>
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Loại Phòng</label>
+                            <label for="" class="form-label">Loại Phòng:</label>
                             <select formControlName="loaiphong" class="form-select">
                                 <option value="0">Nam</option>
                                 <option value="1">Nữ</option>
                             </select>
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Số Lượng Tối Đa</label>
+                            <label for="" class="form-label">Số Lượng Tối Đa:</label>
                             <input type="text" class="form-control" readonly formControlName="sltoida">
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Số Lượng Đang Ở</label>
+                            <label for="" class="form-label">Số Lượng Đang Ở:</label>
                             <input type="number" class="form-control" formControlName="sldango"
                                 (change)="SlDangO_InputChang()">
                             <div class="alert alert-danger mt-2" *ngIf="f.sldango.touched && f.sldango.invalid">
@@ -373,11 +374,11 @@
                             </div>
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Ghi Chú</label>
+                            <label for="" class="form-label">Ghi Chú:</label>
                             <textarea type="text" class="form-control" formControlName="ghichu"></textarea>
                         </div>
                         <div class="col-6 mb-3">
-                            <label for="" class="form-label">Tình Trạng Phòng</label>
+                            <label for="" class="form-label">Tình Trạng Phòng:</label>
                             <div class="d-flex">
                                 <input type="radio" name="tinhtrang" class="form-check" value="0"
                                     formControlName="tinhtrang">&nbsp;

@@ -14,27 +14,38 @@
                 <label for="" class="form-label">Giới tính:</label>
                 <select class="form-select" formControlName="phai">
                     <option>--Chọn--</option>
-                    <option value="0">Nữ</option>
-                    <option value="1">Nam</option>
+                    <option value="0">Nam</option>
+                    <option value="1">Nữ</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="col-md-6 mb-3">
         <label for="" class="form-label">Mã số sinh viên:</label>
-        <input type="text" class="form-control" placeholder="Nhập mã số sinh viên..." formControlName="mssv">
+        <input type="text" class="form-control" placeholder="Nhập mã số sinh viên..." formControlName="mssv"
+            onkeyup="this.value = this.value.toUpperCase()">
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
             <div class="col-sm-6">
                 <label for="" class="form-label">Số điện thoại:</label>
-                <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
+                <input type="tel" class="form-control" placeholder="Nhập số điện thoại..."
                     onkeypress="if(this.value.length == 10) return false;" formControlName="dienthoai">
+                <div *ngIf="f.dienthoai.touched && f.dienthoai.invalid">
+                    <small class="text-danger mt-1" *ngIf="f.dienthoai.errors?.required">*Vui lòng nhập số diện
+                        thoại</small>
+                    <small class="text-danger mt-1" *ngIf="f.dienthoai.errors?.pattern">*Số điện thoại phải bắt đầu từ
+                        0 và bằng số</small>
+                </div>
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">CMND/CCCD:</label>
-                <input type="number" class="form-control" id="" placeholder="Nhập CMND hoặc CCCD..."
+                <input type="tel" class="form-control" placeholder="Nhập CMND hoặc CCCD..."
                     onkeypress="if(this.value.length == 10) return false;" formControlName="cmnd">
+                <div *ngIf="f.cmnd.touched && f.cmnd.invalid">
+                    <small class="text-danger mt-1" *ngIf="f.cmnd.errors?.required">*Vui lòng nhập CMND/CCCD</small>
+                    <small class="text-danger mt-1" *ngIf="f.cmnd.errors?.pattern">*CMND/CCCD phải là số</small>
+                </div>
             </div>
         </div>
     </div>
@@ -50,16 +61,15 @@
             </div>
             <div class="col-sm-6">
                 <label for="" class="form-label">Lớp:</label>
-                <select class="form-select" formControlName="lop">
-                    <option>--Chọn lớp--</option>
+                <select class="form-select" formControlName="malop">
+                    <option *ngFor="let item of class" [value]="item.MaLop">{{item.TenLop}}</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="col-md-12 mb-3">
-        <button type="submit" class="btn btn-primary">Thêm mới</button> &nbsp;
-        <button [disabled]="mssv==''?true:false" class="btn btn-success" type="button" (click)="updateStudent()">Cập
-            nhật</button>
+        <button [disabled]="!studentForm.valid" type="submit" class="btn btn-primary">Thêm
+            mới</button>
     </div>
 </form>
 <hr class="w-100">
@@ -74,6 +84,7 @@
             <th>CMND</th>
             <th>Dân tộc</th>
             <th>Địa chỉ</th>
+            <th>Điện thoại</th>
             <th>Giới tính</th>
             <th>Lớp</th>
             <th></th>
@@ -83,7 +94,7 @@
         <div *ngIf="student.length!=0; else elseBlock" class="text-center"></div>
         <ng-template #elseBlock>
             <tr class="text-center">
-                <td colspan="10" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện chưa có sinh viên
+                <td colspan="11" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện chưa có sinh viên
                 </td>
             </tr>
         </ng-template>
@@ -95,10 +106,12 @@
             <td>{{item.Cmnd}}</td>
             <td>{{item.DanToc}}</td>
             <td>{{item.DiaChi}}</td>
+            <td>{{item.DienThoai}}</td>
             <td>{{item.Phai ? "Nam" : "Nữ"}}</td>
             <td>{{item.MaLop}}</td>
             <td>
-                <button class="btn btn-success custom" (click)="selectRowValue(item)">
+                <button class="btn btn-success custom" (click)="selectRowValue(item)" data-bs-toggle="modal"
+                    data-bs-target="#UpdateSV">
                     <i class="bi bi-pencil-square"></i>
                 </button>
                 <button class="btn btn-danger custom" (click)="deleteStudent(item.Mssv)">
@@ -108,3 +121,88 @@
         </tr>
     </tbody>
 </table>
+<!-- modal -->
+<div class="modal fade" id="UpdateSV" tabindex="-1" aria-labelledby="capnhatNV" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="UpdateSVForm">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="capnhatNV">Cập Nhật Nhân Viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Họ tên:</label>
+                            <input type="text" class="form-control" id="" placeholder="Nhập họ tên..."
+                                formControlName="hoten">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Ngày sinh:</label>
+                                    <input bsDatepicker type="text" class="form-control" formControlName="ngaysinh"
+                                        placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Giới tính:</label>
+                                    <select class="form-select" formControlName="phai">
+                                        <option>--Chọn--</option>
+                                        <option value="0">Nữ</option>
+                                        <option value="1">Nam</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="" class="form-label">Mã số sinh viên:</label>
+                            <input type="text" class="form-control" placeholder="Nhập mã số sinh viên..."
+                                formControlName="mssv">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Số điện thoại:</label>
+                                    <input type="tel" class="form-control" id="" placeholder="Nhập số điện thoại..."
+                                        onkeypress="if(this.value.length == 10) return false;"
+                                        formControlName="dienthoai">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">CMND/CCCD:</label>
+                                    <input type="text" class="form-control" id="" placeholder="Nhập CMND hoặc CCCD..."
+                                        onkeypress="if(this.value.length == 10) return false;" formControlName="cmnd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="" class="form-label">Địa chỉ:</label>
+                            <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..."
+                                formControlName="diachi">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Dân tộc:</label>
+                                    <input type="text" class="form-control" id="" formControlName="dantoc">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="" class="form-label">Lớp:</label>
+                                    <select class="form-select" formControlName="malop">
+                                        <option>--Chọn lớp--</option>
+                                        <option *ngFor="let item of class" [value]="item.MaLop">{{item.TenLop}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="updateStudent()">
+                        <i class="bi bi-x-circle"></i>
+                        Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

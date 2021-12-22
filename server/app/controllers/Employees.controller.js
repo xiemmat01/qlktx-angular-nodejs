@@ -42,10 +42,15 @@ export const create = async (req, res) => {
 };
 
 export const update = (req, res) => {
-	const id = req.params.id;
-	const employee = {};
+	const id = req.params.manv;
+	const employee = {
+		TenNV: req.body.tennv,
+		DienThoai: req.body.dienthoai,
+		Email: req.body.email,
+		DiaChi: req.body.diachi,
+	};
 	Employee.update(employee, {
-		where: { id: id },
+		where: { MaNV: id },
 	})
 		.then((num) => {
 			if (num == 1) {

@@ -46,7 +46,6 @@ export const create = async (req, res) => {
 export const update = (req, res) => {
 	const id = req.params.id;
 	const contract = {
-		MaHopDong: req.body.mahopdong,
 		MaNV: req.body.manv,
 		Mssv: req.body.mssv,
 		MaP: req.body.map,
@@ -55,7 +54,7 @@ export const update = (req, res) => {
 		Ngay_Ket_Thuc: req.body.ngayketthuc,
 	};
 	Contract.update(contract, {
-		where: { id: id },
+		where: { MaHopDong: id },
 	})
 		.then((num) => {
 			if (num == 1) {
@@ -78,7 +77,7 @@ export const deleteById = (req, res) => {
 	const id = req.params.id;
 	console.log(id);
 	Contract.destroy({
-		where: { id: id },
+		where: { MaHopDong: id },
 	})
 		.then((num) => {
 			if (num == 1) {

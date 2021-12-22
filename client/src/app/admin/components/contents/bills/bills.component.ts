@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { DataTable } from 'src/app/admin/config/datatable';
-declare var $: any;
+
 @Component({
   selector: 'app-bills',
   templateUrl: './bills.component.html',
@@ -13,7 +12,5 @@ export class BillsComponent implements OnInit {
     this.titleService.setTitle('Quản lý tiền điện nước');
   }
 
-  ngOnInit(): void {
-    DataTable('bills');
-  }
+  ngOnInit(): void {}
 }

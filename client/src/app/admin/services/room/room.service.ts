@@ -31,4 +31,8 @@ export class RoomService {
   delete(id?: any): Observable<Room> {
     return this.http.delete(`${NODE_API_SERVER}/phong/${id}`);
   }
+
+  updateSlDangO(id: any, data: any): Observable<Room> {
+    return this.http.put(`${NODE_API_SERVER}/phong/sl/${id}`, data);
+  }
 }

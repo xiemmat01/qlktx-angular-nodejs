@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import * as moment from 'moment';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Student } from 'src/app/admin/models/Student';
 import { StudentService } from 'src/app/admin/services/student/student.service';
@@ -13,6 +12,8 @@ import { StudentService } from 'src/app/admin/services/student/student.service';
 export class StudentComponent implements OnInit {
   student: Student[] = [];
   mssv?: string = '';
+  class: any;
+  checkForm: any;
   constructor(
     private titleService: Title,
     private studentService: StudentService,
@@ -24,38 +25,61 @@ export class StudentComponent implements OnInit {
 
   studentForm = new FormGroup({
     hoten: new FormControl('', Validators.required),
-    ngaysinh: new FormControl(new Date(), Validators.required),
-    phai: new FormControl('--Chọn--', Validators.required),
+    ngaysinh: new FormControl(new Date('01-01-1999'), Validators.required),
+    phai: new FormControl('0', Validators.required),
     mssv: new FormControl('', Validators.required),
-    dienthoai: new FormControl('', Validators.required),
-    cmnd: new FormControl('', Validators.required),
+    dienthoai: new FormControl('', [
+      Validators.required,
+      Validators.pattern('0[0-9]{9}'),
+    ]),
+    cmnd: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(([0-9]*)|(([0-9]*).([0-9]*)))$'),
+    ]),
     diachi: new FormControl('', Validators.required),
     dantoc: new FormControl('Kinh', Validators.required),
-    lop: new FormControl('--Chọn lớp--', Validators.required),
+    malop: new FormControl('CNTT01', Validators.required),
+  });
+  UpdateSVForm = new FormGroup({
+    hoten: new FormControl('', Validators.required),
+    ngaysinh: new FormControl(new Date('01-01-1999'), Validators.required),
+    phai: new FormControl('--Chọn--', Validators.required),
+    mssv: new FormControl('', Validators.required),
+    dienthoai: new FormControl('', [
+      Validators.required,
+      Validators.pattern('0[0-9]{9}'),
+    ]),
+    cmnd: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^(([0-9]*)|(([0-9]*).([0-9]*)))$'),
+    ]),
+    diachi: new FormControl('', Validators.required),
+    dantoc: new FormControl('Kinh', Validators.required),
+    malop: new FormControl('', Validators.required),
   });
 
   ngOnInit(): void {
     this.getAllStudent();
+    this.getClass();
   }
 
   onSubmit = () => {
-    console.log(typeof this.studentForm.value.ngaysinh);
     this.createStudent();
   };
 
   selectRowValue = (std: Student) => {
     console.log(std);
     this.mssv = std.Mssv;
-    this.studentForm.setValue({
+    this.UpdateSVForm.setValue({
       hoten: std.HoTen,
+      mssv: std.Mssv,
       ngaysinh: new Date(std.NgaySinh ? std.NgaySinh : ''),
       phai: std.Phai === true ? 1 : 0,
-      mssv: std.Mssv,
       dienthoai: std.DienThoai,
       cmnd: std.Cmnd,
       diachi: std.DiaChi,
       dantoc: std.DanToc,
-      lop: std.MaLop,
+      malop: std.MaLop,
     });
   };
 
@@ -71,8 +95,8 @@ export class StudentComponent implements OnInit {
   };
   createStudent = () => {
     this.studentService.create(this.studentForm.value).subscribe(
-      (rep) => {
-        console.log(rep);
+      (res) => {
+        console.log(res);
         this.getAllStudent();
       },
       (error) => {
@@ -82,8 +106,8 @@ export class StudentComponent implements OnInit {
   };
   deleteStudent = (mssv?: string) => {
     this.studentService.delete(mssv).subscribe(
-      (rep) => {
-        console.log(rep);
+      (res) => {
+        console.log(res);
         this.getAllStudent();
       },
       (error) => {
@@ -92,10 +116,10 @@ export class StudentComponent implements OnInit {
     );
   };
   updateStudent = () => {
-    this.studentService.update(this.mssv, this.studentForm.value).subscribe(
-      (req: any) => {
-        alert(req.message);
-        this.studentForm.reset();
+    this.studentService.update(this.mssv, this.UpdateSVForm.value).subscribe(
+      (res: any) => {
+        alert(res.message);
+        this.UpdateSVForm.reset();
         this.mssv = '';
         this.getAllStudent();
       },
@@ -104,6 +128,9 @@ export class StudentComponent implements OnInit {
       }
     );
   };
+  getClass() {
+    this.studentService.findClass().subscribe((data) => (this.class = data));
+  }
 
   get f() {
     return this.studentForm.controls;

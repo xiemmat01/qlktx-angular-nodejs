@@ -19,6 +19,7 @@ export class RoomComponent implements OnInit {
   room: Room[] = [];
   isActive = { khuA: false, khuB: false, loc: false, tatca: false };
   manv = sessionStorage.getItem('manv');
+  tennv = sessionStorage.getItem('tennv');
   countEmptyRoom: any;
   countFullRoom: any;
   setMaP: any;

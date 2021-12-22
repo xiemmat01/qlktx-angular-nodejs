@@ -7,7 +7,7 @@ export default (sequelize, Sequelize) => {
 				allowNull: false,
 				primaryKey: true,
 			},
-			TenLop: { type: Sequelize.STRING(10), allowNull: false },
+			TenLop: { type: Sequelize.STRING(100), allowNull: false },
 			MaKhoa: { type: Sequelize.STRING(10), allowNull: false },
 
 			Ngay_them_moi: {

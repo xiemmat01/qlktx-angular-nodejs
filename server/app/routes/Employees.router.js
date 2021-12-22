@@ -10,7 +10,7 @@ const routerEmployee = express.Router();
 
 routerEmployee.post("/", create);
 routerEmployee.get("/", findAll);
-routerEmployee.put("/:id", update);
-routerEmployee.delete("/:id", deleteById);
+routerEmployee.put("/:manv", update);
+routerEmployee.delete("/:manv", deleteById);
 
 export default routerEmployee;

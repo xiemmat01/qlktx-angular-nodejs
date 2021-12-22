@@ -16,6 +16,9 @@ export class StudentService {
   findMasv(): Observable<Student[]> {
     return this.http.get<Student[]>(`${NODE_API_SERVER}${'/sinh-vien'}/mssv`);
   }
+  findClass() {
+    return this.http.get(`${NODE_API_SERVER}${'/sinh-vien'}/lop`);
+  }
   findFilter(hoten: any, mssv: any): Observable<Student> {
     return this.http.get(
       `${NODE_API_SERVER}${'/sinh-vien'}/${hoten ? hoten : mssv}`

@@ -1,6 +1,7 @@
 import db from "../models/sequelize.js";
 
 const Students = db.Students;
+const Class = db.Class;
 
 const Op = db.Sequelize.Op;
 
@@ -21,7 +22,7 @@ export const create = async (req, res) => {
 		DiaChi: req.body.diachi,
 		DanToc: req.body.dantoc,
 		Phai: req.body.phai,
-		Hinh: req.body.hinh,
+		MaLop: req.body.malop,
 	};
 	await Students.findOrCreate({
 		where: { Mssv: sinhvien.Mssv },
@@ -55,7 +56,7 @@ export const update = async (req, res) => {
 		DiaChi: req.body.diachi,
 		DanToc: req.body.dantoc,
 		Phai: req.body.phai,
-		Hinh: req.body.hinh,
+		MaLop: req.body.malop,
 	};
 
 	await Students.update(sinhvien, {
@@ -130,6 +131,11 @@ export const findAll = async (req, res) => {
 
 export const findOne = async (req, res) => {
 	await Students.findAll({ attributes: ["Mssv"] }).then((data) => {
+		res.send(data);
+	});
+};
+export const findClass = async (req, res) => {
+	await Class.findAll({ attributes: ["MaLop", "TenLop"] }).then((data) => {
 		res.send(data);
 	});
 };

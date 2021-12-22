@@ -20,10 +20,10 @@ export class EmployeeService {
   create(data: any): Observable<Employee> {
     return this.http.post(NODE_API_SERVER + '/nhan-vien', data);
   }
-  update(id: any, data: any): Observable<Employee> {
-    return this.http.put(`${NODE_API_SERVER}/nhan-vien/${id}`, data);
+  update(manv: any, data: any): Observable<Employee> {
+    return this.http.put(`${NODE_API_SERVER}/nhan-vien/${manv}`, data);
   }
-  delete(id?: number): Observable<Employee> {
-    return this.http.delete(`${NODE_API_SERVER}/nhan-vien/${id}`);
+  delete(manv?: string): Observable<Employee> {
+    return this.http.delete(`${NODE_API_SERVER}/nhan-vien/${manv}`);
   }
 }
