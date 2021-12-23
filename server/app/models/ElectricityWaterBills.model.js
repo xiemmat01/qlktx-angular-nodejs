@@ -3,8 +3,8 @@ export default (sequelize, Sequelize) => {
 		"HDDienNuoc",
 		{
 			MaHD: {
-				type: Sequelize.STRING(10),
-				allowNull: false,
+				type: Sequelize.INTEGER,
+				autoIncrement: true,
 				primaryKey: true,
 			},
 			MaNV: { type: Sequelize.STRING(10), allowNull: false },

@@ -1,94 +1,121 @@
-<button class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#billForm" aria-expanded="false"
-    aria-controls="billForm">
-    <i class="bi bi-plus-circle"></i> Lập hóa đơn điện nước
-</button>
-<form class="row collapse mt-3" id="billForm">
-    <div class="col-md-12 mb-3">
-        <div class="row">
-            <div class="col-4">
-                <label for="" class="form-label">Phòng:</label>&nbsp;
-                <select class="form-control">
-                    <option>--Chọn phòng--</option>
-                </select>
-            </div>
-            <div class="col-4">
-                <label for="" class="form-label">Giá tiền điện (ĐỒNG/KWH):</label>
-                <input type="number" class="form-control" value="10000"
-                    onkeypress="if(this.value.length == 10) return false;">
-            </div>
-            <div class="col-4">
-                <label for="" class="form-label">Giá tiền nước (ĐỒNG/M<sup>3</sup>):</label>
-                <input type="number" class="form-control" value="2000"
-                    onkeypress="if(this.value.length == 10) return false;">
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 mb-3">
-        <div class="row">
-            <div class="col-6">
-                <label for="" class="form-label">Chỉ số điện đầu:</label>
-                <input type="number" class="form-control" placeholder="Nhập số điện thoại..."
-                    onkeypress="if(this.value.length == 10) return false;">
-            </div>
-            <div class="col-6">
-                <label for="" class="form-label">Chỉ số nước đầu:</label>
-                <input type="number" class="form-control" placeholder="Nhập mã nhân viên..."
-                    onkeypress="if(this.value.length == 10) return false;">
-            </div>
-            <div class="col-6">
-                <label for="" class="form-label">Chỉ số điện cuối:</label>
-                <input type="number" class="form-control" placeholder="Nhập số điện thoại..."
-                    onkeypress="if(this.value.length == 10) return false;">
-            </div>
-            <div class="col-6">
-                <label for="" class="form-label">Chỉ số nước cuối:</label>
-                <input type="number" class="form-control" placeholder="Nhập mã nhân viên..."
-                    onkeypress="if(this.value.length == 10) return false;">
+<div class="p-3 border position-relative mt-3">
+    <span class="position-absolute top-0 start-50 translate-middle badge bg-white">
+        <h5>Thông Tin Điện Nước</h5>
+        <span class="visually-hidden">unread messages</span>
+    </span>
+    <form class="row mt-3" [formGroup]="billForm" (ngSubmit)="BillSubmit()">
+        <div class="col-md-12 mb-3">
+            <div class="row">
+                <div class="col-4">
+                    <label for="" class="form-label">Phòng:</label>&nbsp;
+                    <select class="form-select" formControlName="map">
+                        <option disabled>Chọn phòng</option>
+                        <option *ngFor="let item of maphong" [value]="item.MaP">{{item.MaP}}</option>
+                        <div class="text-danger" *ngIf="f.map.touched">
+                            <small *ngIf="f.map.errors?.required">*Vui lòng chọn Phòng</small>
+                        </div>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="" class="form-label">Giá tiền điện (ĐỒNG/KWH):</label>
+                    <input type="number" class="form-control" value="10000"
+                        onkeypress="if(this.value.length == 10) return false;" [value]="giatiendien">
+                </div>
+                <div class="col-4">
+                    <label for="" class="form-label">Giá tiền nước (ĐỒNG/M<sup>3</sup>):</label>
+                    <input type="number" class="form-control" value="2000"
+                        onkeypress="if(this.value.length == 10) return false;" [value]="giatiennuoc">
+                </div>
             </div>
         </div>
-        <div class="row mt-3" style="font-size: 18px;">
-            <div class="col">
-                <b>Tổng tiền:</b>&nbsp;<span>{{100000 | currency:"VND"}}</span>
+        <div class="col-md-12 mb-3">
+            <div class="row">
+                <div class="col-6 mt-3">
+                    <label for="" class="form-label">Chỉ số điện đầu (KWH):</label>
+                    <input type="number" class="form-control" placeholder="Nhập số điện đầu..."
+                        onkeypress="if(this.value.length == 3) return false;" formControlName="chisodiendau"
+                        (change)="isChange()">
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="" class="form-label">Chỉ số nước đầu (M<sup>3</sup>):</label>
+                    <input type="number" class="form-control" placeholder="Nhập chỉ số nước đầu..."
+                        onkeypress="if(this.value.length == 3) return false;" formControlName="chisonuocdau"
+                        (change)="isChange()">
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="" class="form-label">Chỉ số điện cuối (KWH):</label>
+                    <input type="number" class="form-control" placeholder="Nhập số điện cuối..."
+                        onkeypress="if(this.value.length == 3) return false;" formControlName="chisodiencuoi"
+                        (change)="isChange()">
+                    <div class="text-danger" *ngIf="f.chisodiencuoi.touched">
+                        <small>{{f.chisodiencuoi.errors?.message}}</small>
+                    </div>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="" class="form-label">Chỉ số nước cuối (M<sup>3</sup>):</label>
+                    <input type="number" class="form-control" placeholder="Nhập chỉ số nước cuối..."
+                        onkeypress="if(this.value.length == 3) return false;" formControlName="chisonuoccuoi"
+                        (change)="isChange()">
+                    <div class="text-danger" *ngIf="f.chisonuoccuoi.touched">
+                        <small>{{f.chisonuoccuoi.errors?.message}}</small>
+                    </div>
+                </div>
             </div>
-            <div class="col d-flex justify-content-end">
-                <button class="btn btn-success"><i class="bi bi-check2-circle"></i> Lưu thông tin</button>
+            <div class="row mt-3" style="font-size: 18px;">
+                <div class="col">
+                    <b>Tổng tiền:</b>&nbsp;<span class="fw-bold">{{tong_tien | currency:"VND"}}</span>
+                    <input type="hidden" formControlName="tongtien" [value]="tong_tien">
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <button type="submit" [disabled]="!billForm.valid" class="btn btn-success"><i
+                            class="bi bi-check2-circle"></i> Lưu
+                        thông
+                        tin</button>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+        <small>Nhân viên: {{tennv}}</small>
+        <input type="hidden" formControlName="manv">
+    </form>
+</div>
 <hr class="w-100">
 <div class="my-4"></div>
+
 <table class="table table-bordered table-striped" style="width:100%">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Office</th>
-            <th>Age</th>
-            <th>Start date</th>
-            <th>Salary</th>
-            <td>$320,800</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
+        <tr class="text-center">
+            <th>Mã Hóa Đơn</th>
+            <th>Mã Phòng</th>
+            <th>Chỉ Số Điện Đầu</th>
+            <th>Chỉ Số Điện Cuối</th>
+            <th>Chỉ Số Nước Đầu</th>
+            <th>Chỉ Số Nước Cuối</th>
+            <th>Tổng Tiền</th>
             <td></td>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
-            <td>$320,800</td>
+        <div *ngIf="bills.length!=0; else billsCheck" class="text-center"></div>
+        <ng-template #billsCheck>
+            <tr class="text-center">
+                <td colspan="8" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện chưa có hóa đơn
+                </td>
+            </tr>
+        </ng-template>
+        <tr class="text-center" *ngFor="let item of bills">
+            <td>{{item.MaHD}}</td>
+            <td>{{item.MaP}}</td>
+            <td>{{item.ChiSoDienDau}} KWH</td>
+            <td>{{item.ChiSoDienCuoi}} KWH</td>
+            <td>{{item.ChiSoNuocDau}} M<sup>3</sup></td>
+            <td>{{item.ChiSoNuocCuoi}} M<sup>3</sup></td>
+            <td>{{item.TongTien | currency:"VND"}}</td>
             <td>
-                <button class="btn btn-success custom">
+                <button class="btn btn-success custom" (click)="selectRow(item)" data-bs-toggle="modal"
+                    data-bs-target="#updateBill">
                     <i class="bi bi-pencil-square"></i>
-                </button>
-                <button class="btn btn-danger custom">
+                </button>&nbsp;
+                <button class="btn btn-danger custom" (click)="deleteBill(item.MaHD)">
                     <i class="bi bi-trash"></i>
                 </button>
             </td>
@@ -96,41 +123,94 @@
     </tbody>
 </table>
 
-<!-- <form [formGroup]="sinhvienForm" class="row" (ngSubmit)="submit()">
-    <div class="col-md-6">
-        <label class="form-label">Mã số sinh viên:</label>
-        <input type="text" class="form-control" placeholder="nhập masv" formControlName="Masv">
-        <div class="alert alert-danger mt-2" *ngIf="f.Masv.touched && f.Masv.invalid">
-            <div *ngIf="f.Masv.errors?.required">Bạn chưa nhập Mã SV</div>
-            <div *ngIf="f.Masv.errors?.minlength || f.Masv.errors?.maxlength">Mã sinh viên tối đa 10 ký số</div>
+<!-- modal -->
+<div class="modal fade" id="updateBill" tabindex="-1" aria-labelledby="updateBill" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="updateBillForm">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="capnhatNV">Cập Nhật Nhân Viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="" class="form-label">Phòng:</label>&nbsp;
+                                    <select class="form-select" formControlName="map">
+                                        <option disabled>Chọn phòng</option>
+                                        <option *ngFor="let item of maphong" [value]="item.MaP">{{item.MaP}}</option>
+                                        <div class="text-danger" *ngIf="f.map.touched">
+                                            <small *ngIf="f.map.errors?.required">*Vui lòng chọn Phòng</small>
+                                        </div>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="" class="form-label">Giá tiền điện (ĐỒNG/KWH):</label>
+                                    <input type="number" class="form-control" value="10000"
+                                        onkeypress="if(this.value.length == 10) return false;"
+                                        formControlName="giatiendien">
+                                </div>
+                                <div class="col-4">
+                                    <label for="" class="form-label">Giá tiền nước (ĐỒNG/M<sup>3</sup>):</label>
+                                    <input type="number" class="form-control" value="2000"
+                                        onkeypress="if(this.value.length == 10) return false;"
+                                        formControlName="giatiennuoc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <div class="row">
+                                <div class="col-6 mt-3">
+                                    <label for="" class="form-label">Chỉ số điện đầu (KWH):</label>
+                                    <input type="number" class="form-control" placeholder="Nhập số điện đầu..."
+                                        onkeypress="if(this.value.length == 3) return false;"
+                                        formControlName="chisodiendau" (change)="isChange()">
+                                </div>
+                                <div class="col-6 mt-3">
+                                    <label for="" class="form-label">Chỉ số nước đầu (M<sup>3</sup>):</label>
+                                    <input type="number" class="form-control" placeholder="Nhập chỉ số nước đầu..."
+                                        onkeypress="if(this.value.length == 3) return false;"
+                                        formControlName="chisonuocdau" (change)="isChange()">
+                                </div>
+                                <div class="col-6 mt-3">
+                                    <label for="" class="form-label">Chỉ số điện cuối (KWH):</label>
+                                    <input type="number" class="form-control" placeholder="Nhập số điện cuối..."
+                                        onkeypress="if(this.value.length == 3) return false;"
+                                        formControlName="chisodiencuoi" (change)="isChange()">
+                                    <div class="text-danger" *ngIf="f.chisodiencuoi.touched">
+                                        <small>{{f.chisodiencuoi.errors?.message}}</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 mt-3">
+                                    <label for="" class="form-label">Chỉ số nước cuối (M<sup>3</sup>):</label>
+                                    <input type="number" class="form-control" placeholder="Nhập chỉ số nước cuối..."
+                                        onkeypress="if(this.value.length == 3) return false;"
+                                        formControlName="chisonuoccuoi" (change)="isChange()">
+                                    <div class="text-danger" *ngIf="f.chisonuoccuoi.touched">
+                                        <small>{{f.chisonuoccuoi.errors?.message}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3" style="font-size: 18px;">
+                                <div class="col">
+                                    <b>Tổng tiền:</b>&nbsp;<span class="fw-bold">{{updateBillForm.value.tongtien |
+                                        currency:"VND"}}</span>
+                                    <input type="hidden" formControlName="tongtien" [value]="tong_tien">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" formControlName="manv">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" (click)="updateBill()">
+                        <i class="bi bi-x-circle"></i>
+                        Cập nhật</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="col-md-6">
-        <label class="form-label">Họ và tên:</label>
-        <input type="text" class="form-control" placeholder="nhập họ và tên" formControlName="Hoten">
-        <div class="alert alert-danger mt-2" *ngIf="f.Hoten.touched && f.Hoten.invalid">
-            <div *ngIf="f.Hoten.errors?.required">Bạn chưa nhập Họ tên</div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label class="form-label">Năm sinh:</label>
-        <input type="text" class="form-control" placeholder="nhập năm sinh"
-            onkeypress="if(this.value.length == 4) return false;" formControlName="Namsinh">
-        <div class="alert alert-danger mt-2" *ngIf="f.Namsinh.touched && f.Namsinh.invalid">
-            <div *ngIf="f.Namsinh.errors?.required">Bạn chưa nhập Năm sinh</div>
-            <div *ngIf="f.Namsinh.errors?.min || f.Namsinh.errors?.max">Năm sinh trong khoảng từ 1993 đến
-                2000</div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label class="form-label">Nơi sinh:</label>
-        <input type="text" class="form-control" placeholder="nhập nơi sinh" formControlName="Noisinh">
-        <div class="alert alert-danger mt-2" *ngIf="f.Noisinh.touched && f.Noisinh.invalid">
-            <div *ngIf="f.Noisinh.errors?.required">Bạn chưa nhập Nơi sinh</div>
-        </div>
-    </div>
-    <div class="col-12 mt-3">
-        <button class="btn btn-success" type="submit" [disabled]="sinhvienForm.valid">Cập nhật
-            thông tin</button>
-    </div>
-</form> -->
+</div>

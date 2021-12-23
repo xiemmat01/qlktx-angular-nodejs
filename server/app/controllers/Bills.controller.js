@@ -13,7 +13,6 @@ export const create = async (req, res) => {
 	}
 
 	const bill = {
-		MaHD: req.body.mahd,
 		MaNV: req.body.manv,
 		MaP: req.body.map,
 		TongTien: req.body.tongtien,
@@ -23,18 +22,9 @@ export const create = async (req, res) => {
 		ChiSoNuocCuoi: req.body.chisonuoccuoi,
 	};
 
-	await Bill.findOrCreate({
-		where: { MaHD: bill.MaHD },
-		defaults: bill,
-	})
-		.then(([data, create]) => {
-			if (create) {
-				res.send(data);
-			} else {
-				res.send({
-					message: "Mã hóa đơn đã tồn tại! Không thể thêm mới hd.",
-				});
-			}
+	await Bill.create(bill)
+		.then((data) => {
+			res.send({ message: "Lưu thông tin hóa đơn thành công!!" });
 		})
 		.catch((err) => {
 			res.status(500).send({
@@ -56,21 +46,22 @@ export const update = (req, res) => {
 		ChiSoNuocCuoi: req.body.chisonuoccuoi,
 	};
 	Bill.update(bill, {
-		where: { id: id },
+		where: { MaHD: id },
 	})
 		.then((num) => {
 			if (num == 1) {
 				res.send({ message: "Cập nhật hóa đơn thành công" });
 			} else {
 				res.send({
-					message: `Không thể cập nhật với id=${id}. Có thể id này không tồn tại`,
+					message: `Không thể cập nhật với Mã hóa đơn= ${id}. Có thể Mã hóa đơn này không tồn tại`,
 				});
 			}
 		})
 		.catch((err) => {
 			res.status(500).send({
 				message:
-					err.message || "Có lổi, Không thể cập nhật với id=" + id,
+					err.message ||
+					"Có lổi, Không thể cập nhật với Mã hóa đơn: " + id,
 			});
 		});
 };
@@ -79,14 +70,14 @@ export const deleteById = (req, res) => {
 	const id = req.params.id;
 	console.log(id);
 	Bill.destroy({
-		where: { id: id },
+		where: { MaHD: id },
 	})
 		.then((num) => {
 			if (num == 1) {
-				res.send({ message: "Xóa  hợp đồng thành công" });
+				res.send({ message: "Xóa hóa đơn thành công!!" });
 			} else {
 				res.send({
-					message: `Không thể Xóa  hợp đồng với id=${id}. Có thể id này không tồn tại`,
+					message: `Không thể Xóa hóa đơn với Mã hóa đơn: ${id}. Có thể Mã hóa đơn này không tồn tại`,
 				});
 			}
 		})
@@ -94,7 +85,7 @@ export const deleteById = (req, res) => {
 			res.status(500).send({
 				message:
 					err.message ||
-					"Có lổi, Không thể Xóa hợp đồng với id=" + id,
+					"Có lỗi, Không thể Xóa hóa đơn với Mã hóa đơn: " + id,
 			});
 		});
 };

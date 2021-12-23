@@ -1,5 +1,5 @@
 export class Bill {
-  MaHD?: string;
+  MaHD?: number;
   MaNV?: string;
   MaP?: string;
   TongTien?: number = 0;

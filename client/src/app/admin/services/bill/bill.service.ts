@@ -13,11 +13,7 @@ export class BillService {
   findAll(): Observable<Bill[]> {
     return this.http.get<Bill[]>(NODE_API_SERVER + '/hoa-don');
   }
-  findOne(hoten: any, mssv: any): Observable<Bill> {
-    return this.http.get(
-      `${NODE_API_SERVER}${'/hoa-don'}/${hoten ? hoten : mssv}`
-    );
-  }
+
   create(data: any): Observable<Bill> {
     return this.http.post(NODE_API_SERVER + '/hoa-don', data);
   }
