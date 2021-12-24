@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,6 +10,5 @@ import { Title } from '@angular/platform-browser';
 })
 export class SidebarComponent implements OnInit {
   constructor() {}
-
   ngOnInit(): void {}
 }

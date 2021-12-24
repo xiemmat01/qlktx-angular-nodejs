@@ -3,3 +3,29 @@
     padding: 1.5rem;
   }
 }
+.sidebar-brand .name,
+.sidebar-brand small {
+  font-size: 15px;
+  color: #ccc;
+}
+.sidebar-brand small {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.sidebar-brand i {
+  padding-right: 3px;
+  color: rgb(30, 209, 13);
+  font-size: 6.7px;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background: rgba(172, 126, 126, 0.418);
+  text-align: center;
+  position: relative;
+  margin-right: 10px;
+  color: rgb(204, 203, 209);
+}

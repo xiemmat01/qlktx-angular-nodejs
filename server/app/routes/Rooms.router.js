@@ -5,12 +5,14 @@ import {
 	filter,
 	findAll,
 	findOne,
+	GetStudentInRoom,
 	update,
 	updateSlDangO,
 } from "../controllers/Rooms.controller.js";
 
 const routerRoom = express.Router();
 
+routerRoom.get("/chi-tiet/:map", GetStudentInRoom);
 routerRoom.get("/", findAll);
 routerRoom.get("/map", findOne);
 routerRoom.post("/", create);

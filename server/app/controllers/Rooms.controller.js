@@ -1,6 +1,8 @@
 import db from "../models/sequelize.js";
 
 const Rooms = db.Rooms;
+const Student = db.Students;
+const Contract = db.Contracts;
 const Op = db.Sequelize.Op;
 
 export const create = async (req, res) => {
@@ -154,5 +156,21 @@ export const updateSlDangO = (req, res) => {
 				message:
 					err.message || "Có lổi, Không thể cập nhật với id=" + map,
 			});
+		});
+};
+export const GetStudentInRoom = (req, res) => {
+	console.log(req.params.map);
+	Contract.findAll({
+		include: [{ model: Student, attributes: ["Mssv", "HoTen"] }],
+		attributes: ["MaP", "Ngay_Bat_Dau", "Ngay_Ket_Thuc"],
+		where: { MaP: req.params.map },
+	})
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send(
+				err.message || "Có lỗi, không tìm thấy dữ liệu!",
+			);
 		});
 };
