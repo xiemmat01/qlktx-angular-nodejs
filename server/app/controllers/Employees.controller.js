@@ -18,6 +18,7 @@ export const create = async (req, res) => {
 		DienThoai: req.body.dienthoai,
 		Email: req.body.email,
 		DiaChi: req.body.diachi,
+		MatKhau: req.body.matkhau,
 	};
 
 	await Employee.findOrCreate({
@@ -48,6 +49,7 @@ export const update = (req, res) => {
 		DienThoai: req.body.dienthoai,
 		Email: req.body.email,
 		DiaChi: req.body.diachi,
+		MatKhau: req.body.matkhau,
 	};
 	Employee.update(employee, {
 		where: { MaNV: id },
@@ -94,17 +96,17 @@ export const deleteById = (req, res) => {
 };
 
 export const findAll = (req, res) => {
-	const hoten = req.body.hoten;
-	const mssv = req.body.mssv;
+	const tenvv = req.body.tenvv;
+	const manv = req.body.manv;
 
 	let condition = {
-		mssv: mssv ? { MSSV: { [Op.eq]: mssv } } : null,
-		hoten: hoten ? { HoTen: { [Op.like]: `%${hoten}%` } } : null,
+		manv: manv ? { MaNV: { [Op.eq]: manv } } : null,
+		tenvv: tenvv ? { TenNV: { [Op.like]: `%${tenvv}%` } } : null,
 	};
 
 	Employee.findAll({
 		where:
-			condition.hoten || condition.mssv
+			condition.tenvv || condition.manv
 				? { [Op.or]: [condition.hoten, condition.mssv] }
 				: null,
 	})
@@ -121,7 +123,7 @@ export const findAll = (req, res) => {
 export const findMaNV = (req, res) => {
 	console.log(req.params.manv);
 	Employee.findAll({
-		where: { MaNV: req.params.manv, DienThoai: req.params.dienthoai },
+		where: { MaNV: req.params.manv, MatKhau: req.params.matkhau },
 	})
 		.then((data) => res.send(data))
 		.catch((err) => {

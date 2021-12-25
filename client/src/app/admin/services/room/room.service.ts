@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Room } from '../../models/Room';
 import { NODE_API_SERVER } from '../../config/api';
+import { data } from 'jquery';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +32,13 @@ export class RoomService {
   delete(id?: any): Observable<Room> {
     return this.http.delete(`${NODE_API_SERVER}/phong/${id}`);
   }
-
   updateSlDangO(id: any, data: any): Observable<Room> {
-    return this.http.put(`${NODE_API_SERVER}/phong/sl/${id}`, data);
+    return this.http.put(`${NODE_API_SERVER}/phong/sl/u/${id}`, data);
+  }
+  deleteSlDangO(id: any, data: any): Observable<Room> {
+    return this.http.put(`${NODE_API_SERVER}/phong/sl/d/${id}`, data);
+  }
+  getDetailRoom(map: any) {
+    return this.http.get(`${NODE_API_SERVER}/phong/chi-tiet/${map}`);
   }
 }

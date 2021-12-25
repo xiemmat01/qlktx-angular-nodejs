@@ -23,6 +23,7 @@ export class RoomComponent implements OnInit {
   countEmptyRoom: any;
   countFullRoom: any;
   setMaP: any;
+  detailRoom: any;
 
   ngOnInit(): void {
     this.getAll();
@@ -185,6 +186,19 @@ export class RoomComponent implements OnInit {
       }
     );
   };
+  selectRoom(map: any) {
+    this.roomService.getDetailRoom(map).subscribe(
+      (data: any) => {
+        if (data.length != 0) {
+          this.detailRoom = data;
+        }
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   get f() {
     return this.AddNewRoom.controls;
   }

@@ -8,11 +8,9 @@ import { EmployeeComponent } from './admin/components/contents/employee/employee
 import { RoomComponent } from './admin/components/contents/room/room.component';
 import { StudentComponent } from './admin/components/contents/student/student.component';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
-  { path: 'dang-ky-thue-phong/dang-nhap', component: LoginComponent },
   {
     path: '',
     component: AppComponent,

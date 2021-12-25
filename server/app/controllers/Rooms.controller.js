@@ -128,7 +128,7 @@ export const filter = (req, res) => {
 };
 
 export const findOne = async (req, res) => {
-	await Rooms.findAll({ attributes: ["MaP", "SlDangO"] }).then((data) => {
+	await Rooms.findAll({ attributes: ["MaP", "SLDangO"] }).then((data) => {
 		res.send(data);
 	});
 };
@@ -137,7 +137,33 @@ export const updateSlDangO = (req, res) => {
 	console.log(req.body.MaP);
 	let map = req.body.MaP;
 	Rooms.update(
-		{ SLDangO: req.body.SlDangO + 1 },
+		{ SLDangO: req.body.SLDangO + 1 },
+		{
+			where: { MaP: map },
+		},
+	)
+		.then((num) => {
+			if (num == 1) {
+				res.send({ message: "Cập nhật phòng thành công" });
+			} else {
+				res.send({
+					message: `Không thể cập nhật với id=${map}. Có thể id này không tồn tại`,
+				});
+			}
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message:
+					err.message || "Có lổi, Không thể cập nhật với id=" + map,
+			});
+		});
+};
+export const deleteSlDangO = (req, res) => {
+	console.log(req.body.MaP);
+	console.log(req.body.SLDangO);
+	let map = req.body.MaP;
+	Rooms.update(
+		{ SLDangO: req.body.SLDangO - 1 },
 		{
 			where: { MaP: map },
 		},

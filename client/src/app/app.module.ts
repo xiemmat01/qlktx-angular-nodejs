@@ -26,7 +26,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { viLocale } from 'ngx-bootstrap/locale';
 import { UserComponent } from './user/user.component';
-import { LoginComponent } from './login/login.component';
 import { DangkythueComponent } from './admin/components/contents/dangkythue/dangkythue.component';
 
 defineLocale('vi', viLocale);
@@ -46,7 +45,6 @@ registerLocaleData(localeVi);
     BillsComponent,
     ContractComponent,
     UserComponent,
-    LoginComponent,
     DangkythueComponent,
   ],
   imports: [

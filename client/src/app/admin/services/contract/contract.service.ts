@@ -26,4 +26,7 @@ export class ContractService {
   delete(id?: string): Observable<Contract> {
     return this.http.delete(`${NODE_API_SERVER}/hop-dong/${id}`);
   }
+  getDetailRoom(map: any) {
+    return this.http.get(`${NODE_API_SERVER}/phong/chi-tiet/${map}`);
+  }
 }

@@ -4,4 +4,5 @@ export class Employee {
   DienThoai?: string;
   Email?: string;
   DiaChi?: string;
+  MatKhau?: string;
 }

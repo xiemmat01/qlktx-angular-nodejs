@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { data } from 'jquery';
 import { Contract } from 'src/app/admin/models/Contract';
 import { ContractService } from 'src/app/admin/services/contract/contract.service';
 import { RoomService } from 'src/app/admin/services/room/room.service';
@@ -18,7 +19,7 @@ export class ContractComponent implements OnInit {
   manv = sessionStorage.getItem('manv');
   tennv = sessionStorage.getItem('tennv');
   Masv: any = [];
-
+  detailroom: any = [];
   constructor(
     private titleService: Title,
     private contractService: ContractService,
@@ -62,7 +63,6 @@ export class ContractComponent implements OnInit {
         (res: any) => {
           if (res.length != 0) {
             this.create();
-            return;
           }
         },
         (error) => {
@@ -74,17 +74,18 @@ export class ContractComponent implements OnInit {
         (item: any) => item.Mssv == this.contractForm.value.mssv
       );
       if (msv.length != 0 && this.contractForm.value.mssv == msv[0].Mssv) {
-        this.updateRoom();
+        console.log(true);
+        this.create();
       } else {
         alert('Mã sinh viên không tồn tại!! Hãy thêm mới');
       }
     } else {
-      console.log(false);
+      alert('Sinh viên này hiện đã có. Vui lòng thêm sinh viên khác!!');
     }
   };
 
   seNgayKetThuc() {
-    let ngay_bat_dau_o = new Date(this.contractForm.value.ngaybatdau);
+    //let ngay_bat_dau_o = new Date(this.contractForm.value.ngaybatdau);
     this.contractForm
       .get('ngaybatdau')
       ?.valueChanges.subscribe((selectValue) => {
@@ -147,20 +148,28 @@ export class ContractComponent implements OnInit {
     );
   };
   create = () => {
-    this.contractService.create(this.contractForm.value).subscribe(
-      (rep) => {
-        console.log(rep);
-        this.getAll();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (
+      this.detailroom.length != 0 &&
+      this.detailroom[0].SinhVien.Mssv == this.contractForm.value.mssv
+    ) {
+      return;
+    } else {
+      this.contractService.create(this.contractForm.value).subscribe(
+        (res: any) => {
+          alert('Thêm hợp đồng thành công!');
+          this.updateRoom();
+          this.getAll();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   };
   delete = (id?: string) => {
     this.contractService.delete(id).subscribe(
       (rep) => {
-        alert(rep);
+        alert('Xóa hợp đồng thành công');
         this.getAll();
       },
       (error) => {
@@ -185,14 +194,23 @@ export class ContractComponent implements OnInit {
     let r: any = this.room.filter(
       (item: any) => item.MaP == this.contractForm.value.map
     );
-    if (r[0].SlDangO < 6) {
+    if (r[0].SLDangO < 6) {
       this.roomService
         .updateSlDangO(this.contractForm.value.map, r[0])
         .subscribe(
           (res: any) => {
             if (res.message) {
-              this.create();
               console.log(res.message);
+              this.contractForm.setValue({
+                mahopdong: '',
+                manv: this.manv,
+                mssv: '',
+                map: '--Chọn phòng--',
+                ngaylap: new Date(),
+                ngaybatdau: new Date(),
+                ngayketthuc: '',
+                thoigian_o: '6',
+              });
             }
           },
           (error) => {
@@ -203,6 +221,33 @@ export class ContractComponent implements OnInit {
       alert('Số lượng đầy không thể thêm');
     }
   };
+  deleteSlDangO = (id?: string, map?: string) => {
+    let r: any = this.room.filter((item: any) => item.MaP == map);
+    console.log(r[0]);
+    if (r[0].SLDangO != 0) {
+      this.roomService.deleteSlDangO(map, r[0]).subscribe(
+        (res: any) => {
+          if (res.message) {
+            this.delete(id);
+            console.log(res.message);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      alert('Có lỗi không thể xóa');
+    }
+  };
+  getDetailRoom() {
+    let map = this.contractForm.value.map;
+    this.contractService.getDetailRoom(map).subscribe((data: any) => {
+      this.detailroom = data.filter(
+        (item: any) => item.SinhVien.Mssv == this.contractForm.value.mssv
+      );
+    });
+  }
   get f() {
     return this.contractForm.controls;
   }

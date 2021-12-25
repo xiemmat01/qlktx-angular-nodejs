@@ -28,6 +28,7 @@ export class EmployeeComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     dienthoai: new FormControl('', Validators.required),
     diachi: new FormControl('', Validators.required),
+    matkhau: new FormControl('', Validators.required),
   });
   UpdateNVForm = new FormGroup({
     manv: new FormControl('', Validators.required),
@@ -35,6 +36,7 @@ export class EmployeeComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     dienthoai: new FormControl('', Validators.required),
     diachi: new FormControl('', Validators.required),
+    matkhau: new FormControl('', Validators.required),
   });
 
   onSubmit = () => {

@@ -12,6 +12,7 @@ import { StudentService } from '../admin/services/student/student.service';
 })
 export class UserComponent implements OnInit {
   issubmit: boolean = false;
+  isLogin: boolean = false;
   lop: any = [];
   khoa: any = [];
   phong: any = [];
@@ -19,7 +20,8 @@ export class UserComponent implements OnInit {
   constructor(
     private room: RoomService,
     private st: StudentService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.getLop();
@@ -61,17 +63,25 @@ export class UserComponent implements OnInit {
   }
 
   loginForm = new FormGroup({
-    manv: new FormControl(''),
-    dienthoai: new FormControl(''),
+    manv: new FormControl('NV001'),
+    matkhau: new FormControl('000000'),
   });
   login() {
     this.http
       .get(
-        `http://localhost:5000/api/nhan-vien/${this.loginForm.value.manv}/${this.loginForm.value.dienthoai}`
+        `http://localhost:5000/api/nhan-vien/${this.loginForm.value.manv}/${this.loginForm.value.matkhau}`
       )
       .subscribe((data: any) => {
         if (data.length) {
-          window.location.href = 'admin';
+          this.isLogin = true;
+          document.getElementById('autoclick')?.click();
+          sessionStorage.setItem('manv', data[0].MaNV);
+          sessionStorage.setItem('tennv', data[0].TenNV);
+          this.router.navigateByUrl('/admin/phong');
+        } else {
+          alert(
+            'Bạn đăng nhập không thành công! Kiểm tra lại mật khẩu hay tên tài khoản'
+          );
         }
       });
   }

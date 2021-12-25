@@ -15,6 +15,7 @@ export default (sequelize, Sequelize) => {
 				validate: { isEmail: true },
 			},
 			DiaChi: { type: Sequelize.STRING, allowNull: true },
+			MatKhau: { type: Sequelize.STRING(10), allowNull: false },
 			Ngay_them_moi: {
 				type: Sequelize.DATE,
 				allowNull: false,

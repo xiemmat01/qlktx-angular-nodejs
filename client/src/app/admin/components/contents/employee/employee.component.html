@@ -28,6 +28,10 @@
         <label for="" class="form-label">Địa chỉ:</label>
         <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..." formControlName="diachi">
     </div>
+    <div class="col-md-6 mb-3">
+        <label for="" class="form-label">Mật Khẩu:</label>
+        <input type="password" class="form-control" id="" placeholder="Nhập địa chỉ..." formControlName="matkhau">
+    </div>
     <div class="col-md-12 mb-3 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary" [disabled]="f.manv.errors?.required"><i
                 class="bi bi-check2-circle"></i> Lưu thông tin</button>
@@ -44,6 +48,7 @@
             <th>Email</th>
             <th>Địa Chỉ</th>
             <th>Điện thoại</th>
+            <th>Mật khẩu</th>
             <td></td>
         </tr>
     </thead>
@@ -62,6 +67,7 @@
             <td>{{item.Email}}</td>
             <td>{{item.DiaChi}}</td>
             <td>{{item.DienThoai}}</td>
+            <td>{{item.MatKhau}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)" data-bs-toggle="modal"
                     data-bs-target="#UpdateNV">
@@ -114,6 +120,11 @@
                             <label for="" class="form-label">Địa chỉ:</label>
                             <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..."
                                 formControlName="diachi">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="" class="form-label">Mật Khẩu:</label>
+                            <input type="password" class="form-control" id="" placeholder="Nhập địa chỉ..."
+                                formControlName="matkhau">
                         </div>
                     </div>
                 </div>

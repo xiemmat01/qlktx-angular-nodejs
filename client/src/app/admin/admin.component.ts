@@ -15,8 +15,6 @@ export class AdminComponent implements OnInit {
   avatar: any;
 
   constructor(private router: Router) {
-    sessionStorage.setItem('manv', 'NV001');
-    sessionStorage.setItem('tennv', 'Nguyễn Thị Cẩm Tú');
     this.tennv = sessionStorage.getItem('tennv');
     this.manv = sessionStorage.getItem('manv');
     this.avatar = this.tennv.slice(0, 1);
