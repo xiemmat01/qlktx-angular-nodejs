@@ -117,3 +117,14 @@ export const findAll = (req, res) => {
 			);
 		});
 };
+
+export const findMaNV = (req, res) => {
+	console.log(req.params.manv);
+	Employee.findAll({
+		where: { MaNV: req.params.manv, DienThoai: req.params.dienthoai },
+	})
+		.then((data) => res.send(data))
+		.catch((err) => {
+			res.status(500).send(err.message || "Đăng nhập không thành công");
+		});
+};

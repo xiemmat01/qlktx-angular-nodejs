@@ -89,10 +89,99 @@
                     <h4 class="fw-bolder">Đăng ký thuê phòng</h4>
                 </div>
                 <div class="card-body">
-                    <form class="row">
-                        
+                    <small>Bằng cách điền thông tin vào form bên dưới rồi click vào nút "Đăng ký" để đăng ký thuê
+                        phòng</small>
+                    <div class="dropdown-divider"></div>
+                    <form class="row" [formGroup]="dangkythue" (ngSubmit)="dangky()">
+                        <div class="col-6 mt-2">
+                            <label class="form-label">Họ tên:</label>
+                            <input type="text" class="form-control" formControlName="hoten" placeholder="nhập họ tên">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <label class="form-label">Mã sinh viên:</label>
+                            <input type="text" class="form-control" formControlName="mssv"
+                                placeholder="nhập mã sinh viên">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Ngày sinh:</label>
+                            <input bsDatepicker type="text" class="form-control" formControlName="ngaysinh"
+                                placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Giới tính:</label>
+                            <select class="form-select" formControlName="gt">
+                                <option>----Chọn----</option>
+                                <option value="0">Nam</option>
+                                <option value="1">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Điện thoại:</label>
+                            <input type="text" class="form-control"
+                                onkeypress="if(this.value.length == 10)return false " formControlName="dienthoai"
+                                placeholder="nhập số điện thoại">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">CMND:</label>
+                            <input type="text" class="form-control" formControlName="cmnd" placeholder="nhập cmnd">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Địa chỉ:</label>
+                            <input type="text" class="form-control" formControlName="diachi" placeholder="nhập địa chỉ">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Dân tộc:</label>
+                            <input type="text" class="form-control" formControlName="dantoc">
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Khoa:</label>
+                            <select class="form-select" formControlName="khoa">
+                                <option>----Chọn khoa----</option>
+                                <option *ngFor="let item of khoa" [value]="item.MaKhoa">{{item.TenKhoa}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Lớp:</label>
+                            <select class="form-select" formControlName="malop">
+                                <option>----Chọn lớp----</option>
+                                <option *ngFor="let item of lop" [value]="item.MaLop">{{item.TenLop}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Số tháng muốn ở:</label>
+                            <select class="form-select" formControlName="thang">
+                                <option value="6"> 6 Tháng</option>
+                                <option value="11"> 11 Tháng</option>
+                            </select>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Phòng:</label>
+                            <select class="form-select" formControlName="map">
+                                <option>----Chọn phòng----</option>
+                                <option *ngFor="let item of phong" [value]="item.MaP">{{item.MaP}}</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mt-3 text-center">
+                            <button class="btn btn-success"> <i class="bi bi-check-square"></i> Đăng
+                                ký</button>
+                        </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+    <div class="toast-container position-fixed top-0">
+        <div [ngClass]="issubmit?'show':''" class="toast align-items-center text-white bg-success border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center">
+                    <i class="bi bi-check2-circle text-white me-1" style="font-size: 18px;"></i>
+                    Bạn đã đăng ký thuê phòng thành công.
+                </div>
+                <div style="cursor: pointer;" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></div>
             </div>
         </div>
     </div>
@@ -107,20 +196,20 @@
                 <div class="align-middle px-3">
                     <div class="text-center mt-4">
                         <h1 class="h2">Chào mừng</h1>
-                        <p class="lead">
+                        <small>
                             Đăng nhập vào tài khoản của bạn để tiếp tục
-                        </p>
+                        </small>
                     </div>
-                    <form>
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="mb-3">
                             <label class="form-label">Tên Đăng Nhập</label>
-                            <input class="form-control form-control-lg" type="email" name="email"
-                                placeholder="Nhập mã nhân viên" />
+                            <input class="form-control form-control-lg" type="text" placeholder="Nhập mã nhân viên"
+                                formControlName="manv">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Mật Khẩu</label>
-                            <input class="form-control form-control-lg" type="password" name="password"
-                                placeholder="Nhập mật khẩu" />
+                            <input class="form-control form-control-lg" type="password" placeholder="Nhập mật khẩu"
+                                formControlName="dienthoai">
                             <small>
                                 <a href="javascript:void(0)">Quên mật khẩu?</a>
                             </small>

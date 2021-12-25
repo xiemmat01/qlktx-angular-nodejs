@@ -9,11 +9,11 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-
   currentRoute: string = '';
   tennv: any;
   manv: any;
   avatar: any;
+
   constructor(private router: Router) {
     sessionStorage.setItem('manv', 'NV001');
     sessionStorage.setItem('tennv', 'Nguyễn Thị Cẩm Tú');

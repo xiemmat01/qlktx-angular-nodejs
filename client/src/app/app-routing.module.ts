@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { BillsComponent } from './admin/components/contents/bills/bills.component';
 import { ContractComponent } from './admin/components/contents/contract/contract.component';
+import { DangkythueComponent } from './admin/components/contents/dangkythue/dangkythue.component';
 import { EmployeeComponent } from './admin/components/contents/employee/employee.component';
 import { RoomComponent } from './admin/components/contents/room/room.component';
 import { StudentComponent } from './admin/components/contents/student/student.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
           { path: 'sinh-vien', component: StudentComponent },
           { path: 'tien-dien-nuoc', component: BillsComponent },
           { path: 'hop-dong', component: ContractComponent },
+          { path: 'ql-thue-phong', component: DangkythueComponent },
         ],
       },
     ],
