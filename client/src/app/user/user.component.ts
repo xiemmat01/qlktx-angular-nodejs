@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { RoomService } from '../admin/services/room/room.service';
 import { StudentService } from '../admin/services/student/student.service';
 
@@ -22,7 +23,9 @@ export class UserComponent implements OnInit {
     private st: StudentService,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+  }
+
   ngOnInit(): void {
     this.getLop();
     this.getKhoa();

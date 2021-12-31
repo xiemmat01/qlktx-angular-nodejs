@@ -2,7 +2,6 @@ export default (sequelize, Sequelize) => {
 	const Contracts = sequelize.define(
 		"Hopdong",
 		{
-		
 			MaHopDong: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
@@ -20,18 +19,18 @@ export default (sequelize, Sequelize) => {
 				type: Sequelize.STRING(10),
 				allowNull: false,
 			},
-			Ngay_Lap: {
+			NgayTaoLap: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
 
-			Ngay_Bat_Dau: {
+			NgayBatDau: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_Ket_Thuc: {
+			NgayKetThuc: {
 				type: Sequelize.DATE,
 				allowNull: false,
 			},

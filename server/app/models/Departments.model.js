@@ -2,7 +2,6 @@ export default (sequelize, Sequelize) => {
 	const Departments = sequelize.define(
 		"Khoa",
 		{
-			
 			MaKhoa: {
 				type: Sequelize.STRING(10),
 				allowNull: false,
@@ -10,12 +9,12 @@ export default (sequelize, Sequelize) => {
 			},
 			TenKhoa: { type: Sequelize.STRING(100), allowNull: false },
 
-			Ngay_them_moi: {
+			NgayThemMoi: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_cap_nhat: {
+			NgayCapNhat: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,

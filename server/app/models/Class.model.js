@@ -10,12 +10,12 @@ export default (sequelize, Sequelize) => {
 			TenLop: { type: Sequelize.STRING(100), allowNull: false },
 			MaKhoa: { type: Sequelize.STRING(10), allowNull: false },
 
-			Ngay_them_moi: {
+			NgayThemMoi: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_cap_nhat: {
+			NgayCapNhat: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,

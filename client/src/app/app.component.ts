@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 @Component({
@@ -10,7 +11,8 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'Website Quản lý ký túc xá';
 
-  constructor(private router: Router, private location: Location) {
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('Đăng ký thuê phòng');
   }
 
   ngOnInit(): void {}

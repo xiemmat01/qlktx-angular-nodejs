@@ -34,7 +34,7 @@ export class StudentComponent implements OnInit {
     ]),
     cmnd: new FormControl('', [
       Validators.required,
-      Validators.pattern('^(([0-9]*)|(([0-9]*).([0-9]*)))$'),
+      Validators.pattern('0[0-9]{9}'),
     ]),
     diachi: new FormControl('', Validators.required),
     dantoc: new FormControl('Kinh', Validators.required),

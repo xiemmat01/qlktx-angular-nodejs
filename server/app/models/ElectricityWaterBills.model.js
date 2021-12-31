@@ -14,12 +14,12 @@ export default (sequelize, Sequelize) => {
 			ChiSoDienCuoi: { type: Sequelize.INTEGER, allowNull: false },
 			ChiSoNuocDau: { type: Sequelize.INTEGER, allowNull: false },
 			ChiSoNuocCuoi: { type: Sequelize.INTEGER, allowNull: false },
-			Ngay_tao_lap: {
+			NgayTaoLap: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_cap_nhat: {
+			NgayCapNhat: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,

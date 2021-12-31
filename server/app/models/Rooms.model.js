@@ -23,12 +23,12 @@ export default (sequelize, Sequelize) => {
 				defaultValue: 0,
 			},
 
-			Ngay_them_moi: {
+			NgayThemMoi: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_cap_nhat: {
+			NgayCapNhat: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,

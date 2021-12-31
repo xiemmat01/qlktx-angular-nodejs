@@ -18,14 +18,14 @@ export default (sequelize, Sequelize) => {
 				defaultValue: "Kinh",
 			},
 			Phai: { type: Sequelize.BOOLEAN, allowNull: false },
-			Hinh: { type: Sequelize.STRING, allowNull: true },
+
 			MaLop: { type: Sequelize.STRING(10), allowNull: true },
-			Ngay_them_moi: {
+			NgayThemMoi: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_cap_nhat: {
+			NgayCapNhat: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,

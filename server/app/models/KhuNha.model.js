@@ -8,12 +8,12 @@ export default (sequelize, Sequelize) => {
 				primaryKey: true,
 			},
 			TenKhu: { type: Sequelize.STRING(10), allowNull: false },
-			Ngay_them_moi: {
+			NgayThemMoi: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			Ngay_cap_nhat: {
+			NgayCapNhat: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
