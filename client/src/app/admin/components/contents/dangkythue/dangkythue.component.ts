@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DangkythueComponent implements OnInit {
   constructor() {}
-  dkthue: any = [];
-  dsThue: any = [];
+
+  dsDangKyThue: any = [];
   ngOnInit(): void {
-    this.dkthue = [localStorage.getItem('dangkythue')];
-    this.dsThue = [...this.dkthue];
-    console.log(this.dsThue);
+    this.dsDangKyThue = JSON.parse(localStorage.getItem('dsDangKy') || '');
+    console.log(
+      this.dsDangKyThue.filter((item: any) => item.hoten == '12312312')
+    );
   }
+  selectRowValue(item: any) {}
+  delete(id: any) {}
 }

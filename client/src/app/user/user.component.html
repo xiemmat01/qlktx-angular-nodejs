@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-6 mt-3">
                             <label class="form-label">Khoa:</label>
-                            <select class="form-select" formControlName="khoa">
+                            <select class="form-select" formControlName="khoa" (change)="selectChange()">
                                 <option>----Chọn khoa----</option>
                                 <option *ngFor="let item of khoa" [value]="item.MaKhoa">{{item.TenKhoa}}</option>
                             </select>
@@ -143,8 +143,11 @@
                         <div class="col-6 mt-3">
                             <label class="form-label">Lớp:</label>
                             <select class="form-select" formControlName="malop">
-                                <option>----Chọn lớp----</option>
-                                <option *ngFor="let item of lop" [value]="item.MaLop">{{item.TenLop}}</option>
+                                <option *ngIf="dsLopByKhoa.length!=0; else block">----Chọn lớp----</option>
+                                <option *ngFor="let item of dsLopByKhoa" [value]="item.MaLop">{{item.TenLop}}</option>
+                                <ng-template #block>
+                                    <option>----Chọn lớp----</option>
+                                </ng-template>
                             </select>
                         </div>
                         <div class="col-6 mt-3">

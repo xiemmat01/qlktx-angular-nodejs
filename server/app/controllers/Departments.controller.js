@@ -14,7 +14,7 @@ export const create = async (req, res) => {
 
 	const department = {
 		MaKhoa: req.body.makhoa,
-		TenKhoa: req.body.tenhoa,
+		TenKhoa: req.body.tenkhoa,
 	};
 
 	await Department.findOrCreate({
@@ -41,7 +41,7 @@ export const update = (req, res) => {
 	const id = req.params.id;
 	const department = {};
 	Department.update(department, {
-		where: { id: id },
+		where: { MaKhoa: id },
 	})
 		.then((num) => {
 			if (num == 1) {
@@ -64,7 +64,7 @@ export const deleteById = (req, res) => {
 	const id = req.params.id;
 	console.log(id);
 	Department.destroy({
-		where: { id: id },
+		where: { MaKhoa: id },
 	})
 		.then((num) => {
 			if (num == 1) {

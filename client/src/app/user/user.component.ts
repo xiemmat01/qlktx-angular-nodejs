@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Lop } from '../admin/models/Class';
+import { LopService } from '../admin/services/lop/lop.service';
 import { RoomService } from '../admin/services/room/room.service';
 import { StudentService } from '../admin/services/student/student.service';
 
@@ -17,14 +19,15 @@ export class UserComponent implements OnInit {
   lop: any = [];
   khoa: any = [];
   phong: any = [];
-
+  dsLopByKhoa: any = [];
+  dk: any = [];
   constructor(
     private room: RoomService,
     private st: StudentService,
     private http: HttpClient,
-    private router: Router
-  ) {
-  }
+    private router: Router,
+    private lopService: LopService
+  ) {}
 
   ngOnInit(): void {
     this.getLop();
@@ -51,12 +54,20 @@ export class UserComponent implements OnInit {
     setTimeout(() => {
       this.issubmit = false;
     }, 2000);
-
+    console.log(this.dangkythue.value);
     localStorage.setItem('dangkythue', JSON.stringify(this.dangkythue.value));
+
+    if (this.dk.lenght != 0) {
+      this.dk = [...this.dk, localStorage.getItem('dangkythue')];
+    } else {
+      this.dk = [localStorage.getItem('dangkythue')];
+    }
+    localStorage.setItem('dsDangKy', JSON.stringify(this.dk));
+    // console.log(localStorage.getItem('dsDangKy'));
   }
 
   getLop() {
-    this.st.findClass().subscribe((data) => (this.lop = data));
+    this.lopService.findAll().subscribe((data) => (this.lop = data));
   }
   getKhoa() {
     this.st.findKhoa().subscribe((data) => (this.khoa = data));
@@ -87,5 +98,13 @@ export class UserComponent implements OnInit {
           );
         }
       });
+  }
+
+  selectChange() {
+    let lopbymakhoa = this.lop.filter(
+      (item: Lop) => item.MaKhoa == this.dangkythue.value.khoa
+    );
+    this.dsLopByKhoa = lopbymakhoa;
+    console.log(this.dsLopByKhoa);
   }
 }

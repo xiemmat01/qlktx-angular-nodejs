@@ -1,0 +1,70 @@
+<div>
+    <div class="row">
+        <div class="col-6">
+            <form class="row" [formGroup]="lopForm" (ngSubmit)="onSubmit()">
+                <div class="col-12">
+                    <label class="form-label">Khoa:</label>
+                    <select class="form-select" formControlName="makhoa">
+                        <option value="">----Chọn khoa----</option>
+                        <option *ngFor="let item of khoa" [value]="item.MaKhoa">{{item.TenKhoa}}</option>
+                    </select>
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="form-label">Mã Lớp:</label>
+                    <input type="text" class="form-control" formControlName="malop" placeholder="Nhập mã khoa..."
+                        onkeyup="this.value = this.value.toUpperCase()" [attr.disabled]="isupdate ? '' : null">
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="form-label">Tên Lớp:</label>
+                    <input type="text" class="form-control" formControlName="tenlop" placeholder="Nhập tên khoa...">
+                </div>
+                <div class="col-12 mt-3">
+                    <button type="submit" [disabled]="!lopForm.valid || isupdate" class="btn btn-primary">Lưu thông
+                        tin</button>
+                    &nbsp;
+                    <button [disabled]="!isupdate" class="btn btn-warning" (click)="update()">Cập nhật</button>
+                    &nbsp;
+                    <button [disabled]="!isupdate" class="btn btn-danger" (click)="cancel()">Hủy</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="table-scrollable">
+                <table class="table table-bordered table-striped table-scrollable" style="width:100%">
+                    <thead>
+                        <tr class="text-center">
+                            <th>STT</th>
+                            <th>Mã lớp</th>
+                            <th>Tên lớp</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div *ngIf="lop.length!=0; else elseBlock" class="text-center"></div>
+                        <ng-template #elseBlock>
+                            <tr class="text-center">
+                                <td colspan="11" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện
+                                    chưa có Lớp
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <tr *ngFor="let item of lop; index as indexOfelement">
+                            <td class="text-center">{{indexOfelement+1}}</td>
+                            <td>{{item.MaLop}}</td>
+                            <td>{{item.TenLop}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-success custom" (click)="selectRowValue(item)"
+                                    data-bs-toggle="modal" data-bs-target="#UpdateSV">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>&nbsp;
+                                <button class="btn btn-danger custom" (click)="delete(item.MaLop)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

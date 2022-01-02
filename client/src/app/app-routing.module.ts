@@ -5,6 +5,8 @@ import { BillsComponent } from './admin/components/contents/bills/bills.componen
 import { ContractComponent } from './admin/components/contents/contract/contract.component';
 import { DangkythueComponent } from './admin/components/contents/dangkythue/dangkythue.component';
 import { EmployeeComponent } from './admin/components/contents/employee/employee.component';
+import { KhoaComponent } from './admin/components/contents/khoa/khoa.component';
+import { LopComponent } from './admin/components/contents/lop/lop.component';
 import { RoomComponent } from './admin/components/contents/room/room.component';
 import { StudentComponent } from './admin/components/contents/student/student.component';
 import { AppComponent } from './app.component';
@@ -28,6 +30,8 @@ const routes: Routes = [
           { path: 'tien-dien-nuoc', component: BillsComponent },
           { path: 'hop-dong', component: ContractComponent },
           { path: 'ql-thue-phong', component: DangkythueComponent },
+          { path: 'khoa', component: KhoaComponent },
+          { path: 'lop', component: LopComponent },
         ],
       },
     ],

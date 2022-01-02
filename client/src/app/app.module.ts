@@ -27,6 +27,8 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { viLocale } from 'ngx-bootstrap/locale';
 import { UserComponent } from './user/user.component';
 import { DangkythueComponent } from './admin/components/contents/dangkythue/dangkythue.component';
+import { LopComponent } from './admin/components/contents/lop/lop.component';
+import { KhoaComponent } from './admin/components/contents/khoa/khoa.component';
 
 defineLocale('vi', viLocale);
 
@@ -46,6 +48,8 @@ registerLocaleData(localeVi);
     ContractComponent,
     UserComponent,
     DangkythueComponent,
+    LopComponent,
+    KhoaComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,5 +65,3 @@ registerLocaleData(localeVi);
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-

@@ -23,7 +23,7 @@
     <div class="col-md-6 mb-3">
         <label for="" class="form-label">Mã số sinh viên:</label>
         <input type="text" class="form-control" placeholder="Nhập mã số sinh viên..." formControlName="mssv"
-            onkeyup="this.value = this.value.toUpperCase()" onblur="this.value = this.value.toUpperCase()">
+            onkeyup="this.value = this.value.toUpperCase()">
     </div>
     <div class="col-md-6 mb-3">
         <div class="row">
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="col-md-6 mb-3">
-        <label for="" class="form-label">Địa chỉ:</label>
+        <label for="" class="form-label">Quê quán:</label>
         <input type="text" class="form-control" id="" placeholder="Nhập địa chỉ..." formControlName="diachi">
     </div>
     <div class="col-md-6 mb-3">
@@ -83,7 +83,7 @@
             <th>Ngày sinh</th>
             <th>CMND</th>
             <th>Dân tộc</th>
-            <th>Địa chỉ</th>
+            <th>Quê quán</th>
             <th>Điện thoại</th>
             <th>Giới tính</th>
             <th>Lớp</th>
@@ -107,7 +107,7 @@
             <td>{{item.DanToc}}</td>
             <td>{{item.DiaChi}}</td>
             <td>{{item.DienThoai}}</td>
-            <td>{{item.Phai ? "Nam" : "Nữ"}}</td>
+            <td>{{item.Phai ? "Nữ" : "Nam"}}</td>
             <td>{{item.MaLop}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)" data-bs-toggle="modal"
@@ -148,8 +148,8 @@
                                     <label for="" class="form-label">Giới tính:</label>
                                     <select class="form-select" formControlName="phai">
                                         <option>--Chọn--</option>
-                                        <option value="0">Nữ</option>
-                                        <option value="1">Nam</option>
+                                        <option value="1">Nữ</option>
+                                        <option value="0">Nam</option>
                                     </select>
                                 </div>
                             </div>

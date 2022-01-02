@@ -1,0 +1,65 @@
+<div>
+    <div class="row">
+        <div class="col-6">
+            <form class="row" [formGroup]="khoaForm" (ngSubmit)="onSubmit()">
+                <div class="col-12">
+                    <label class="form-label">Mã Khoa:</label>
+                    <input type="text" class="form-control" formControlName="makhoa" placeholder="Nhập mã khoa..."
+                        onkeyup="this.value = this.value.toUpperCase()" [attr.disabled]="isupdate ? '' : null">
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="form-label">Tên Khoa:</label>
+                    <input type="text" class="form-control" formControlName="tenkhoa" placeholder="Nhập tên khoa...">
+                </div>
+                <div class="col-12 mt-3">
+                    <button type="submit" [disabled]="!khoaForm.valid || isupdate" class="btn btn-primary">Lưu thông
+                        tin</button>
+                    &nbsp;
+                    <button [disabled]="!isupdate" class="btn btn-warning" (click)="update()">Cập nhật</button>
+                    &nbsp;
+                    <button [disabled]="!isupdate" class="btn btn-danger" (click)="cancel()">Hủy</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="table-scrollable">
+                <table class="table table-bordered table-striped table-responsive" style="width:100%">
+                    <thead>
+                        <tr class="text-center">
+                            <th>STT</th>
+                            <th>Mã khoa</th>
+                            <th>Tên khoa</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div *ngIf="khoa.length!=0; else elseBlock" class="text-center"></div>
+                        <ng-template #elseBlock>
+                            <tr class="text-center">
+                                <td colspan="11" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện
+                                    chưa có
+                                    Khoa
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <tr *ngFor="let item of khoa; index as indexOfelement">
+                            <td class="text-center">{{indexOfelement+1}}</td>
+                            <td>{{item.MaKhoa}}</td>
+                            <td>{{item.TenKhoa}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-success custom" (click)="selectRowValue(item)"
+                                    data-bs-toggle="modal" data-bs-target="#UpdateSV">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>&nbsp;
+                                <button class="btn btn-danger custom" (click)="delete(item.MaKhoa)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -40,6 +40,12 @@ export class AdminComponent implements OnInit {
             case '/admin/hop-dong':
               this.currentRoute = 'Quản lý hợp đồng';
               break;
+            case '/admin/lop':
+              this.currentRoute = 'Quản lý lớp';
+              break;
+            case '/admin/khoa':
+              this.currentRoute = 'Quản lý khoa';
+              break;
             default:
               this.currentRoute = 'Quản lý đăng thuê phòng';
               break;

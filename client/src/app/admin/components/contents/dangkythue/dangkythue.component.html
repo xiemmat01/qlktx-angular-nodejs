@@ -1,1 +1,51 @@
-<p>dangkythue works!</p>
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr class="text-center">
+            <th>STT</th>
+            <th>Mssv</th>
+            <th>Họ và tên</th>
+            <th>Ngày sinh</th>
+            <th>CMND</th>
+            <th>Dân tộc</th>
+            <th>Quê quán</th>
+            <th>Điện thoại</th>
+            <th>Giới tính</th>
+            <th>Lớp</th>
+            <th>Số tháng</th>
+            <th>Phòng</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <div *ngIf="dsDangKyThue.length!=0; else elseBlock" class="text-center"></div>
+        <ng-template #elseBlock>
+            <tr class="text-center">
+                <td colspan="11" style="font-family: 'Baloo Tamma 2', cursive;font-size: 18px;">Hiện chưa có sinh viên
+                </td>
+            </tr>
+        </ng-template>
+        <tr *ngFor="let item of dsDangKyThue; index as indexOfelement" class="text-center">
+            <td>{{indexOfelement+1}}</td>
+            <td>{{item.mssv}}</td>
+            <td>{{item.hoten}}</td>
+            <td>{{item.ngaysinh | date:'dd-MM-yyyy'}}</td>
+            <td>{{item.cmnd}}</td>
+            <td>{{item.dantoc}}</td>
+            <td>{{item.diachi}}</td>
+            <td>{{item.dienthoai}}</td>
+            <td>{{item.gt ? "Nữ" : "Nam"}}</td>
+            <td>{{item.malop}}</td>
+            <td>{{item.thang}}</td>
+            <td>{{item.map}}</td>
+            <td>
+                <button class="btn btn-success custom" (click)="selectRowValue(item)" data-bs-toggle="modal"
+                    data-bs-target="#UpdateSV">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-danger custom" (click)="delete(item.Mssv)">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
