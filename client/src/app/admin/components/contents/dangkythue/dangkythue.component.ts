@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DkthueService } from 'src/app/admin/services/dangkythue/dkthue.service';
 
 @Component({
   selector: 'app-dangkythue',
@@ -6,14 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dangkythue.component.css'],
 })
 export class DangkythueComponent implements OnInit {
-  constructor() {}
+  constructor(private dkthue: DkthueService) {}
 
   dsDangKyThue: any = [];
   ngOnInit(): void {
-    this.dsDangKyThue = JSON.parse(localStorage.getItem('dsDangKy') || '');
-    console.log(
-      this.dsDangKyThue.filter((item: any) => item.hoten == '12312312')
-    );
+    this.dkthue.currentData.subscribe((data) => (this.dsDangKyThue = data));
+    console.log(this.dsDangKyThue);
   }
   selectRowValue(item: any) {}
   delete(id: any) {}

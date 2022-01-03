@@ -47,7 +47,7 @@ export class AdminComponent implements OnInit {
               this.currentRoute = 'Quản lý khoa';
               break;
             default:
-              this.currentRoute = 'Quản lý đăng thuê phòng';
+              this.currentRoute = 'Danh sách đăng ký thuê';
               break;
           }
         }

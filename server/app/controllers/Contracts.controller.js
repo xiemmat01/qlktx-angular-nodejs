@@ -17,13 +17,13 @@ export const create = async (req, res) => {
 		MaNV: req.body.manv,
 		Mssv: req.body.mssv,
 		MaP: req.body.map,
-		Ngay_Lap: req.body.ngaylap,
-		Ngay_Bat_Dau: req.body.ngaybatdau,
-		Ngay_Ket_Thuc: req.body.ngayketthuc,
+		NgayTaoLap: req.body.ngaylap,
+		NgayBatDau: req.body.ngaybatdau,
+		NgayKetThuc: req.body.ngayketthuc,
 	};
 
 	await Contract.findOrCreate({
-		where: { MaHopDong: contract.MaHopDong },
+		where: { MaHopDong: contract.mahopdong },
 		defaults: contract,
 	})
 		.then(([data, create]) => {
@@ -49,9 +49,9 @@ export const update = (req, res) => {
 		MaNV: req.body.manv,
 		Mssv: req.body.mssv,
 		MaP: req.body.map,
-		Ngay_Lap: req.body.ngaylap,
-		Ngay_Bat_Dau: req.body.ngaybatdau,
-		Ngay_Ket_Thuc: req.body.ngayketthuc,
+		NgayTaoLap: req.body.ngaylap,
+		NgayBatDau: req.body.ngaybatdau,
+		NgayKetThuc: req.body.ngayketthuc,
 	};
 	Contract.update(contract, {
 		where: { MaHopDong: id },

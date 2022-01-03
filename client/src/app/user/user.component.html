@@ -2,30 +2,6 @@
     <a class="sidebar-toggle js-sidebar-toggle ms-5">
         <img src="assets/img/logo/sv_logo.png" alt="trang chu">
     </a>
-    <!-- <div class="navbar-collapse collapse">
-        <ul class="navbar-nav navbar-align">
-            <li class="nav-item me-4">
-                <a class="nav-link d-none d-sm-inline-block text-light" href="javascript:void(0)">
-                    Trang Chủ
-                </a>
-            </li>
-            <li class="nav-item me-4">
-                <a class="nav-link d-none d-sm-inline-block text-light" href="javascript:void(0)">
-                    Tin Tức
-                </a>
-            </li>
-            <li class="nav-item me-4">
-                <a class="nav-link d-none d-sm-inline-block text-light" href="javascript:void(0)">
-                    Đăng Ký KTX
-                </a>
-            </li>
-            <li class="nav-item me-4">
-                <a class="nav-link d-none d-sm-inline-block text-light" href="javascript:void(0)">
-                    Liên Hệ
-                </a>
-            </li>
-        </ul>
-    </div> -->
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
             <li class="nav-item">
@@ -117,13 +93,13 @@
                         </div>
                         <div class="col-6 mt-3">
                             <label class="form-label">Điện thoại:</label>
-                            <input type="text" class="form-control"
-                                onkeypress="if(this.value.length == 10)return false " formControlName="dienthoai"
-                                placeholder="nhập số điện thoại">
+                            <input type="tel" class="form-control" onkeypress="if(this.value.length == 10)return false"
+                                formControlName="dienthoai" placeholder="nhập số điện thoại" pattern="0[0-9]{9}">
                         </div>
                         <div class="col-6 mt-3">
                             <label class="form-label">CMND:</label>
-                            <input type="text" class="form-control" formControlName="cmnd" placeholder="nhập cmnd">
+                            <input type="tel" class="form-control" formControlName="cmnd" placeholder="nhập cmnd"
+                                onkeypress="if(this.value.length == 10)return false" pattern="0[0-9]{9}">
                         </div>
                         <div class="col-6 mt-3">
                             <label class="form-label">Địa chỉ:</label>
@@ -174,6 +150,11 @@
         </div>
     </div>
 </div>
+<footer>
+    <div class="container">
+        <div class="row"></div>
+    </div>
+</footer>
 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
     <div class="toast-container position-fixed top-0">
         <div [ngClass]="issubmit?'show':''" class="toast align-items-center text-white bg-success border-0" role="alert"
@@ -189,6 +170,7 @@
         </div>
     </div>
 </div>
+
 <!-- modal -->
 <div class="modal fade" id="login" tabindex="-1" aria-labelledby="login" aria-hidden="false">
     <div class="modal-dialog">

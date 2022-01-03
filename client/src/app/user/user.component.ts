@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Lop } from '../admin/models/Class';
+import { DkthueService } from '../admin/services/dangkythue/dkthue.service';
 import { LopService } from '../admin/services/lop/lop.service';
 import { RoomService } from '../admin/services/room/room.service';
 import { StudentService } from '../admin/services/student/student.service';
@@ -26,6 +27,7 @@ export class UserComponent implements OnInit {
     private st: StudentService,
     private http: HttpClient,
     private router: Router,
+    private dkthue: DkthueService,
     private lopService: LopService
   ) {}
 
@@ -35,18 +37,24 @@ export class UserComponent implements OnInit {
     this.getPhong();
   }
   dangkythue = new FormGroup({
-    hoten: new FormControl(''),
-    mssv: new FormControl(''),
-    ngaysinh: new FormControl(''),
-    gt: new FormControl('0'),
-    dienthoai: new FormControl(''),
-    cmnd: new FormControl(''),
-    diachi: new FormControl(''),
-    dantoc: new FormControl('Kinh'),
-    khoa: new FormControl('----Chọn khoa----'),
-    malop: new FormControl('----Chọn lớp----'),
-    thang: new FormControl('6'),
-    map: new FormControl('----Chọn phòng----'),
+    hoten: new FormControl('', Validators.required),
+    mssv: new FormControl('', Validators.required),
+    ngaysinh: new FormControl(new Date('01-01-1999'), Validators.required),
+    gt: new FormControl('0', Validators.required),
+    dienthoai: new FormControl('', [
+      Validators.required,
+      Validators.pattern('0[0-9]{9}'),
+    ]),
+    cmnd: new FormControl('', [
+      Validators.required,
+      Validators.pattern('0[0-9]{9}'),
+    ]),
+    diachi: new FormControl('', Validators.required),
+    dantoc: new FormControl('Kinh', Validators.required),
+    khoa: new FormControl('----Chọn khoa----', Validators.required),
+    malop: new FormControl('----Chọn lớp----', Validators.required),
+    thang: new FormControl('6', Validators.required),
+    map: new FormControl('----Chọn phòng----', Validators.required),
   });
 
   dangky() {
@@ -55,15 +63,16 @@ export class UserComponent implements OnInit {
       this.issubmit = false;
     }, 2000);
     console.log(this.dangkythue.value);
-    localStorage.setItem('dangkythue', JSON.stringify(this.dangkythue.value));
+    this.dkthue.addData(this.dangkythue.value);
+    // localStorage.setItem('dangkythue', JSON.stringify(this.dangkythue.value));
 
-    if (this.dk.lenght != 0) {
-      this.dk = [...this.dk, localStorage.getItem('dangkythue')];
-    } else {
-      this.dk = [localStorage.getItem('dangkythue')];
-    }
-    localStorage.setItem('dsDangKy', JSON.stringify(this.dk));
-    // console.log(localStorage.getItem('dsDangKy'));
+    // if (this.dk.lenght != 0) {
+    //   this.dk = [...this.dk, localStorage.getItem('dangkythue')];
+    // } else {
+    //   this.dk = [localStorage.getItem('dangkythue')];
+    // }
+    // localStorage.setItem('dsDangKy', JSON.stringify(this.dk));
+    // // console.log(localStorage.getItem('dsDangKy'));
   }
 
   getLop() {
@@ -77,8 +86,8 @@ export class UserComponent implements OnInit {
   }
 
   loginForm = new FormGroup({
-    manv: new FormControl('NV001'),
-    matkhau: new FormControl('000000'),
+    manv: new FormControl('NV002'),
+    matkhau: new FormControl('123456'),
   });
   login() {
     this.http

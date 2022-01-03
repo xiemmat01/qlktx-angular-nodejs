@@ -1,0 +1,5 @@
+.table-scrollable {
+  overflow-y: auto;
+  max-width: 1200px;
+  margin: auto;
+}
