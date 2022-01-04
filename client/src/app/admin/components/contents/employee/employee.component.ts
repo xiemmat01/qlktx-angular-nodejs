@@ -51,6 +51,7 @@ export class EmployeeComponent implements OnInit {
       email: emp.Email,
       dienthoai: emp.DienThoai,
       diachi: emp.DiaChi,
+      matkhau: emp.MatKhau,
     });
     this.manv = emp.MaNV;
   };

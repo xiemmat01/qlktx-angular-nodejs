@@ -188,7 +188,7 @@ export const GetStudentInRoom = (req, res) => {
 	console.log(req.params.map);
 	Contract.findAll({
 		include: [{ model: Student, attributes: ["Mssv", "HoTen"] }],
-		attributes: ["MaP", "Ngay_Bat_Dau", "Ngay_Ket_Thuc"],
+		attributes: ["MaP", "NgayBatDau", "NgayKetThuc"],
 		where: { MaP: req.params.map },
 	})
 		.then((data) => {

@@ -4,7 +4,7 @@ export class Contract {
   MaNV?: string;
   Mssv?: string;
   MaP?: string;
-  Ngay_Lap?: string;
-  Ngay_Bat_Dau?: string;
-  Ngay_Ket_Thuc?: string;
+  NgayTaoLap?: string;
+  NgayBatDau?: string;
+  NgayKetThuc?: string;
 }

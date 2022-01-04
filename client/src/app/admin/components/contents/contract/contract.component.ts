@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { data } from 'jquery';
 import { Contract } from 'src/app/admin/models/Contract';
 import { ContractService } from 'src/app/admin/services/contract/contract.service';
+import { LopService } from 'src/app/admin/services/lop/lop.service';
 import { RoomService } from 'src/app/admin/services/room/room.service';
 import { StudentService } from 'src/app/admin/services/student/student.service';
 
@@ -20,11 +21,13 @@ export class ContractComponent implements OnInit {
   tennv = sessionStorage.getItem('tennv');
   Masv: any = [];
   detailroom: any = [];
+  lop: any = [];
   constructor(
     private titleService: Title,
     private contractService: ContractService,
     private studentService: StudentService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private lopService: LopService
   ) {
     this.titleService.setTitle('Quản lý hợp đồng');
   }
@@ -54,7 +57,8 @@ export class ContractComponent implements OnInit {
     this.getAll();
     this.getMaP();
     this.getMasv();
-    this.seNgayKetThuc();
+    this.setNgayKetThuc();
+    this.getLop();
   }
 
   onSubmit = () => {
@@ -84,7 +88,7 @@ export class ContractComponent implements OnInit {
     }
   };
 
-  seNgayKetThuc() {
+  setNgayKetThuc() {
     //let ngay_bat_dau_o = new Date(this.contractForm.value.ngaybatdau);
     this.contractForm
       .get('ngaybatdau')
@@ -108,11 +112,9 @@ export class ContractComponent implements OnInit {
       manv: contract.MaNV,
       mssv: contract.Mssv,
       map: contract.MaP,
-      ngaylap: new Date(contract.Ngay_Lap ? contract.Ngay_Lap : ''),
-      ngaybatdau: new Date(contract.Ngay_Bat_Dau ? contract.Ngay_Bat_Dau : ''),
-      ngayketthuc: new Date(
-        contract.Ngay_Ket_Thuc ? contract.Ngay_Ket_Thuc : ''
-      ),
+      ngaylap: new Date(contract.NgayTaoLap ? contract.NgayTaoLap : ''),
+      ngaybatdau: new Date(contract.NgayBatDau ? contract.NgayBatDau : ''),
+      ngayketthuc: new Date(contract.NgayKetThuc ? contract.NgayKetThuc : ''),
     });
   };
   getMasv = () => {
@@ -136,6 +138,9 @@ export class ContractComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  getLop() {
+    this.lopService.findAll().subscribe((data) => (this.lop = data));
   }
   getAll = () => {
     this.contractService.findAll().subscribe(

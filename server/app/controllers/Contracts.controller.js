@@ -23,7 +23,7 @@ export const create = async (req, res) => {
 	};
 
 	await Contract.findOrCreate({
-		where: { MaHopDong: contract.mahopdong },
+		where: { MaHopDong: req.body.mahopdong },
 		defaults: contract,
 	})
 		.then(([data, create]) => {

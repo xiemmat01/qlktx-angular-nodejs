@@ -4,7 +4,7 @@
             <div class="d-flex flex-row align-items-center h-100">
                 <span>Còn trống: {{countEmptyRoom ? countEmptyRoom : 0 }}</span>
                 <span class="mx-2">|</span>
-                <span>Đã cho thuê: {{countFullRoom ? countFullRoom : 0}}</span>
+                <span>Đã đầy: {{countFullRoom ? countFullRoom : 0}}</span>
             </div>
         </div>
         <div class="col-6">
@@ -60,8 +60,8 @@
         </ng-template>
         <div id="tatca" class="row tab-pane fade show" [ngClass]="isActive.tatca ? 'active' : ''">
             <div class="col-2" *ngFor="let item of room">
-                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'
-                    (click)="selectRoom(item.MaP)">
+                <div class="card border custom" data-bs-toggle="modal"
+                    [attr.data-bs-target]='isActive.tatca ? "#"+item.MaP : ""' (click)="selectRoom(item.MaP)">
                     <div class="card-body">
                         <div class="row1">
                             <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
@@ -85,9 +85,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="false">
-                    <div class="modal-dialog">
+                <div class="modal fade" [id]="isActive.tatca ? item.MaP: ''" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="false">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
@@ -98,20 +98,20 @@
                                 <table class="table table-bordered table-striped display nowrap" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Stt</th>
+                                            <th>Tên sinh viên</th>
+                                            <th>Mã sinh viên</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of detailRoom">
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                        <tr *ngFor="let item of detailRoom; index as indexOfElement">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{item.SinhVien.Mssv}}</td>
+                                            <td>{{item.SinhVien.HoTen}}</td>
+                                            <td>{{item.NgayBatDau | date:'dd-MM-yyyy'}}</td>
+                                            <td>{{item.NgayKetThuc | date:'dd-MM-yyyy'}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -126,7 +126,8 @@
         </div>
         <div id="khuA" class="row tab-pane fade show" [ngClass]="isActive.khuA ? 'active' : ''">
             <div class="col-2" *ngFor="let item of khunha">
-                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                <div class="card border custom" data-bs-toggle="modal"
+                    [attr.data-bs-target]='isActive.khuA ? "#"+item.MaP:""' (click)="selectRoom(item.MaP)">
                     <div class="card-body">
                         <div class="row1">
                             <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
@@ -150,33 +151,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" [id]="isActive.khuA ? item.MaP : ''" tabindex="-1" aria-labelledby="khua"
                     aria-hidden="false">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <h5 class="modal-title fw-bold" id="khua">Chi Tiết Phòng</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <table class="table table-bordered table-striped display nowrap" style="width:100%">
+                                <table class="table table-bordered table-striped display nowrap text-center"
+                                    style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Stt</th>
+                                            <th>Tên sinh viên</th>
+                                            <th>Mã sinh viên</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                        <tr *ngFor="let item of detailRoom; index as indexOfElement">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{item.SinhVien.Mssv}}</td>
+                                            <td>{{item.SinhVien.HoTen}}</td>
+                                            <td>{{item.NgayBatDau | date:'dd-MM-yyyy'}}</td>
+                                            <td>{{item.NgayKetThuc | date:'dd-MM-yyyy'}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -189,9 +191,10 @@
                 </div>
             </div>
         </div>
-        <div id="khuB" class="row tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
+        <div id="khuB" class="row tab-pane fade show" [ngClass]="isActive.khuB ? 'active' : ''">
             <div class="col-2" *ngFor="let item of khunha">
-                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                <div class="card border custom" data-bs-toggle="modal"
+                    [attr.data-bs-target]='isActive.khuB ? "#"+item.MaP:""' (click)="selectRoom(item.MaP)">
                     <div class="card-body">
                         <div class="row1">
                             <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
@@ -215,12 +218,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" [id]="isActive.khuB ? item.MaP : ''" tabindex="-1" aria-labelledby="khub"
                     aria-hidden="false">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <h5 class="modal-title fw-bold" id="khub">Chi Tiết Phòng</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -228,20 +231,20 @@
                                 <table class="table table-bordered table-striped display nowrap" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Stt</th>
+                                            <th>Tên sinh viên</th>
+                                            <th>Mã sinh viên</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                        <tr *ngFor="let item of detailRoom; index as indexOfElement">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{item.SinhVien.Mssv}}</td>
+                                            <td>{{item.SinhVien.HoTen}}</td>
+                                            <td>{{item.NgayBatDau | date:'dd-MM-yyyy'}}</td>
+                                            <td>{{item.NgayKetThuc | date:'dd-MM-yyyy'}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -256,7 +259,8 @@
         </div>
         <div id="loc" class="row tab-pane fade show" [ngClass]="isActive.loc ? 'active' : ''">
             <div class="col-2" *ngFor="let item of filterRoom">
-                <div class="card border custom" data-bs-toggle="modal" [attr.data-bs-target]='"#"+item.MaP'>
+                <div class="card border custom" data-bs-toggle="modal"
+                    [attr.data-bs-target]='isActive.loc ? "#"+item.MaP:""' (click)="selectRoom(item.MaP)">
                     <div class="card-body">
                         <div class="row1">
                             <i class="bi bi-house-fill"><span>{{item.MaP}}</span></i>
@@ -280,12 +284,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" [id]="item.MaP" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" [id]="isActive.loc ? item.MaP : ''" tabindex="-1" aria-labelledby="loc"
                     aria-hidden="false">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title fw-bold" id="exampleModalLabel">Chi Tiết Phòng</h5>
+                                <h5 class="modal-title fw-bold" id="loc">Chi Tiết Phòng</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -293,20 +297,20 @@
                                 <table class="table table-bordered table-striped display nowrap" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Stt</th>
+                                            <th>Tên sinh viên</th>
+                                            <th>Mã sinh viên</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                        <tr *ngFor="let item of detailRoom; index as indexOfElement">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{item.SinhVien.Mssv}}</td>
+                                            <td>{{item.SinhVien.HoTen}}</td>
+                                            <td>{{item.NgayBatDau | date:'dd-MM-yyyy'}}</td>
+                                            <td>{{item.NgayKetThuc | date:'dd-MM-yyyy'}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

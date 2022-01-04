@@ -93,7 +93,7 @@
                     <div class="col-sm-6">
                         <label for="" class="form-label">Ngày sinh:</label>
                         <input bsDatepicker type="text" class="form-control" formControlName="ngaysinh"
-                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+                            placeholder="dd-mm-yyyy" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" readonly>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -114,12 +114,12 @@
                 <div class="row mt-3">
                     <div class="col-sm-6">
                         <label for="" class="form-label">Số điện thoại:</label>
-                        <input type="number" class="form-control" id="" placeholder="Nhập số điện thoại..."
+                        <input type="tel" class="form-control" id="" placeholder="Nhập số điện thoại..."
                             onkeypress="if(this.value.length == 10) return false;" formControlName="dienthoai">
                     </div>
                     <div class="col-sm-6">
                         <label for="" class="form-label">CMND/CCCD:</label>
-                        <input type="number" class="form-control" id="" placeholder="Nhập CMND hoặc CCCD..."
+                        <input type="tel" class="form-control" id="" placeholder="Nhập CMND hoặc CCCD..."
                             onkeypress="if(this.value.length == 10) return false;" formControlName="cmnd">
                     </div>
                 </div>
@@ -128,6 +128,7 @@
                         <label for="" class="form-label">Lớp:</label>
                         <select class="form-select" formControlName="lop">
                             <option>--Chọn lớp--</option>
+                            <option *ngFor="let item of lop" [value]="item.MaLop">{{item.TenLop}}</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
@@ -169,14 +170,14 @@
                 </td>
             </tr>
         </ng-template>
-        <tr *ngFor="let item of contract">
+        <tr *ngFor="let item of contract" class="text-center">
             <td>{{item.MaHopDong}}</td>
             <td>{{item.Mssv}}</td>
             <td>{{item.MaP}}</td>
             <td>{{item.MaNV}}</td>
-            <td>{{item.Ngay_Lap | date:'dd-MM-yyyy'}}</td>
-            <td>{{item.Ngay_Bat_Dau | date:'dd-MM-yyyy'}}</td>
-            <td>{{item.Ngay_Ket_Thuc | date:'dd-MM-yyyy'}}</td>
+            <td>{{item.NgayTaoLap | date:'dd-MM-yyyy'}}</td>
+            <td>{{item.NgayBatDau | date:'dd-MM-yyyy'}}</td>
+            <td>{{item.NgayKetThuc | date:'dd-MM-yyyy'}}</td>
             <td>
                 <button class="btn btn-success custom" (click)="selectRowValue(item)">
                     <i class="bi bi-pencil-square"></i>

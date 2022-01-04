@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Room } from 'src/app/admin/models/Room';
+import { ContractService } from 'src/app/admin/services/contract/contract.service';
 import { RoomService } from 'src/app/admin/services/room/room.service';
 
 @Component({
@@ -10,10 +11,13 @@ import { RoomService } from 'src/app/admin/services/room/room.service';
   styleUrls: ['./room.component.css'],
 })
 export class RoomComponent implements OnInit {
-  constructor(private titleService: Title, private roomService: RoomService) {
+  constructor(
+    private titleService: Title,
+    private roomService: RoomService,
+    private contractService: ContractService
+  ) {
     this.titleService.setTitle('Quản lý phòng');
   }
-
   khunha: any = [];
   filterRoom: any = [];
   room: Room[] = [];
@@ -192,13 +196,14 @@ export class RoomComponent implements OnInit {
         if (data.length != 0) {
           this.detailRoom = data;
         }
-        console.log(data);
+        console.log(data[0].SinhVien.Mssv);
       },
       (error) => {
         console.log(error);
       }
     );
   }
+
   get f() {
     return this.AddNewRoom.controls;
   }
